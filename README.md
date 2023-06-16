@@ -21,6 +21,24 @@
     ```sh
     npx husky-init && npm install
     ```
+- [commitizen/cz-cli](https://github.com/commitizen/cz-cli)
+    - install dev package
+        ```sh
+        npm install commitizen --save-dev
+        npm install @commitlint/cz-commitlint --save-dev
+        ```
+    - `package.json`
+        ```json
+        "config": {
+            "commitizen": {
+            "path": "@commitlint/cz-commitlint"
+            }
+        }
+        ```
+    - add hook
+        ```sh
+        npx husky add .husky/prepare-commit-msg 'exec < /dev/tty && node_modules/.bin/cz --hook || true'
+        ```
 
 ---
 
