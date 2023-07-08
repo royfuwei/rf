@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@rf/utility": ["packages/utility/src/index.ts"]
+      "@rfjs/utility": ["packages/utility/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
