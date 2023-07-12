@@ -1,6 +1,6 @@
 import { Paths, Leaves } from './path';
 
-describe('utility', () => {
+describe('utils', () => {
   it('use Leaves', async () => {
     interface ITest {
       a: string;
