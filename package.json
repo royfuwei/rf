@@ -4,8 +4,7 @@
   "license": "MIT",
   "scripts": {
     "test": "",
-    "prepare": "husky install",
-    "version": "npx conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md"
+    "prepare": "husky install"
   },
   "config": {
     "commitizen": {
