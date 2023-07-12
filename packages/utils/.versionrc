@@ -1,0 +1,5 @@
+{
+  "path": ".",
+  "tag-prefix": "@rfjs/utils-v",
+  "releaseCommitMessageFormat": "chore(release): @rfjs/utils v{{currentTag}}"
+}
