@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "test": "",
+    "release": "standard-version",
     "prepare": "husky install"
   },
   "config": {
