@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@rfjs/helper": ["packages/helper/src/index.ts"],
       "@rfjs/utils": ["packages/utils/src/index.ts"]
     }
   },
