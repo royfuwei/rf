@@ -17,6 +17,7 @@
     "@commitlint/cli": "^17.6.5",
     "@commitlint/config-conventional": "^17.6.5",
     "@commitlint/cz-commitlint": "^17.5.0",
+    "@nx/esbuild": "16.4.0-beta.8",
     "@nx/eslint-plugin": "16.4.0-beta.8",
     "@nx/jest": "16.4.0-beta.8",
     "@nx/js": "16.4.0-beta.8",
@@ -29,6 +30,7 @@
     "commitizen": "^4.3.0",
     "conventional-changelog-angular": "^6.0.0",
     "conventional-changelog-cli": "^3.0.0",
+    "esbuild": "^0.17.17",
     "eslint": "~8.15.0",
     "eslint-config-prettier": "8.1.0",
     "husky": "^8.0.0",
@@ -47,6 +49,7 @@
     "packages/*"
   ],
   "dependencies": {
+    "axios": "^1.0.0",
     "crypto-js": "^4.1.1",
     "tslib": "^2.3.0"
   }
