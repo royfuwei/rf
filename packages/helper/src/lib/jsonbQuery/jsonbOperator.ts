@@ -123,7 +123,7 @@ export const jsonbIsNotNullOperator: JsonbOperatorToSqlObj = {
     arrayObjectDate: (_jsonb: string, _field: string, _value: boolean) => null,
 };
 
-export const jsonbContaintOperator: JsonbOperatorToSqlObj = {
+export const jsonbContainsOperator: JsonbOperatorToSqlObj = {
     string: (_jsonb: string, _field: string, _value: string) =>
         `((${_jsonb} ->> '${_field}' ) like '%${_value}%')`,
     arrayString: (_jsonb: string, _field: string, _value: string) =>

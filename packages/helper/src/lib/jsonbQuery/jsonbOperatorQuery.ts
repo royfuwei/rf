@@ -8,7 +8,7 @@ import {
     jsonbNeqOperator,
     jsonbIsNullOperator,
     jsonbIsNotNullOperator,
-    jsonbContaintOperator,
+    jsonbContainsOperator,
     jsonbStartsWithOperator,
     jsonbEndsWithOperator,
     jsonbTermsOperator,
@@ -18,10 +18,97 @@ import {
     jsonbLteOperator,
     jsonbLtOperator,
 } from './jsonbOperator';
-import { ISqlQuery, DataType, JsonbValueType } from './type';
+import {
+    ISqlQuery,
+    DataType,
+    JsonbValueType,
+    FilterOperator,
+    FilterOperatorQueryObj,
+} from './type';
 import { v4 as uuidv4 } from 'uuid';
 
-export class JsonbEqQuery implements ISqlQuery {
+export const filterOperator: FilterOperatorQueryObj = {
+    contains: (
+        _jsonb: string,
+        _field: string,
+        _dataType: DataType,
+        _value: JsonbValueType,
+    ) => jsonbContainsOperator[_dataType](_jsonb, _field, _value),
+    eq: (
+        _jsonb: string,
+        _field: string,
+        _dataType: DataType,
+        _value: JsonbValueType,
+    ) => jsonbEqOperator[_dataType](_jsonb, _field, _value),
+    neq: (
+        _jsonb: string,
+        _field: string,
+        _dataType: DataType,
+        _value: JsonbValueType,
+    ) => jsonbNeqOperator[_dataType](_jsonb, _field, _value),
+    isnull: (
+        _jsonb: string,
+        _field: string,
+        _dataType: DataType,
+        _value: JsonbValueType,
+    ) => jsonbIsNullOperator[_dataType](_jsonb, _field, _value),
+    isnotnull: (
+        _jsonb: string,
+        _field: string,
+        _dataType: DataType,
+        _value: JsonbValueType,
+    ) => jsonbIsNotNullOperator[_dataType](_jsonb, _field, _value),
+    startswith: (
+        _jsonb: string,
+        _field: string,
+        _dataType: DataType,
+        _value: JsonbValueType,
+    ) => jsonbStartsWithOperator[_dataType](_jsonb, _field, _value),
+    endswith: (
+        _jsonb: string,
+        _field: string,
+        _dataType: DataType,
+        _value: JsonbValueType,
+    ) => jsonbEndsWithOperator[_dataType](_jsonb, _field, _value),
+    terms: (
+        _jsonb: string,
+        _field: string,
+        _dataType: DataType,
+        _value: JsonbValueType,
+    ) => jsonbTermsOperator[_dataType](_jsonb, _field, _value),
+    gte: (
+        _jsonb: string,
+        _field: string,
+        _dataType: DataType,
+        _value: JsonbValueType,
+    ) => jsonbGteOperator[_dataType](_jsonb, _field, _value),
+    gt: (
+        _jsonb: string,
+        _field: string,
+        _dataType: DataType,
+        _value: JsonbValueType,
+    ) => jsonbGtOperator[_dataType](_jsonb, _field, _value),
+    lte: (
+        _jsonb: string,
+        _field: string,
+        _dataType: DataType,
+        _value: JsonbValueType,
+    ) => jsonbLteOperator[_dataType](_jsonb, _field, _value),
+    lt: (
+        _jsonb: string,
+        _field: string,
+        _dataType: DataType,
+        _value: JsonbValueType,
+    ) => jsonbLtOperator[_dataType](_jsonb, _field, _value),
+    range: (
+        _jsonb: string,
+        _field: string,
+        _dataType: DataType,
+        _value: JsonbValueType,
+    ) => jsonbRangeOperator[_dataType](_jsonb, _field, _value),
+};
+
+export class JsonbOperatorQuery implements ISqlQuery {
     private alias = uuidv4();
     fromAlias?: string | null | undefined;
     from: string | null | undefined;
@@ -30,248 +117,13 @@ export class JsonbEqQuery implements ISqlQuery {
     constructor(
         jsonb: string,
         field: string,
+        filter: FilterOperator,
         dataType: DataType,
         value: JsonbValueType,
     ) {
-        const _aliasField = jsonbWhereAliasField[dataType](field, this.alias);
+        const aliasField = jsonbWhereAliasField[dataType](field, this.alias);
         this.fromAlias = jsonbFromAlias[dataType](field, this.alias);
         this.from = jsonbFromSql[dataType](jsonb, field);
-        this.where = jsonbEqOperator[dataType](jsonb, _aliasField, value);
-    }
-}
-
-export class JsonbNeqQuery implements ISqlQuery {
-    private alias = uuidv4();
-    fromAlias?: string | null | undefined;
-    from: string | null | undefined;
-    where: string | null | undefined;
-
-    constructor(
-        jsonb: string,
-        field: string,
-        dataType: DataType,
-        value: JsonbValueType,
-    ) {
-        const _aliasField = jsonbWhereAliasField[dataType](field, this.alias);
-        this.fromAlias = jsonbFromAlias[dataType](field, this.alias);
-        this.from = jsonbFromSql[dataType](jsonb, field);
-        this.where = jsonbNeqOperator[dataType](jsonb, _aliasField, value);
-    }
-}
-
-export class JsonbIsNullQuery implements ISqlQuery {
-    private alias = uuidv4();
-    fromAlias?: string | null | undefined;
-    from: string | null | undefined;
-    where: string | null | undefined;
-
-    constructor(
-        jsonb: string,
-        field: string,
-        dataType: DataType,
-        value: JsonbValueType,
-    ) {
-        const _aliasField = jsonbWhereAliasField[dataType](field, this.alias);
-        this.fromAlias = jsonbFromAlias[dataType](field, this.alias);
-        this.from = jsonbFromSql[dataType](jsonb, field);
-        this.where = jsonbIsNullOperator[dataType](jsonb, _aliasField, value);
-    }
-}
-
-export class JsonbIsNotNullQuery implements ISqlQuery {
-    private alias = uuidv4();
-    fromAlias?: string | null | undefined;
-    from: string | null | undefined;
-    where: string | null | undefined;
-
-    constructor(
-        jsonb: string,
-        field: string,
-        dataType: DataType,
-        value: JsonbValueType,
-    ) {
-        const _aliasField = jsonbWhereAliasField[dataType](field, this.alias);
-        this.fromAlias = jsonbFromAlias[dataType](field, this.alias);
-        this.from = jsonbFromSql[dataType](jsonb, field);
-        this.where = jsonbIsNotNullOperator[dataType](
-            jsonb,
-            _aliasField,
-            value,
-        );
-    }
-}
-
-export class JsonbContaintQuery implements ISqlQuery {
-    private alias = uuidv4();
-    fromAlias?: string | null | undefined;
-    from: string | null | undefined;
-    where: string | null | undefined;
-
-    constructor(
-        jsonb: string,
-        field: string,
-        dataType: DataType,
-        value: JsonbValueType,
-    ) {
-        const _aliasField = jsonbWhereAliasField[dataType](field, this.alias);
-        this.fromAlias = jsonbFromAlias[dataType](field, this.alias);
-        this.from = jsonbFromSql[dataType](jsonb, field);
-        this.where = jsonbContaintOperator[dataType](jsonb, _aliasField, value);
-    }
-}
-
-export class JsonbStartsWithQuery implements ISqlQuery {
-    private alias = uuidv4();
-    fromAlias?: string | null | undefined;
-    from: string | null | undefined;
-    where: string | null | undefined;
-
-    constructor(
-        jsonb: string,
-        field: string,
-        dataType: DataType,
-        value: JsonbValueType,
-    ) {
-        const _aliasField = jsonbWhereAliasField[dataType](field, this.alias);
-        this.fromAlias = jsonbFromAlias[dataType](field, this.alias);
-        this.from = jsonbFromSql[dataType](jsonb, field);
-        this.where = jsonbStartsWithOperator[dataType](
-            jsonb,
-            _aliasField,
-            value,
-        );
-    }
-}
-
-export class JsonbEndsWithQuery implements ISqlQuery {
-    private alias = uuidv4();
-    fromAlias?: string | null | undefined;
-    from: string | null | undefined;
-    where: string | null | undefined;
-
-    constructor(
-        jsonb: string,
-        field: string,
-        dataType: DataType,
-        value: JsonbValueType,
-    ) {
-        const _aliasField = jsonbWhereAliasField[dataType](field, this.alias);
-        this.fromAlias = jsonbFromAlias[dataType](field, this.alias);
-        this.from = jsonbFromSql[dataType](jsonb, field);
-        this.where = jsonbEndsWithOperator[dataType](jsonb, _aliasField, value);
-    }
-}
-
-export class JsonbTermsQuery implements ISqlQuery {
-    private alias = uuidv4();
-    fromAlias?: string | null | undefined;
-    from: string | null | undefined;
-    where: string | null | undefined;
-
-    constructor(
-        jsonb: string,
-        field: string,
-        dataType: DataType,
-        value: JsonbValueType,
-    ) {
-        const _aliasField = jsonbWhereAliasField[dataType](field, this.alias);
-        this.fromAlias = jsonbFromAlias[dataType](field, this.alias);
-        this.from = jsonbFromSql[dataType](jsonb, field);
-        this.where = jsonbTermsOperator[dataType](jsonb, _aliasField, value);
-    }
-}
-
-export class JsonbRangeQuery implements ISqlQuery {
-    private alias = uuidv4();
-    fromAlias?: string | null | undefined;
-    from: string | null | undefined;
-    where: string | null | undefined;
-
-    constructor(
-        jsonb: string,
-        field: string,
-        dataType: DataType,
-        value: JsonbValueType,
-    ) {
-        const _aliasField = jsonbWhereAliasField[dataType](field, this.alias);
-        this.fromAlias = jsonbFromAlias[dataType](field, this.alias);
-        this.from = jsonbFromSql[dataType](jsonb, field);
-        this.where = jsonbRangeOperator[dataType](jsonb, _aliasField, value);
-    }
-}
-
-export class JsonbGteQuery implements ISqlQuery {
-    private alias = uuidv4();
-    fromAlias?: string | null | undefined;
-    from: string | null | undefined;
-    where: string | null | undefined;
-
-    constructor(
-        jsonb: string,
-        field: string,
-        dataType: DataType,
-        value: JsonbValueType,
-    ) {
-        const _aliasField = jsonbWhereAliasField[dataType](field, this.alias);
-        this.fromAlias = jsonbFromAlias[dataType](field, this.alias);
-        this.from = jsonbFromSql[dataType](jsonb, field);
-        this.where = jsonbGteOperator[dataType](jsonb, _aliasField, value);
-    }
-}
-
-export class JsonbGtQuery implements ISqlQuery {
-    private alias = uuidv4();
-    fromAlias?: string | null | undefined;
-    from: string | null | undefined;
-    where: string | null | undefined;
-
-    constructor(
-        jsonb: string,
-        field: string,
-        dataType: DataType,
-        value: JsonbValueType,
-    ) {
-        const _aliasField = jsonbWhereAliasField[dataType](field, this.alias);
-        this.fromAlias = jsonbFromAlias[dataType](field, this.alias);
-        this.from = jsonbFromSql[dataType](jsonb, field);
-        this.where = jsonbGtOperator[dataType](jsonb, _aliasField, value);
-    }
-}
-
-export class JsonbLteQuery implements ISqlQuery {
-    private alias = uuidv4();
-    fromAlias?: string | null | undefined;
-    from: string | null | undefined;
-    where: string | null | undefined;
-
-    constructor(
-        jsonb: string,
-        field: string,
-        dataType: DataType,
-        value: JsonbValueType,
-    ) {
-        const _aliasField = jsonbWhereAliasField[dataType](field, this.alias);
-        this.fromAlias = jsonbFromAlias[dataType](field, this.alias);
-        this.from = jsonbFromSql[dataType](jsonb, field);
-        this.where = jsonbLteOperator[dataType](jsonb, _aliasField, value);
-    }
-}
-
-export class JsonbLtQuery implements ISqlQuery {
-    private alias = uuidv4();
-    fromAlias?: string | null | undefined;
-    from: string | null | undefined;
-    where: string | null | undefined;
-
-    constructor(
-        jsonb: string,
-        field: string,
-        dataType: DataType,
-        value: JsonbValueType,
-    ) {
-        const _aliasField = jsonbWhereAliasField[dataType](field, this.alias);
-        this.fromAlias = jsonbFromAlias[dataType](field, this.alias);
-        this.from = jsonbFromSql[dataType](jsonb, field);
-        this.where = jsonbLtOperator[dataType](jsonb, _aliasField, value);
+        this.where = filterOperator[filter](jsonb, aliasField, dataType, value);
     }
 }
