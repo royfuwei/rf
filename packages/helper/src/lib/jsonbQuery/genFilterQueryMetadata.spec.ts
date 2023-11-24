@@ -11,9 +11,43 @@ describe('genFilterQueryMetadata', () => {
             filters: [],
         }
         const query = genFilterQueryMetadata('properties', filterQuery);
-        console.log(query);
+        // console.log(query);
         expect('genFilterQueryMetadata').toEqual('genFilterQueryMetadata');
     })
+
+    it('genFilterQueryMetadata filter err operator', () => {
+        const filterQuery = {
+            logic: 'and',
+            filters: [
+                {
+                    field: 'arr_object',
+                    dataType: 'arrayObjectDate',
+                    operator: 'range1',
+                    value: ['2020-03-30', '2021-07-31']
+                }
+            ],
+        }
+        const query = genFilterQueryMetadata('properties', filterQuery as FilterQueryMetadata);
+        // console.log(query);
+        expect('genFilterQueryMetadata').toEqual('genFilterQueryMetadata');
+    })
+
+    // it('genFilterQueryMetadata filter err dataType', () => {
+    //     const filterQuery = {
+    //         logic: 'and',
+    //         filters: [
+    //             {
+    //                 field: 'arr_object',
+    //                 dataType: 'arrayObjectDate1',
+    //                 operator: 'range',
+    //                 value: ['2020-03-30', '2021-07-31']
+    //             }
+    //         ],
+    //     }
+    //     const query = genFilterQueryMetadata('properties', filterQuery as FilterQueryMetadata);
+    //     console.log(query);
+    //     expect('genFilterQueryMetadata').toEqual('genFilterQueryMetadata');
+    // })
 
     it('genFilterQueryMetadata filter 1', () => {
         const filterQuery: FilterQueryMetadata = {
@@ -28,7 +62,7 @@ describe('genFilterQueryMetadata', () => {
             ],
         }
         const query = genFilterQueryMetadata('properties', filterQuery);
-        console.log(query);
+        // console.log(query);
         expect('genFilterQueryMetadata').toEqual('genFilterQueryMetadata');
     })
 
@@ -46,7 +80,7 @@ describe('genFilterQueryMetadata', () => {
             ],
         }
         const query = genFilterQueryMetadata('properties', filterQuery);
-        console.log(query);
+        // console.log(query);
         expect('genFilterQueryMetadata').toEqual('genFilterQueryMetadata');
     })
 
@@ -69,7 +103,7 @@ describe('genFilterQueryMetadata', () => {
             ],
         }
         const query = genFilterQueryMetadata('properties', filterQuery);
-        console.log(query);
+        // console.log(query);
         expect('genFilterQueryMetadata').toEqual('genFilterQueryMetadata');
     })
 
@@ -97,13 +131,13 @@ describe('genFilterQueryMetadata', () => {
             ],
         }
         const query = genFilterQueryMetadata('properties', filterQuery);
-        console.log(query);
+        // console.log(query);
         expect('genFilterQueryMetadata').toEqual('genFilterQueryMetadata');
     })
 
     it('genFilterQueryMetadata filter 1, FilterQueryMetadata 2', () => {
         const filterQuery: FilterQueryMetadata = {
-            logic: 'or',
+            logic: 'and',
             filters: [
                 {
                     logic: 'or',
