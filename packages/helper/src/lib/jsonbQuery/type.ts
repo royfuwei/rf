@@ -126,3 +126,12 @@ export type FilterOperatorQuery = {
         _value: JsonbValueType,
     ) => ISqlQuery;
 };
+
+export type FilterOperatorQueryObj = {
+    [key in FilterOperator]: (
+        _jsonb: string,
+        _field: string,
+        _dataType: DataType,
+        _value: JsonbValueType,
+    ) => string | null;
+};
