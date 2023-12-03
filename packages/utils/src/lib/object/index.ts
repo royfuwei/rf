@@ -47,16 +47,29 @@ export function flatten(nestedObj: object, prefix?: string) {
  * @param value nested value
  * @returns nested object
  */
-export function keysToNested(keys: string[], value: any) {
-    return keys.reverse().reduce((pre, key, idx) => {
-        if (idx === 0) {
-            Object.assign(pre, { [`${key}`]: value });
-        } else {
-            pre = Object.assign({}, { [`${key}`]: pre});
-        }
-        return pre;
-    }, {});
-}
+export function keysToNested(
+    keys: string[],
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    value: any,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    target: any = {},
+    depth = 0,
+) {
+    const isLastDepth = depth == keys.length - 1;
+    const key = keys[depth];
+    if (!isLastDepth) {
+        const result = keysToNested(
+            keys,
+            value,
+            target[key],
+            ++depth,
+        );
+        target[key] = result;
+    } else {
+        target[key] = value;
+    }
+    return target;
+};
 
 /**
  * convert object to Json string
