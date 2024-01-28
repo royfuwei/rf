@@ -1,3 +1,4 @@
+import { Minimal } from '@rfjs/minimal';
 import styles from './page.module.scss';
 
 export default async function Index() {
@@ -10,13 +11,7 @@ export default async function Index() {
     <div className={styles.page}>
       <div className="wrapper">
         <div className="container">
-          <div id="welcome">
-            <h1>
-              <span> Hello there, </span>
-              Welcome web 👋
-            </h1>
-          </div>
-
+          <Minimal id={'welcome'} />
           <div id="hero" className="rounded">
             <div className="text-container">
               <h2>
