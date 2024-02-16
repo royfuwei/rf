@@ -1,14 +1,27 @@
+import 'reflect-metadata';
 import koa from 'koa';
+import path from 'path';
+import { TsyringeAdapter } from './iocAdapter';
+import { useContainer, useKoaServer } from 'routing-controllers';
+import { useSwaggerDocument } from './openapi';
 
-const host = process.env.HOST ?? 'localhost';
-const port = process.env.PORT ? Number(process.env.PORT) : 8001;
+async function main() {
+  const app = new koa();
+  const iocAdapter = new TsyringeAdapter();
+  
+  useContainer(iocAdapter);
+  useKoaServer(app, {
+    routePrefix: 'api',
+    controllers: [ path.join(__dirname, '/modules/**/**.{controller,ctrl}.{ts,js}')],
+  });
+  useSwaggerDocument(app);
 
-const app = new koa();
+  const host = process.env.HOST ?? 'localhost';
+  const port = process.env.PORT ? Number(process.env.PORT) : 8001;
 
-app.use(async (ctx) => {
-  ctx.body = { message: 'Hello API' };
-});
+  app.listen(port, host, () => {
+    console.log(`[ ready ] http://${host}:${port}`);
+  });
+}
 
-app.listen(port, host, () => {
-  console.log(`[ ready ] http://${host}:${port}`);
-});
+main();
