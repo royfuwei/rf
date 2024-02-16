@@ -18,6 +18,7 @@
       "@rfjs/helper": ["packages/helper/src/index.ts"],
       "@rfjs/minimal": ["packages/minimal/src/index.ts"],
       "@rfjs/minimal/server": ["packages/minimal/src/server.ts"],
+      "@rfjs/modules": ["libs/modules/src/index.ts"],
       "@rfjs/utils": ["packages/utils/src/index.ts"]
     }
   },
