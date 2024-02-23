@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@rfjs/common": ["libs/common/src/index.ts"],
       "@rfjs/helpers": ["packages/helpers/src/index.ts"],
       "@rfjs/minimal": ["packages/minimal/src/index.ts"],
       "@rfjs/minimal/server": ["packages/minimal/src/server.ts"],
