@@ -1,35 +1,35 @@
 {
-  "name": "helper",
+  "name": "helpers",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "packages/helper/src",
+  "sourceRoot": "packages/helpers/src",
   "projectType": "library",
   "targets": {
     "build": {
       "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/packages/helper",
-        "main": "packages/helper/src/index.ts",
-        "tsConfig": "packages/helper/tsconfig.lib.json",
-        "assets": ["packages/helper/*.md"]
+        "outputPath": "dist/packages/helpers",
+        "main": "packages/helpers/src/index.ts",
+        "tsConfig": "packages/helpers/tsconfig.lib.json",
+        "assets": ["packages/helpers/*.md"]
       }
     },
     "publish": {
-      "command": "node tools/scripts/publish.mjs helper {args.ver} {args.tag}",
+      "command": "node tools/scripts/publish.mjs helpers {args.ver} {args.tag}",
       "dependsOn": ["build"]
     },
     "lint": {
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["packages/helper/**/*.ts"]
+        "lintFilePatterns": ["packages/helpers/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "packages/helper/jest.config.ts",
+        "jestConfig": "packages/helpers/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {
