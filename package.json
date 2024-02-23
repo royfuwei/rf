@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "dev": "mode=LOCAL_DEV npx nx run-many --target=serve --parallel=4",
+    "dev": "mode=LOCAL_DEV npm run clean && npx npx nx run-many --target=serve --parallel=4",
+    "clean": "npx rimraf ./dist",
     "test": "",
     "release": "standard-version",
     "prepare": "husky install"
@@ -37,6 +38,7 @@
     "@testing-library/react": "14.0.0",
     "@types/jest": "^29.4.0",
     "@types/koa": "~2.13.5",
+    "@types/koa__multer": "^2.0.7",
     "@types/node": "18.16.9",
     "@types/react": "18.2.33",
     "@types/react-dom": "18.2.14",
@@ -75,10 +77,17 @@
     "packages/*"
   ],
   "dependencies": {
+    "@koa/multer": "^3.0.2",
     "axios": "^1.6.7",
+    "chalk": "^5.3.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
+    "class-validator-jsonschema": "^5.0.0",
     "crypto-js": "^4.1.1",
     "koa": "~2.14.1",
+    "koa-bodyparser": "^4.4.1",
     "koa2-swagger-ui": "^5.10.0",
+    "multer": "^1.4.5-lts.1",
     "next": "13.4.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",

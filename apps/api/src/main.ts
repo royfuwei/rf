@@ -11,7 +11,7 @@ async function main() {
   
   useContainer(iocAdapter);
   useKoaServer(app, {
-    routePrefix: 'api',
+    routePrefix: '',
     controllers: [ path.join(__dirname, '/modules/**/**.{controller,ctrl}.{ts,js}')],
   });
   useSwaggerDocument(app);
