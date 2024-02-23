@@ -1,11 +1,12 @@
 import 'reflect-metadata';
 import { inject, injectable } from "tsyringe";
 import { IAppCtrl } from "../types/app.type";
-import { AppInfo, IAppService } from "@rfjs/modules";
-import { Ctx, Get, JsonController, Post, UploadedFiles } from "routing-controllers";
+import { AppInfoDTO, IAppService } from "@rfjs/modules";
+import { Ctx, Get, HttpCode, JsonController, Post, UploadedFiles } from "routing-controllers";
 import { File } from '@koa/multer';
 import { fileUploadOptions } from "../../../common/helpers/upload.helper";
 import { Context } from "koa";
+import { ApiResDTO, ApiResSchema } from '@rfjs/common';
 
 @injectable()
 @JsonController('/app')
@@ -16,8 +17,18 @@ export class AppCtrl implements IAppCtrl {
   ) {}
 
   @Get()
-  async getAppInfo(): Promise<AppInfo> {
-    return this.appSvc.getAppInfo();
+  @ApiResSchema(AppInfoDTO)
+  @ApiResSchema(AppInfoDTO, { isArray: true, status: 201})
+  async getAppInfo() {
+    const data = this.appSvc.getAppInfo();
+    const result: ApiResDTO<AppInfoDTO> = {
+      success: true,
+      status: 200,
+      result: {
+        data,
+      }
+    }
+    return result;
   }
 
   @Post('/files')

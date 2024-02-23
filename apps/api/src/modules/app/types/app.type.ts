@@ -1,5 +1,6 @@
-import { AppInfo } from '@rfjs/modules';
+import { ApiResDTO } from '@rfjs/common';
+import { AppInfoDTO } from '@rfjs/modules';
 
 export interface IAppCtrl {
-  getAppInfo(): Promise<AppInfo>;
+  getAppInfo(): Promise<ApiResDTO<AppInfoDTO>>;
 }
