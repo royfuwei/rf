@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import { inject, injectable } from "tsyringe";
 import { IAppCtrl } from "../types/app.type";
 import { AppInfoDTO, IAppService } from "@rfjs/modules";
-import { Ctx, Get, HttpCode, JsonController, Post, UploadedFiles } from "routing-controllers";
+import { Body, Ctx, Get, JsonController, Post, QueryParam, UploadedFiles } from "routing-controllers";
 import { File } from '@koa/multer';
 import { fileUploadOptions } from "../../../common/helpers/upload.helper";
 import { Context } from "koa";
@@ -18,7 +18,6 @@ export class AppCtrl implements IAppCtrl {
 
   @Get()
   @ApiResSchema(AppInfoDTO)
-  @ApiResSchema(AppInfoDTO, { isArray: true, status: 201})
   async getAppInfo() {
     const data = this.appSvc.getAppInfo();
     const result: ApiResDTO<AppInfoDTO> = {
@@ -30,6 +29,20 @@ export class AppCtrl implements IAppCtrl {
     }
     return result;
   }
+
+  /* @Post()
+  async postAppData(
+    @Body() body: ReqAppBodyDTO,
+  ) {
+    return body;
+  } */
+
+  /* @Get('/query')
+  async queryAppData(
+    @QueryParam('id') id: any,
+  ) {
+    return {id};
+  } */
 
   @Post('/files')
   async uploadFiles(

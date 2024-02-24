@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "dev": "mode=LOCAL_DEV npm run clean && npx npx nx run-many --target=serve --parallel=4",
+    "dev": "mode=LOCAL_DEV npx npx nx run-many --target=serve --parallel=4",
     "clean": "npx rimraf ./dist",
     "test": "",
     "release": "standard-version",
@@ -39,6 +39,7 @@
     "@types/jest": "^29.4.0",
     "@types/koa": "~2.13.5",
     "@types/koa__multer": "^2.0.7",
+    "@types/koa-bodyparser": "^4.3.12",
     "@types/node": "18.16.9",
     "@types/react": "18.2.33",
     "@types/react-dom": "18.2.14",
@@ -77,6 +78,7 @@
     "packages/*"
   ],
   "dependencies": {
+    "@koa/bodyparser": "^5.0.0",
     "@koa/multer": "^3.0.2",
     "axios": "^1.6.7",
     "chalk": "^5.3.0",

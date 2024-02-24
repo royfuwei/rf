@@ -4,15 +4,27 @@ import path from 'path';
 import { TsyringeAdapter } from './iocAdapter';
 import { useContainer, useKoaServer } from 'routing-controllers';
 import { useSwaggerDocument } from './openapi';
+import { bodyParser } from '@koa/bodyparser';
 
 async function main() {
   const app = new koa();
   const iocAdapter = new TsyringeAdapter();
+  app.use(
+    bodyParser({
+      formLimit: '100mb',
+      jsonLimit: '100mb',
+      textLimit: '100mb',
+      encoding: 'utf-8'
+    }),
+  );
   
   useContainer(iocAdapter);
   useKoaServer(app, {
     routePrefix: '',
-    controllers: [ path.join(__dirname, '/modules/**/**.{controller,ctrl}.{ts,js}')],
+    controllers: [
+      path.join(__dirname, '/modules/**/**.controller.{ts,js}'),
+      path.join(__dirname, '/modules/**/**.ctrl.{ts,js}'),
+    ],
   });
   useSwaggerDocument(app);
 

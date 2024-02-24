@@ -15,7 +15,10 @@ export function useSwaggerDocument(
   // https://github.com/epiphone/routing-controllers-openapi/blob/master/sample/01-basic/app.ts
   try {
     const routingControllersOptions = {
-      controllers: [path.join(__dirname, '/modules/**/*.controller.{ts,js}')],
+      controllers: [
+        path.join(__dirname, '/modules/**/*.controller.{ts,js}'),
+        path.join(__dirname, '/modules/**/*.ctrl.{ts,js}'),
+      ],
     };
     const storage = getMetadataArgsStorage();
     const classValidatorMetadataStorage = getMetadataStorage();
@@ -45,7 +48,7 @@ export function useSwaggerDocument(
 
   } catch (err) {
     const errInfo = `[DOC][useSwaggerDocument] error: ${err}`;
-    console.log(errInfo);
+    console.error(errInfo);
+    console.error(err);
   }
-  
 }
