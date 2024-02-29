@@ -3,7 +3,7 @@ import { AppInfoDTO } from '@rfjs/modules';
 import { IsString } from 'class-validator';
 import { JSONSchema } from 'class-validator-jsonschema';
 
-export interface IAppCtrl {
+export interface IAppController {
   getAppInfo(): Promise<ApiResDTO<AppInfoDTO>>;
 }
 

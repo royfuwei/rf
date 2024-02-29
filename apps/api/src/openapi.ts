@@ -1,11 +1,11 @@
 import koa, { DefaultState, DefaultContext } from "koa";
-import path from "path";
 import { getMetadataArgsStorage } from "routing-controllers";
 import { routingControllersToSpec } from 'routing-controllers-openapi';
 import { koaSwagger } from 'koa2-swagger-ui';
 import { defaultMetadataStorage } from 'class-transformer/cjs/storage';
 import { validationMetadatasToSchemas } from "class-validator-jsonschema";
 import { getMetadataStorage } from "class-validator";
+import * as _indexControllers from './controllers';
 const { version, name } = require('../../../package.json');
 
 export function useSwaggerDocument(
@@ -14,10 +14,10 @@ export function useSwaggerDocument(
   // routing-controllers-openapi example:
   // https://github.com/epiphone/routing-controllers-openapi/blob/master/sample/01-basic/app.ts
   try {
+    const controllers = Object.values(_indexControllers).values();
     const routingControllersOptions = {
       controllers: [
-        path.join(__dirname, '/modules/**/*.controller.{ts,js}'),
-        path.join(__dirname, '/modules/**/*.ctrl.{ts,js}'),
+        ...controllers,
       ],
     };
     const storage = getMetadataArgsStorage();

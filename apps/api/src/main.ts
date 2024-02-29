@@ -5,10 +5,13 @@ import { TsyringeAdapter } from './iocAdapter';
 import { useContainer, useKoaServer } from 'routing-controllers';
 import { useSwaggerDocument } from './openapi';
 import { bodyParser } from '@koa/bodyparser';
+import * as _indexControllers from './controllers';
 
 async function main() {
   const app = new koa();
   const iocAdapter = new TsyringeAdapter();
+  const controllers = Object.values(_indexControllers).values();
+
   app.use(
     bodyParser({
       formLimit: '100mb',
@@ -20,10 +23,8 @@ async function main() {
   
   useContainer(iocAdapter);
   useKoaServer(app, {
-    routePrefix: '',
     controllers: [
-      path.join(__dirname, '/modules/**/**.controller.{ts,js}'),
-      path.join(__dirname, '/modules/**/**.ctrl.{ts,js}'),
+      ...controllers,
     ],
   });
   useSwaggerDocument(app);
