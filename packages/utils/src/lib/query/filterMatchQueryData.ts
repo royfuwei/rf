@@ -48,13 +48,13 @@ function logicMatchQuery(
   let result = false;
   switch (logic) {
     case 'and':
-      result = data.every((v) => v == true);
+      result = data.every((v) => v);
       break;
     case 'not':
-      result =data.every((v) => v == false);
+      result = !data.every((v) => v);
       break;
     case 'nor':
-      result = data.includes(false);
+      result = !data.includes(true);
       break;
     case 'or':
       result = data.includes(true);

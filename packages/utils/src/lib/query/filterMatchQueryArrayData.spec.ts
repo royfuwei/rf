@@ -48,6 +48,74 @@ describe('object filterMatchQueryArrayData', () => {
   ]
   
   describe('nested filter', () => {
+    it('logic and not nested filter, 1 filterQueries', () => {
+      const filterQueries: FilterMatchQuery[] = [
+        {
+          logic: 'and',
+          filters: [
+            {
+              logic: 'not',
+              filters: [
+                {
+                  field: 'code',
+                  operator: 'contains',
+                  dataType: 'string',
+                  value: ['B10', 'C10']
+                },
+                {
+                  field: 'deleted',
+                  operator: 'eq',
+                  dataType: 'boolean',
+                  value: true
+                },
+              ]
+            }
+          ]
+        }
+      ]
+      const data = filterMatchQueryArrayData(
+        testData,
+        filterQueries,
+      );
+      const result = data.map(i => i['id']);
+  
+      expect(result).toEqual([1,2,6,7])
+    })
+
+    it('logic and nor nested filter, 1 filterQueries', () => {
+      const filterQueries: FilterMatchQuery[] = [
+        {
+          logic: 'and',
+          filters: [
+            {
+              logic: 'nor',
+              filters: [
+                {
+                  field: 'code',
+                  operator: 'contains',
+                  dataType: 'string',
+                  value: ['B10', 'C10']
+                },
+                {
+                  field: 'deleted',
+                  operator: 'eq',
+                  dataType: 'boolean',
+                  value: true
+                },
+              ]
+            }
+          ]
+        }
+      ]
+      const data = filterMatchQueryArrayData(
+        testData,
+        filterQueries,
+      );
+      const result = data.map(i => i['id']);
+  
+      expect(result).toEqual([1,2,7])
+    })
+
     it('logic and nested filter, 1 filterQueries', () => {
       const filterQueries: FilterMatchQuery[] = [
         {
