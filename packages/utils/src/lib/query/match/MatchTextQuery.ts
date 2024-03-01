@@ -37,7 +37,7 @@ export class MatchTextQuery {
         if (isTargetMatch) tarPre.push(isTargetMatch);
         return tarPre;
       }, <boolean[]>[]);
-      const isMatch = targetMatchs.length == this.targets.length;
+      const isMatch = this.targets.length > 0 && targetMatchs.length == this.targets.length;
       if (isMatch) pre.push(cur);
       return pre;
     }, <string[]>[]);
@@ -67,7 +67,7 @@ export class MatchTextQuery {
         if (isTargetMatch) tarPre.push(isTargetMatch);
         return tarPre;
       }, <boolean[]>[]);
-      const isMatch = targetMatchs.length > 0;
+      const isMatch = this.targets.length > 0 && targetMatchs.length > 0;
       if (isMatch) pre.push(cur);
       return pre;
     }, <string[]>[]);
@@ -85,7 +85,7 @@ export class MatchTextQuery {
         if (isTargetMatch) tarPre.push(isTargetMatch);
         return tarPre;
       }, <boolean[]>[]);
-      const isMatch = targetMatchs.length > 0;
+      const isMatch = this.targets.length > 0 && targetMatchs.length > 0;
       if (isMatch) pre.push(cur);
       return pre;
     }, <string[]>[]);
@@ -103,7 +103,7 @@ export class MatchTextQuery {
         if (isTargetMatch) tarPre.push(isTargetMatch);
         return tarPre;
       }, <boolean[]>[]);
-      const isMatch = targetMatchs.length > 0;
+      const isMatch = this.targets.length > 0 && targetMatchs.length > 0;
       if (isMatch) pre.push(cur);
       return pre;
     }, <string[]>[]);
@@ -118,7 +118,7 @@ export class MatchTextQuery {
         if (isTargetMatch) tarPre.push(isTargetMatch);
         return tarPre;
       }, <boolean[]>[]);
-      const isMatch = targetMatchs.length > 0;
+      const isMatch = this.targets.length > 0 && targetMatchs.length > 0;
       if (isMatch) pre.push(cur);
       return pre;
     }, <string[]>[]);

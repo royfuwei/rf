@@ -38,7 +38,7 @@ export class MatchBooleanQuery {
         if (isTargetMatch) tarPre.push(isTargetMatch);
         return tarPre;
       }, <boolean[]>[]);
-      isMatch =  targetMatchs.length == this.targets.length;
+      isMatch = this.targets.length > 0 && targetMatchs.length == this.targets.length;
       if (isMatch) pre.push(cur);
       return pre;
     }, <boolean[]>[]);

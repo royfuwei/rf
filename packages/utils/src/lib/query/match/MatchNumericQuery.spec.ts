@@ -306,6 +306,26 @@ describe('arrayQuery', () => {
     })
 
     describe('isnotnull', () => {
+      it('undefined key: false', () => {
+        const query = new MatchNumericQuery(
+          'a2.number',
+          'isnotnull',
+          null,
+          testData1,
+        );
+        expect(query.isMatch).toEqual(false);
+      })
+
+      it('null key: false', () => {
+        const query = new MatchNumericQuery(
+          'a1.nullText',
+          'isnotnull',
+          null,
+          testData1,
+        );
+        expect(query.isMatch).toEqual(false);
+      })
+
       it('number: true', () => {
         const query = new MatchNumericQuery(
           'a1.number',

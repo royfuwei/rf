@@ -22,6 +22,26 @@ describe('arrayQuery', () => {
   describe('MatchBooleanQuery', () => {
 
     describe('isnotnull', () => {
+      it('undefined key: false', () => {
+        const query = new MatchBooleanQuery(
+          'a2.number',
+          'isnotnull',
+          null,
+          testData1,
+        );
+        expect(query.isMatch).toEqual(false);
+      })
+
+      it('null key: false', () => {
+        const query = new MatchBooleanQuery(
+          'a1.nullText',
+          'isnotnull',
+          null,
+          testData1,
+        );
+        expect(query.isMatch).toEqual(false);
+      })
+
       it('number: true', () => {
         const query = new MatchBooleanQuery(
           'a1.number',
@@ -34,6 +54,16 @@ describe('arrayQuery', () => {
     })
 
     describe('isnull', () => {
+      it('boolean undefined: true', () => {
+        const query = new MatchBooleanQuery(
+          'a1.boolean2',
+          'isnull',
+          true,
+          testData1,
+        );
+        expect(query.isMatch).toEqual(true);
+      });
+
       it('nullText: true', () => {
         const query = new MatchBooleanQuery(
           'a1.nullText',
@@ -46,6 +76,26 @@ describe('arrayQuery', () => {
     })
 
     describe('neq', () => {
+      it('boolean undefined: true', () => {
+        const query = new MatchBooleanQuery(
+          'a1.boolean2',
+          'neq',
+          true,
+          testData1,
+        );
+        expect(query.isMatch).toEqual(true);
+      });
+
+      it('boolean null: true', () => {
+        const query = new MatchBooleanQuery(
+          'a1.nullText',
+          'neq',
+          true,
+          testData1,
+        );
+        expect(query.isMatch).toEqual(true);
+      });
+
       it('booleanArray bool: true', () => {
         const query = new MatchBooleanQuery(
           'a1.booleanArray',
@@ -77,6 +127,26 @@ describe('arrayQuery', () => {
       });
     })
     describe('eq', () => {
+      it('boolean undefined: false', () => {
+        const query = new MatchBooleanQuery(
+          'a1.boolean2',
+          'eq',
+          true,
+          testData1,
+        );
+        expect(query.isMatch).toEqual(false);
+      });
+
+      it('boolean null: false', () => {
+        const query = new MatchBooleanQuery(
+          'a1.nullText',
+          'eq',
+          true,
+          testData1,
+        );
+        expect(query.isMatch).toEqual(false);
+      });
+
       it('boolean bool: true', () => {
         const query = new MatchBooleanQuery(
           'a1.boolean',

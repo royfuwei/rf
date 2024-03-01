@@ -20,6 +20,26 @@ describe('arrayQuery', () => {
   describe('MatchTextQuery', () => {
 
     describe('isnotnull', () => {
+      it('undefined key: false', () => {
+        const query = new MatchTextQuery(
+          'a2.string',
+          'isnotnull',
+          null,
+          testData1,
+        );
+        expect(query.isMatch).toEqual(false);
+      })
+
+      it('null key: false', () => {
+        const query = new MatchTextQuery(
+          'a1.nullText',
+          'isnotnull',
+          null,
+          testData1,
+        );
+        expect(query.isMatch).toEqual(false);
+      })
+
       it('string: true', () => {
         const query = new MatchTextQuery(
           'a1.string',
@@ -32,6 +52,16 @@ describe('arrayQuery', () => {
     })
 
     describe('isnull', () => {
+      it('undefined key: true', () => {
+        const query = new MatchTextQuery(
+          'a2.number',
+          'isnull',
+          null,
+          testData1,
+        );
+        expect(query.isMatch).toEqual(true);
+      })
+
       it('nullText: true', () => {
         const query = new MatchTextQuery(
           'a1.nullText',
@@ -44,6 +74,27 @@ describe('arrayQuery', () => {
     })
 
     describe('endswith', () => {
+
+      it('undefined key: false', () => {
+        const query = new MatchTextQuery(
+          'a2.number',
+          'endswith',
+          ['la', 'jour'],
+          testData1,
+        );
+        expect(query.isMatch).toEqual(false);
+      })
+
+      it('nullText: false', () => {
+        const query = new MatchTextQuery(
+          'a1.nullText',
+          'endswith',
+          ['la', 'jour'],
+          testData1,
+        );
+        expect(query.isMatch).toEqual(false);
+      })
+    
       it('textArray item 2 - 2ture: true', () => {
         const query = new MatchTextQuery(
           'a1.textArray',
@@ -116,6 +167,26 @@ describe('arrayQuery', () => {
     })
 
     describe('startswith', () => {
+      it('undefined key: false', () => {
+        const query = new MatchTextQuery(
+          'a2.number',
+          'startswith',
+          ['hel', 'bon'],
+          testData1,
+        );
+        expect(query.isMatch).toEqual(false);
+      })
+
+      it('nullText: false', () => {
+        const query = new MatchTextQuery(
+          'a1.nullText',
+          'startswith',
+          ['hel', 'bon'],
+          testData1,
+        );
+        expect(query.isMatch).toEqual(false);
+      })
+
       it('textArray item 2 - 2ture: true', () => {
         const query = new MatchTextQuery(
           'a1.textArray',
@@ -188,6 +259,26 @@ describe('arrayQuery', () => {
     })
 
     describe('contains', () => {
+      it('undefined key: false', () => {
+        const query = new MatchTextQuery(
+          'a2.number',
+          'contains',
+          ['Z'],
+          testData1,
+        );
+        expect(query.isMatch).toEqual(false);
+      })
+
+      it('nullText: false', () => {
+        const query = new MatchTextQuery(
+          'a1.nullText',
+          'contains',
+          ['Z'],
+          testData1,
+        );
+        expect(query.isMatch).toEqual(false);
+      })
+
       it('stringArray 1 item: false', () => {
         const query = new MatchTextQuery(
           'a1.stringArray',
@@ -230,6 +321,26 @@ describe('arrayQuery', () => {
     })
 
     describe('terms', () => {
+      it('undefined key: false', () => {
+        const query = new MatchTextQuery(
+          'a2.number',
+          'terms',
+          'D2',
+          testData1,
+        );
+        expect(query.isMatch).toEqual(false);
+      })
+
+      it('nullText: false', () => {
+        const query = new MatchTextQuery(
+          'a1.nullText',
+          'terms',
+          'D2',
+          testData1,
+        );
+        expect(query.isMatch).toEqual(false);
+      })
+
       it('stringArray 0 match: false', () => {
         const query = new MatchTextQuery(
           'a1.stringArray',
@@ -322,6 +433,26 @@ describe('arrayQuery', () => {
     })
 
     describe('eq', () => {
+      it('undefined key: false', () => {
+        const query = new MatchTextQuery(
+          'a2.number',
+          'eq',
+          'D2',
+          testData1,
+        );
+        expect(query.isMatch).toEqual(false);
+      })
+
+      it('nullText: false', () => {
+        const query = new MatchTextQuery(
+          'a1.nullText',
+          'eq',
+          'D2',
+          testData1,
+        );
+        expect(query.isMatch).toEqual(false);
+      })
+
       it('stringArray 0 match: false', () => {
         const query = new MatchTextQuery(
           'a1.stringArray',

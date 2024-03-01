@@ -38,7 +38,7 @@ export class MatchNumericQuery {
         if (isTargetMatch) tarPre.push(isTargetMatch);
         return tarPre;
       }, <boolean[]>[]);
-      const isMatch = targetMatchs.length == this.targets.length;
+      const isMatch = this.targets.length > 0 && targetMatchs.length == this.targets.length;
       if (isMatch) pre.push(cur);
       return pre;
     }, <number[]>[]);
