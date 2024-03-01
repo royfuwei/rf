@@ -230,6 +230,26 @@ describe('arrayQuery', () => {
     })
 
     describe('terms', () => {
+      it('stringArray 0 match: false', () => {
+        const query = new MatchTextQuery(
+          'a1.stringArray',
+          'terms',
+          'X',
+          testData1,
+        );
+        expect(query.isMatch).toEqual(false);
+      });
+
+      it('stringArray 1 match: true', () => {
+        const query = new MatchTextQuery(
+          'a1.stringArray',
+          'terms',
+          'D2',
+          testData1,
+        );
+        expect(query.isMatch).toEqual(true);
+      });
+
       it('stringArray 2 items - 2false: false', () => {
         const query = new MatchTextQuery(
           'a1.stringArray',
@@ -289,10 +309,30 @@ describe('arrayQuery', () => {
         );
         expect(query.isMatch).toEqual(false);
       });
+
+      it('string 2 items: false', () => {
+        const query = new MatchTextQuery(
+          'a1.string',
+          'terms',
+          ['a', 'z'],
+          testData1,
+        );
+        expect(query.isMatch).toEqual(false);
+      });
     })
 
     describe('eq', () => {
-      it('stringArray 1 match', () => {
+      it('stringArray 0 match: false', () => {
+        const query = new MatchTextQuery(
+          'a1.stringArray',
+          'eq',
+          'Z',
+          testData1,
+        );
+        expect(query.isMatch).toEqual(false);
+      });
+
+      it('stringArray 1 match: false', () => {
         const query = new MatchTextQuery(
           'a1.stringArray',
           'eq',
