@@ -46,6 +46,34 @@ describe('null, undefined object filterMatchQueryArrayData', () => {
       id: 8,
     }
   ]
+
+  describe('empty filter', () => {
+    it('empty filterQueries', () => {
+      const filterQueries: FilterMatchQuery[] = []
+      const data = filterMatchQueryArrayData(
+        testData,
+        filterQueries,
+      );
+      const result = data.map(i => i['id']);
+  
+      expect(result).toEqual([1,2,3,4,5,6,7,8])
+    })
+    it('empty filterQueries.filters', () => {
+      const filterQueries: FilterMatchQuery[] = [
+        {
+          logic: 'and',
+          filters: []
+        }
+      ]
+      const data = filterMatchQueryArrayData(
+        testData,
+        filterQueries,
+      );
+      const result = data.map(i => i['id']);
+  
+      expect(result).toEqual([1,2,3,4,5,6,7,8])
+    })
+  })
   
   describe('nested filter', () => {
     it('logic and not nested filter, 1 filterQueries', () => {
@@ -84,126 +112,126 @@ describe('null, undefined object filterMatchQueryArrayData', () => {
       expect(result).toEqual([1,2,4,6,7,8])
     })
 
-    // it('logic and nor nested filter, 1 filterQueries', () => {
-    //   const filterQueries: FilterMatchQuery[] = [
-    //     {
-    //       logic: 'and',
-    //       filters: [
-    //         {
-    //           logic: 'nor',
-    //           filters: [
-    //             {
-    //               field: 'code',
-    //               operator: 'contains',
-    //               dataType: 'string',
-    //               value: ['B10', 'C10']
-    //             },
-    //             {
-    //               field: 'deleted',
-    //               operator: 'eq',
-    //               dataType: 'boolean',
-    //               value: true
-    //             },
-    //           ]
-    //         }
-    //       ]
-    //     }
-    //   ]
-    //   const data = filterMatchQueryArrayData(
-    //     testData,
-    //     filterQueries,
-    //   );
-    //   const result = data.map(i => i['id']);
+    it('logic and nor nested filter, 1 filterQueries', () => {
+      const filterQueries: FilterMatchQuery[] = [
+        {
+          logic: 'and',
+          filters: [
+            {
+              logic: 'nor',
+              filters: [
+                {
+                  field: 'code',
+                  operator: 'contains',
+                  dataType: 'string',
+                  value: ['B10', 'C10']
+                },
+                {
+                  field: 'deleted',
+                  operator: 'eq',
+                  dataType: 'boolean',
+                  value: true
+                },
+              ]
+            }
+          ]
+        }
+      ]
+      const data = filterMatchQueryArrayData(
+        testData,
+        filterQueries,
+      );
+      const result = data.map(i => i['id']);
   
-    //   expect(result).toEqual([1,2,7])
-    // })
+      expect(result).toEqual([1,2,6,7,8])
+    })
 
-    // it('logic and nested filter, 1 filterQueries', () => {
-    //   const filterQueries: FilterMatchQuery[] = [
-    //     {
-    //       logic: 'and',
-    //       filters: [
-    //         // 1,2,6,7
-    //         {
-    //           field: 'code',
-    //           operator: 'contains',
-    //           dataType: 'string',
-    //           value: 'A100',
-    //         },
-    //         // 5, 6
-    //         {
-    //           logic: 'and',
-    //           filters: [
-    //             // 5, 6, 7
-    //             {
-    //               field: 'cost',
-    //               operator: 'range',
-    //               dataType: 'numeric',
-    //               value: [-500, -1000]
-    //             },
-    //             // 3, 4, 5, 6
-    //             {
-    //               field: 'deleted',
-    //               operator: 'eq',
-    //               dataType: 'boolean',
-    //               value: true
-    //             }
-    //           ]
-    //         }
-    //       ]
-    //     }
-    //   ]
-    //   const data = filterMatchQueryArrayData(
-    //     testData,
-    //     filterQueries,
-    //   );
-    //   const result = data.map(i => i['id']);
+    it('logic and nested filter, 1 filterQueries', () => {
+      const filterQueries: FilterMatchQuery[] = [
+        {
+          logic: 'and',
+          filters: [
+            // 1,2,6,7
+            {
+              field: 'code',
+              operator: 'contains',
+              dataType: 'string',
+              value: 'A100',
+            },
+            // 5
+            {
+              logic: 'and',
+              filters: [
+                // 5, 6, 7
+                {
+                  field: 'cost',
+                  operator: 'range',
+                  dataType: 'numeric',
+                  value: [-500, -1000]
+                },
+                // 3, 4, 5
+                {
+                  field: 'deleted',
+                  operator: 'eq',
+                  dataType: 'boolean',
+                  value: true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+      const data = filterMatchQueryArrayData(
+        testData,
+        filterQueries,
+      );
+      const result = data.map(i => i['id']);
   
-    //   expect(result).toEqual([6])
-    // })
+      expect(result).toEqual([])
+    })
   
-    // it('logic or nested filter, 1 filterQueries', () => {
-    //   const filterQueries: FilterMatchQuery[] = [
-    //     {
-    //       logic: 'or',
-    //       filters: [
-    //         // 1,2,6,7
-    //         {
-    //           field: 'code',
-    //           operator: 'contains',
-    //           dataType: 'string',
-    //           value: 'A100',
-    //         },
-    //         {
-    //           logic: 'and',
-    //           filters: [
-    //             // 5, 6
-    //             {
-    //               field: 'cost',
-    //               operator: 'range',
-    //               dataType: 'numeric',
-    //               value: [-500, -1000]
-    //             },
-    //             // 3, 4, 5, 6
-    //             {
-    //               field: 'deleted',
-    //               operator: 'eq',
-    //               dataType: 'boolean',
-    //               value: true
-    //             }
-    //           ]
-    //         }
-    //       ]
-    //     }
-    //   ]
-    //   const data = filterMatchQueryArrayData(
-    //     testData,
-    //     filterQueries,
-    //   );
-    //   const result = data.map(i => i['id']);
+    it('logic or nested filter, 1 filterQueries', () => {
+      const filterQueries: FilterMatchQuery[] = [
+        {
+          logic: 'or',
+          filters: [
+            // 1,2,6,7
+            {
+              field: 'code',
+              operator: 'contains',
+              dataType: 'string',
+              value: 'A100',
+            },
+            {
+              logic: 'and',
+              filters: [
+                // 5, 6
+                {
+                  field: 'cost',
+                  operator: 'range',
+                  dataType: 'numeric',
+                  value: [-500, -1000]
+                },
+                // 3, 4, 5
+                {
+                  field: 'deleted',
+                  operator: 'eq',
+                  dataType: 'boolean',
+                  value: true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+      const data = filterMatchQueryArrayData(
+        testData,
+        filterQueries,
+      );
+      const result = data.map(i => i['id']);
   
-    //   expect(result).toEqual([1, 2, 5, 6, 7])
-    // })
+      expect(result).toEqual([1, 2, 5, 6, 7])
+    })
   })
 
 })

@@ -7,6 +7,9 @@ export function filterMatchQueryArrayData(
   data: ObjectData[],
   filters: FilterMatchQuery[],
 ) {
+  if (filters.length == 0) {
+    return data;
+  }
   const set = filters.reduce((pre, cur) => {
     for (const val of data) {
       if (filterMatchQueryData(val, cur)) {
