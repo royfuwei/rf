@@ -23,7 +23,7 @@ export class MatchNumericQuery {
     this.values = targetVals;
     let targets = [].concat(target).map(i => typeTransfer(i, 'number'));
     this.targets = targets;
-    if (_.isNull(target)) {
+    if (_.isNull(target) || _.isUndefined(target)) {
       this.targets = [];
     }
     if (typeof this[this.operator] == 'function' ) {

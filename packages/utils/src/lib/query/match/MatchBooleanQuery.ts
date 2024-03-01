@@ -22,7 +22,7 @@ export class MatchBooleanQuery {
     const transVals = [].concat(value).map(i => typeTransfer(i, 'boolean'));
     this.values = transVals;
     this.targets = targets;
-    if (_.isNull(target)) {
+    if (_.isNull(target) || _.isUndefined(target)) {
       this.targets = [];
     }
     if (typeof this[this.operator] == 'function' ) {

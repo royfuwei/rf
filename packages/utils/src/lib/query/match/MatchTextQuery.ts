@@ -22,7 +22,7 @@ export class MatchTextQuery {
     this.values = targetVals;
     const targets = [].concat(target).map(i => typeTransfer(i, 'string'));
     this.targets = targets;
-    if (_.isNull(target)) {
+    if (_.isNull(target) || _.isUndefined(target)) {
       this.targets = [];
     }
     if (typeof this[this.operator] == 'function' ) {
