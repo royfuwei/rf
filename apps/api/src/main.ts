@@ -6,11 +6,13 @@ import { useContainer, useKoaServer } from 'routing-controllers';
 import { useSwaggerDocument } from './openapi';
 import { bodyParser } from '@koa/bodyparser';
 import * as _indexControllers from './controllers';
+import * as _indexMiddlewares from './middlewares';
 
 async function main() {
   const app = new koa();
   const iocAdapter = new TsyringeAdapter();
   const controllers = Object.values(_indexControllers).values();
+  const middlewares = Object.values(_indexMiddlewares).values();
 
   app.use(
     bodyParser({
@@ -26,6 +28,9 @@ async function main() {
     controllers: [
       ...controllers,
     ],
+    middlewares: [
+      ...middlewares,
+    ]
   });
   useSwaggerDocument(app);
 
