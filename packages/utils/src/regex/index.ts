@@ -14,7 +14,7 @@ export function convertAliasData<T>(
     const aliasPath = regex[1] ?? regex[2];
     if (_.isUndefined(aliasPath) || _.isUndefined(origValue)) continue;
     const aliasData = _.get(aliasSource, aliasPath);
-    const aliasDataStr = JSON.stringify(aliasData);
+    const aliasDataStr = JSON.stringify(_.isUndefined(aliasData) ? null : aliasData);
     dataStr = dataStr.replace(`"${origValue}"`, aliasDataStr);
   }
   return JSON.parse(dataStr)
