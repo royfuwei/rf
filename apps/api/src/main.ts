@@ -1,45 +1,32 @@
 import 'reflect-metadata';
-import koa from 'koa';
-import path from 'path';
-import { TsyringeAdapter } from './iocAdapter';
-import { useContainer, useKoaServer } from 'routing-controllers';
-import { useSwaggerDocument } from './openapi';
-import { bodyParser } from '@koa/bodyparser';
-import * as _indexControllers from './controllers';
-import * as _indexMiddlewares from './middlewares';
+import { server } from './server';
 
 async function main() {
-  const app = new koa();
-  const iocAdapter = new TsyringeAdapter();
-  const controllers = Object.values(_indexControllers).values();
-  const middlewares = Object.values(_indexMiddlewares).values();
+  const { httpServer } = await server();
 
-  app.use(
-    bodyParser({
-      formLimit: '100mb',
-      jsonLimit: '100mb',
-      textLimit: '100mb',
-      encoding: 'utf-8'
-    }),
-  );
-  
-  useContainer(iocAdapter);
-  useKoaServer(app, {
-    controllers: [
-      ...controllers,
-    ],
-    middlewares: [
-      ...middlewares,
-    ]
-  });
-  useSwaggerDocument(app);
+  const closeProcesses = async (code: number = 1,) => {
+    httpServer.close(() => {
+        console.info('Server closed');
+    });
+    process.exit(code);
+  };
 
-  const host = process.env.HOST ?? 'localhost';
-  const port = process.env.PORT ? Number(process.env.PORT) : 8001;
+  const successHandler = () => {
+    console.info('SIGTERM received');
+    closeProcesses(0);
+  };
 
-  app.listen(port, host, () => {
-    console.log(`[ ready ] http://${host}:${port}`);
-  });
+  const failureHandler = (
+    error: any,
+  ) => {
+    console.error(error);
+    closeProcesses(1);
+  };
+
+  process.on('uncaughtException', failureHandler);
+  process.on('unhandledRejection', failureHandler);
+
+  process.on('SIGTERM', successHandler);
 }
 
 main();

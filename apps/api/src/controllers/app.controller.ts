@@ -1,4 +1,3 @@
-import 'reflect-metadata';
 import { inject, injectable } from "tsyringe";
 import { IAppController } from "../types/app.type";
 import { AppInfoDTO, IAppService } from "@rfjs/modules";
