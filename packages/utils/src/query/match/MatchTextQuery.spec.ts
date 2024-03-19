@@ -13,12 +13,11 @@ describe('arrayQuery', () => {
       stringArray: ['A', 'B', 'C1', 'D2', 'E3'],
       number: 100,
       numberArray: [100, 999, 50],
-      boolean: true
-    }
-  }
+      boolean: true,
+    },
+  };
 
   describe('MatchTextQuery', () => {
-
     describe('isnotnull', () => {
       it('undefined key: false', () => {
         const query = new MatchTextQuery(
@@ -28,7 +27,7 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(false);
-      })
+      });
 
       it('null key: false', () => {
         const query = new MatchTextQuery(
@@ -38,7 +37,7 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(false);
-      })
+      });
 
       it('string: true', () => {
         const query = new MatchTextQuery(
@@ -48,8 +47,8 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(true);
-      })
-    })
+      });
+    });
 
     describe('isnull', () => {
       it('undefined key: true', () => {
@@ -60,7 +59,7 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(true);
-      })
+      });
 
       it('nullText: true', () => {
         const query = new MatchTextQuery(
@@ -70,11 +69,10 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(true);
-      })
-    })
+      });
+    });
 
     describe('endswith', () => {
-
       it('undefined key: false', () => {
         const query = new MatchTextQuery(
           'a2.number',
@@ -83,7 +81,7 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(false);
-      })
+      });
 
       it('nullText: false', () => {
         const query = new MatchTextQuery(
@@ -93,8 +91,8 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(false);
-      })
-    
+      });
+
       it('textArray item 2 - 2ture: true', () => {
         const query = new MatchTextQuery(
           'a1.textArray',
@@ -104,7 +102,7 @@ describe('arrayQuery', () => {
         );
         expect(query.isMatch).toEqual(true);
       });
-  
+
       it('textArray item 2 - 2false: false', () => {
         const query = new MatchTextQuery(
           'a1.textArray',
@@ -114,7 +112,7 @@ describe('arrayQuery', () => {
         );
         expect(query.isMatch).toEqual(false);
       });
-  
+
       it('textArray item 2 - 1true 1false: true', () => {
         const query = new MatchTextQuery(
           'a1.textArray',
@@ -124,7 +122,7 @@ describe('arrayQuery', () => {
         );
         expect(query.isMatch).toEqual(true);
       });
-  
+
       it('text item 2 - 1true 1false: true', () => {
         const query = new MatchTextQuery(
           'a1.text',
@@ -134,7 +132,7 @@ describe('arrayQuery', () => {
         );
         expect(query.isMatch).toEqual(true);
       });
-  
+
       it('text item 2: true', () => {
         const query = new MatchTextQuery(
           'a1.text',
@@ -144,7 +142,7 @@ describe('arrayQuery', () => {
         );
         expect(query.isMatch).toEqual(true);
       });
-  
+
       it('text item 1: false', () => {
         const query = new MatchTextQuery(
           'a1.text',
@@ -154,7 +152,7 @@ describe('arrayQuery', () => {
         );
         expect(query.isMatch).toEqual(false);
       });
-  
+
       it('text item 1: true', () => {
         const query = new MatchTextQuery(
           'a1.text',
@@ -164,7 +162,7 @@ describe('arrayQuery', () => {
         );
         expect(query.isMatch).toEqual(true);
       });
-    })
+    });
 
     describe('startswith', () => {
       it('undefined key: false', () => {
@@ -175,7 +173,7 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(false);
-      })
+      });
 
       it('nullText: false', () => {
         const query = new MatchTextQuery(
@@ -185,7 +183,7 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(false);
-      })
+      });
 
       it('textArray item 2 - 2ture: true', () => {
         const query = new MatchTextQuery(
@@ -196,7 +194,7 @@ describe('arrayQuery', () => {
         );
         expect(query.isMatch).toEqual(true);
       });
-  
+
       it('textArray item 2 - 2false: false', () => {
         const query = new MatchTextQuery(
           'a1.textArray',
@@ -206,7 +204,7 @@ describe('arrayQuery', () => {
         );
         expect(query.isMatch).toEqual(false);
       });
-  
+
       it('textArray item 2 - 1true 1false: true', () => {
         const query = new MatchTextQuery(
           'a1.textArray',
@@ -216,7 +214,7 @@ describe('arrayQuery', () => {
         );
         expect(query.isMatch).toEqual(true);
       });
-  
+
       it('text item 2 - 1true 1false: true', () => {
         const query = new MatchTextQuery(
           'a1.text',
@@ -226,7 +224,7 @@ describe('arrayQuery', () => {
         );
         expect(query.isMatch).toEqual(true);
       });
-  
+
       it('text item 2: true', () => {
         const query = new MatchTextQuery(
           'a1.text',
@@ -236,7 +234,7 @@ describe('arrayQuery', () => {
         );
         expect(query.isMatch).toEqual(true);
       });
-  
+
       it('text item 1: false', () => {
         const query = new MatchTextQuery(
           'a1.text',
@@ -246,7 +244,7 @@ describe('arrayQuery', () => {
         );
         expect(query.isMatch).toEqual(false);
       });
-  
+
       it('text item 1: true', () => {
         const query = new MatchTextQuery(
           'a1.text',
@@ -256,7 +254,7 @@ describe('arrayQuery', () => {
         );
         expect(query.isMatch).toEqual(true);
       });
-    })
+    });
 
     describe('contains', () => {
       it('undefined key: false', () => {
@@ -267,7 +265,7 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(false);
-      })
+      });
 
       it('nullText: false', () => {
         const query = new MatchTextQuery(
@@ -277,7 +275,7 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(false);
-      })
+      });
 
       it('stringArray 1 item: false', () => {
         const query = new MatchTextQuery(
@@ -288,7 +286,7 @@ describe('arrayQuery', () => {
         );
         expect(query.isMatch).toEqual(false);
       });
-  
+
       it('stringArray 1 item: true', () => {
         const query = new MatchTextQuery(
           'a1.stringArray',
@@ -298,7 +296,7 @@ describe('arrayQuery', () => {
         );
         expect(query.isMatch).toEqual(true);
       });
-  
+
       it('string: true', () => {
         const query = new MatchTextQuery(
           'a1.contains',
@@ -308,7 +306,7 @@ describe('arrayQuery', () => {
         );
         expect(query.isMatch).toEqual(true);
       });
-  
+
       it('string: false', () => {
         const query = new MatchTextQuery(
           'a1.contains',
@@ -318,18 +316,13 @@ describe('arrayQuery', () => {
         );
         expect(query.isMatch).toEqual(false);
       });
-    })
+    });
 
     describe('terms', () => {
       it('undefined key: false', () => {
-        const query = new MatchTextQuery(
-          'a2.number',
-          'terms',
-          'D2',
-          testData1,
-        );
+        const query = new MatchTextQuery('a2.number', 'terms', 'D2', testData1);
         expect(query.isMatch).toEqual(false);
-      })
+      });
 
       it('nullText: false', () => {
         const query = new MatchTextQuery(
@@ -339,7 +332,7 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(false);
-      })
+      });
 
       it('stringArray 0 match: false', () => {
         const query = new MatchTextQuery(
@@ -400,17 +393,12 @@ describe('arrayQuery', () => {
         );
         expect(query.isMatch).toEqual(true);
       });
-  
+
       it('string 2: true', () => {
-        const query = new MatchTextQuery(
-          'string',
-          'terms',
-          ['a'],
-          testData1,
-        );
+        const query = new MatchTextQuery('string', 'terms', ['a'], testData1);
         expect(query.isMatch).toEqual(true);
       });
-  
+
       it('string 1: false', () => {
         const query = new MatchTextQuery(
           'a1.string',
@@ -430,28 +418,18 @@ describe('arrayQuery', () => {
         );
         expect(query.isMatch).toEqual(false);
       });
-    })
+    });
 
     describe('eq', () => {
       it('undefined key: false', () => {
-        const query = new MatchTextQuery(
-          'a2.number',
-          'eq',
-          'D2',
-          testData1,
-        );
+        const query = new MatchTextQuery('a2.number', 'eq', 'D2', testData1);
         expect(query.isMatch).toEqual(false);
-      })
+      });
 
       it('nullText: false', () => {
-        const query = new MatchTextQuery(
-          'a1.nullText',
-          'eq',
-          'D2',
-          testData1,
-        );
+        const query = new MatchTextQuery('a1.nullText', 'eq', 'D2', testData1);
         expect(query.isMatch).toEqual(false);
-      })
+      });
 
       it('stringArray 0 match: false', () => {
         const query = new MatchTextQuery(
@@ -494,58 +472,31 @@ describe('arrayQuery', () => {
       });
 
       it('string 1: true', () => {
-        const query = new MatchTextQuery(
-          'a1.string',
-          'eq',
-          ['b'],
-          testData1,
-        );
+        const query = new MatchTextQuery('a1.string', 'eq', ['b'], testData1);
         expect(query.isMatch).toEqual(true);
       });
-  
+
       it('string 2: true', () => {
-        const query = new MatchTextQuery(
-          'string',
-          'eq',
-          ['a'],
-          testData1,
-        );
+        const query = new MatchTextQuery('string', 'eq', ['a'], testData1);
         expect(query.isMatch).toEqual(true);
       });
-  
+
       it('string 1: false', () => {
-        const query = new MatchTextQuery(
-          'a1.string',
-          'eq',
-          ['a'],
-          testData1,
-        );
+        const query = new MatchTextQuery('a1.string', 'eq', ['a'], testData1);
         expect(query.isMatch).toEqual(false);
       });
-    })
+    });
 
     describe('valid path', () => {
       it('error path', () => {
-        const query = new MatchTextQuery(
-          'a2.string',
-          'eq',
-          ['a'],
-          testData1,
-        );
+        const query = new MatchTextQuery('a2.string', 'eq', ['a'], testData1);
         expect(query.validPath).toEqual(false);
       });
-  
+
       it('valid path', () => {
-        const query = new MatchTextQuery(
-          'a1.string',
-          'eq',
-          ['a'],
-          testData1,
-        );
+        const query = new MatchTextQuery('a1.string', 'eq', ['a'], testData1);
         expect(query.validPath).toEqual(true);
       });
-    })
-
-  })
-  
+    });
+  });
 });

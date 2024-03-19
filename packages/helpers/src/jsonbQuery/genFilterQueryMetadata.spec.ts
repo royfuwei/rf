@@ -11,7 +11,7 @@ describe('genFilterQueryMetadata', () => {
             filters: [],
         }
         const query = genFilterQueryMetadata('properties', filterQuery);
-        // console.log(query);
+        console.log(query);
         expect('genFilterQueryMetadata').toEqual('genFilterQueryMetadata');
     })
 
@@ -28,7 +28,7 @@ describe('genFilterQueryMetadata', () => {
             ],
         }
         const query = genFilterQueryMetadata('properties', filterQuery as FilterQueryMetadata);
-        // console.log(query);
+        console.log(query);
         expect('genFilterQueryMetadata').toEqual('genFilterQueryMetadata');
     })
 
@@ -62,7 +62,7 @@ describe('genFilterQueryMetadata', () => {
             ],
         }
         const query = genFilterQueryMetadata('properties', filterQuery);
-        // console.log(query);
+        console.log(query);
         expect('genFilterQueryMetadata').toEqual('genFilterQueryMetadata');
     })
 
@@ -80,7 +80,7 @@ describe('genFilterQueryMetadata', () => {
             ],
         }
         const query = genFilterQueryMetadata('properties', filterQuery);
-        // console.log(query);
+        console.log(query);
         expect('genFilterQueryMetadata').toEqual('genFilterQueryMetadata');
     })
 
@@ -103,7 +103,7 @@ describe('genFilterQueryMetadata', () => {
             ],
         }
         const query = genFilterQueryMetadata('properties', filterQuery);
-        // console.log(query);
+        console.log(query);
         expect('genFilterQueryMetadata').toEqual('genFilterQueryMetadata');
     })
 
@@ -131,7 +131,7 @@ describe('genFilterQueryMetadata', () => {
             ],
         }
         const query = genFilterQueryMetadata('properties', filterQuery);
-        // console.log(query);
+        console.log(query);
         expect('genFilterQueryMetadata').toEqual('genFilterQueryMetadata');
     })
 

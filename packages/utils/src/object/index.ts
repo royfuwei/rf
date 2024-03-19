@@ -10,9 +10,9 @@
  *      d: 9
  *  }
  * }
- * 
+ *
  * flatten(nestedObj)
- * result: 
+ * result:
  * {
  *  a: 1,
  *  'b.c': 10,
@@ -21,19 +21,19 @@
  * ```
  * @param nestedObj object
  * @param prefix optional
- * @returns 
+ * @returns
  */
 export function flatten(nestedObj: object, prefix?: string) {
-    return Object.entries(nestedObj).reduce((target, cur) => {
-        const [key, value] = cur;
-        const thisKey = prefix ? [prefix, key].join('.') : key;
-        if (typeof value === 'object') {
-            Object.assign(target, flatten(value, thisKey));
-        } else {
-            Object.assign(target, { [`${thisKey}`]: value });
-        }
-        return target;
-    }, {});
+  return Object.entries(nestedObj).reduce((target, cur) => {
+    const [key, value] = cur;
+    const thisKey = prefix ? [prefix, key].join('.') : key;
+    if (typeof value === 'object') {
+      Object.assign(target, flatten(value, thisKey));
+    } else {
+      Object.assign(target, { [`${thisKey}`]: value });
+    }
+    return target;
+  }, {});
 }
 
 /**
@@ -48,40 +48,35 @@ export function flatten(nestedObj: object, prefix?: string) {
  * @returns nested object
  */
 export function keysToNested(
-    keys: string[],
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    value: any,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    target: any = {},
-    depth = 0,
+  keys: string[],
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  value: any,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  target: any = {},
+  depth = 0,
 ) {
-    const isLastDepth = depth == keys.length - 1;
-    const key = keys[depth];
-    if (!isLastDepth) {
-        const result = keysToNested(
-            keys,
-            value,
-            target[key],
-            ++depth,
-        );
-        target[key] = result;
-    } else {
-        target[key] = value;
-    }
-    return target;
-};
+  const isLastDepth = depth == keys.length - 1;
+  const key = keys[depth];
+  if (!isLastDepth) {
+    const result = keysToNested(keys, value, target[key], ++depth);
+    target[key] = result;
+  } else {
+    target[key] = value;
+  }
+  return target;
+}
 
 /**
  * convert object to Json string
  * @param obj object
- * @param _isPretty 
- * @returns 
+ * @param _isPretty
+ * @returns
  */
 export function toJSONString(obj: object, _isPretty = false): string {
-    if (_isPretty) {
-        return JSON.stringify(obj, null, 2)
-    }
-    return JSON.stringify(obj)
+  if (_isPretty) {
+    return JSON.stringify(obj, null, 2);
+  }
+  return JSON.stringify(obj);
 }
 
 /**
@@ -95,9 +90,14 @@ export function toJSONString(obj: object, _isPretty = false): string {
  * @returns flat object string
  */
 export function toFlatString(obj: object) {
-    return Object.entries(flatten(obj)).reduce((pre, cur) => {
+  return Object.entries(flatten(obj))
+    .reduce(
+      (pre, cur) => {
         const [key, value] = cur;
         pre.push(`${key}: ${value}`);
         return pre;
-    }, <string[]>[]).join(', ');
+      },
+      <string[]>[],
+    )
+    .join(', ');
 }

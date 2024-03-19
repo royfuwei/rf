@@ -15,12 +15,11 @@ describe('arrayQuery', () => {
       numberArray: [100, 999, 50],
       boolean: true,
       false: false,
-      booleanArray: [true, false, true, false, false]
-    }
-  }
+      booleanArray: [true, false, true, false, false],
+    },
+  };
 
   describe('MatchBooleanQuery', () => {
-
     describe('isnotnull', () => {
       it('undefined key: false', () => {
         const query = new MatchBooleanQuery(
@@ -30,7 +29,7 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(false);
-      })
+      });
 
       it('null key: false', () => {
         const query = new MatchBooleanQuery(
@@ -40,7 +39,7 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(false);
-      })
+      });
 
       it('number: true', () => {
         const query = new MatchBooleanQuery(
@@ -50,8 +49,8 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(true);
-      })
-    })
+      });
+    });
 
     describe('isnull', () => {
       it('boolean undefined: true', () => {
@@ -72,8 +71,8 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(true);
-      })
-    })
+      });
+    });
 
     describe('neq', () => {
       it('boolean undefined: true', () => {
@@ -125,7 +124,7 @@ describe('arrayQuery', () => {
         );
         expect(query.isMatch).toEqual(false);
       });
-    })
+    });
     describe('eq', () => {
       it('boolean undefined: false', () => {
         const query = new MatchBooleanQuery(
@@ -156,7 +155,7 @@ describe('arrayQuery', () => {
         );
         expect(query.isMatch).toEqual(true);
       });
-  
+
       it('boolean stringbool: true', () => {
         const query = new MatchBooleanQuery(
           'a1.boolean',
@@ -166,7 +165,7 @@ describe('arrayQuery', () => {
         );
         expect(query.isMatch).toEqual(true);
       });
-  
+
       it('boolean boolean: false', () => {
         const query = new MatchBooleanQuery(
           'a1.boolean',
@@ -176,19 +175,14 @@ describe('arrayQuery', () => {
         );
         expect(query.isMatch).toEqual(false);
       });
-    })
+    });
 
     describe('path', () => {
       it('error path', () => {
-        const query = new MatchBooleanQuery(
-          'a2.number',
-          'eq',
-          null,
-          testData1,
-        );
+        const query = new MatchBooleanQuery('a2.number', 'eq', null, testData1);
         expect(query.validPath).toEqual(false);
       });
-  
+
       it('valid path', () => {
         const query = new MatchBooleanQuery(
           'a1.number',
@@ -198,6 +192,6 @@ describe('arrayQuery', () => {
         );
         expect(query.validPath).toEqual(true);
       });
-    })
-  })
+    });
+  });
 });

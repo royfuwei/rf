@@ -13,12 +13,11 @@ describe('arrayQuery', () => {
       stringArray: ['A', 'B', 'C1', 'D2', 'E3'],
       number: 100,
       numberArray: [100, 999, 50],
-      boolean: true
-    }
-  }
+      boolean: true,
+    },
+  };
 
   describe('MatchNumericQuery', () => {
-
     describe('range', () => {
       it('numberArray 1 match: true', () => {
         const query = new MatchNumericQuery(
@@ -28,7 +27,7 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(true);
-      })
+      });
 
       it('numberArray all unmatch: false', () => {
         const query = new MatchNumericQuery(
@@ -38,7 +37,7 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(false);
-      })
+      });
 
       it('numberArray all match: true', () => {
         const query = new MatchNumericQuery(
@@ -48,7 +47,7 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(true);
-      })
+      });
 
       it('number: true', () => {
         const query = new MatchNumericQuery(
@@ -58,7 +57,7 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(true);
-      })
+      });
 
       it('number 2: true', () => {
         const query = new MatchNumericQuery(
@@ -68,7 +67,7 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(true);
-      })
+      });
 
       it('number: false', () => {
         const query = new MatchNumericQuery(
@@ -78,8 +77,8 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(false);
-      })
-    })
+      });
+    });
 
     describe('lt', () => {
       it('numberArray 2 items - 2false: false', () => {
@@ -90,7 +89,7 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(false);
-      })
+      });
 
       it('numberArray 2 items - 1true 1false: true', () => {
         const query = new MatchNumericQuery(
@@ -100,7 +99,7 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(true);
-      })
+      });
 
       it('numberArray 2 items - 2true: true', () => {
         const query = new MatchNumericQuery(
@@ -110,7 +109,7 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(true);
-      })
+      });
 
       it('numberArray 1match: true', () => {
         const query = new MatchNumericQuery(
@@ -120,7 +119,7 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(true);
-      })
+      });
 
       it('numberArray all unmatch: false', () => {
         const query = new MatchNumericQuery(
@@ -130,7 +129,7 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(false);
-      })
+      });
 
       it('numberArray all match: true', () => {
         const query = new MatchNumericQuery(
@@ -140,7 +139,7 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(true);
-      })
+      });
 
       it('number 2 items - 2true: true', () => {
         const query = new MatchNumericQuery(
@@ -150,7 +149,7 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(true);
-      })
+      });
 
       it('number 2 items - 2false: false', () => {
         const query = new MatchNumericQuery(
@@ -160,7 +159,7 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(false);
-      })
+      });
 
       it('number 2 items - 1true 1false: true', () => {
         const query = new MatchNumericQuery(
@@ -170,28 +169,18 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(true);
-      })
+      });
 
       it('number: true', () => {
-        const query = new MatchNumericQuery(
-          'a1.number',
-          'lt',
-          500,
-          testData1,
-        );
+        const query = new MatchNumericQuery('a1.number', 'lt', 500, testData1);
         expect(query.isMatch).toEqual(true);
-      })
+      });
 
       it('number: false', () => {
-        const query = new MatchNumericQuery(
-          'a1.number',
-          'lt',
-          15,
-          testData1,
-        );
+        const query = new MatchNumericQuery('a1.number', 'lt', 15, testData1);
         expect(query.isMatch).toEqual(false);
-      })
-    })
+      });
+    });
 
     describe('gt', () => {
       it('numberArray 2 items - 2false: false', () => {
@@ -202,7 +191,7 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(false);
-      })
+      });
 
       it('numberArray 2 items - 1true 1false: true', () => {
         const query = new MatchNumericQuery(
@@ -212,7 +201,7 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(true);
-      })
+      });
 
       it('numberArray 2 items - 2true: true', () => {
         const query = new MatchNumericQuery(
@@ -222,7 +211,7 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(true);
-      })
+      });
 
       it('numberArray 1match: true', () => {
         const query = new MatchNumericQuery(
@@ -232,7 +221,7 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(true);
-      })
+      });
 
       it('numberArray all unmatch: false', () => {
         const query = new MatchNumericQuery(
@@ -242,7 +231,7 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(false);
-      })
+      });
 
       it('numberArray all match: true', () => {
         const query = new MatchNumericQuery(
@@ -252,7 +241,7 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(true);
-      })
+      });
 
       it('number 2 items - 2true: true', () => {
         const query = new MatchNumericQuery(
@@ -262,7 +251,7 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(true);
-      })
+      });
 
       it('number 2 items - 2false: false', () => {
         const query = new MatchNumericQuery(
@@ -272,7 +261,7 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(false);
-      })
+      });
 
       it('number 2 items - 1true 1false: true', () => {
         const query = new MatchNumericQuery(
@@ -282,28 +271,18 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(true);
-      })
+      });
 
       it('number: true', () => {
-        const query = new MatchNumericQuery(
-          'a1.number',
-          'gt',
-          50,
-          testData1,
-        );
+        const query = new MatchNumericQuery('a1.number', 'gt', 50, testData1);
         expect(query.isMatch).toEqual(true);
-      })
+      });
 
       it('number: false', () => {
-        const query = new MatchNumericQuery(
-          'a1.number',
-          'gt',
-          150,
-          testData1,
-        );
+        const query = new MatchNumericQuery('a1.number', 'gt', 150, testData1);
         expect(query.isMatch).toEqual(false);
-      })
-    })
+      });
+    });
 
     describe('isnotnull', () => {
       it('undefined key: false', () => {
@@ -314,7 +293,7 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(false);
-      })
+      });
 
       it('null key: false', () => {
         const query = new MatchNumericQuery(
@@ -324,7 +303,7 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(false);
-      })
+      });
 
       it('number: true', () => {
         const query = new MatchNumericQuery(
@@ -334,8 +313,8 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(true);
-      })
-    })
+      });
+    });
 
     describe('isnull', () => {
       it('nullText: true', () => {
@@ -346,51 +325,31 @@ describe('arrayQuery', () => {
           testData1,
         );
         expect(query.isMatch).toEqual(true);
-      })
-    })
+      });
+    });
 
     describe('eq', () => {
       it('number 1: true', () => {
-        const query = new MatchNumericQuery(
-          'a1.number',
-          'eq',
-          100,
-          testData1,
-        );
+        const query = new MatchNumericQuery('a1.number', 'eq', 100, testData1);
         expect(query.isMatch).toEqual(true);
       });
-  
+
       it('number 2: true', () => {
-        const query = new MatchNumericQuery(
-          'number',
-          'eq',
-          [1000],
-          testData1,
-        );
+        const query = new MatchNumericQuery('number', 'eq', [1000], testData1);
         expect(query.isMatch).toEqual(true);
       });
-  
+
       it('number 1: false', () => {
-        const query = new MatchNumericQuery(
-          'a1.number',
-          'eq',
-          999,
-          testData1,
-        );
+        const query = new MatchNumericQuery('a1.number', 'eq', 999, testData1);
         expect(query.isMatch).toEqual(false);
       });
-    })
+    });
     describe('path', () => {
       it('error path', () => {
-        const query = new MatchNumericQuery(
-          'a2.number',
-          'eq',
-          null,
-          testData1,
-        );
+        const query = new MatchNumericQuery('a2.number', 'eq', null, testData1);
         expect(query.validPath).toEqual(false);
       });
-  
+
       it('valid path', () => {
         const query = new MatchNumericQuery(
           'a1.number',
@@ -400,7 +359,6 @@ describe('arrayQuery', () => {
         );
         expect(query.validPath).toEqual(true);
       });
-    })
-  })
-  
+    });
+  });
 });

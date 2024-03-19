@@ -1,5 +1,11 @@
-import { BooleanFilterOperator, LogicalOperator, NumericFilterOperator, ObjectData, TextFilterOperator } from '@rfjs/common';
-import _ = require("lodash");
+import {
+  BooleanFilterOperator,
+  LogicalOperator,
+  NumericFilterOperator,
+  ObjectData,
+  TextFilterOperator,
+} from '@rfjs/common';
+import _ = require('lodash');
 import { FilterMatchQuery, MatchQueryMetadata } from './type';
 import { MatchTextQuery, MatchNumericQuery, MatchBooleanQuery } from './match';
 
@@ -18,7 +24,7 @@ export function filterMatchQueryArrayData(
     }
     return pre;
   }, new Set<ObjectData>());
-  return Array.from(set.values())
+  return Array.from(set.values());
 }
 
 export function filterMatchQueryData(
@@ -26,28 +32,25 @@ export function filterMatchQueryData(
   filterQuery: FilterMatchQuery,
 ) {
   const { logic, filters } = filterQuery;
-  const matchs = filters.reduce((pre, cur) => {
-    if (isFilterMatchQuery(cur)) {
-      const nestedMatch = filterMatchQueryData(
-        data,
-        cur as FilterMatchQuery
-      );
-      pre.push(nestedMatch);
+  const matchs = filters.reduce(
+    (pre, cur) => {
+      if (isFilterMatchQuery(cur)) {
+        const nestedMatch = filterMatchQueryData(data, cur as FilterMatchQuery);
+        pre.push(nestedMatch);
+        return pre;
+      }
+      const matchQuery = factoryMatchQuery(data, cur as MatchQueryMetadata);
+      const isMatch = matchQuery.isMatch;
+      pre.push(isMatch);
       return pre;
-    }
-    const matchQuery = factoryMatchQuery(data, cur as MatchQueryMetadata);
-    const isMatch = matchQuery.isMatch;
-    pre.push(isMatch);
-    return pre;
-  }, <boolean[]>[]);
+    },
+    <boolean[]>[],
+  );
   const logicMatch = logicMatchQuery(logic, matchs);
   return logicMatch;
-};
+}
 
-function logicMatchQuery(
-  logic: LogicalOperator,
-  data: boolean[],
-) {
+function logicMatchQuery(logic: LogicalOperator, data: boolean[]) {
   let result = false;
   switch (logic) {
     case 'and':
@@ -66,9 +69,7 @@ function logicMatchQuery(
   return result;
 }
 
-function isFilterMatchQuery(
-  filter: FilterMatchQuery | MatchQueryMetadata
-) {
+function isFilterMatchQuery(filter: FilterMatchQuery | MatchQueryMetadata) {
   return _.has(filter, 'logic');
 }
 
@@ -78,10 +79,22 @@ export function factoryMatchQuery(
 ) {
   const { field, operator, value, dataType } = metadata;
   const query = {
-    string: () => new MatchTextQuery(field, (operator as TextFilterOperator), value, data),
-    numeric: () => new MatchNumericQuery(field, (operator as NumericFilterOperator), value, data),
-    boolean: () => new MatchBooleanQuery(field, (operator as BooleanFilterOperator), value, data)
-  }
-  return query[dataType]()
+    string: () =>
+      new MatchTextQuery(field, operator as TextFilterOperator, value, data),
+    numeric: () =>
+      new MatchNumericQuery(
+        field,
+        operator as NumericFilterOperator,
+        value,
+        data,
+      ),
+    boolean: () =>
+      new MatchBooleanQuery(
+        field,
+        operator as BooleanFilterOperator,
+        value,
+        data,
+      ),
+  };
+  return query[dataType]();
 }
-
