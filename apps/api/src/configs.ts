@@ -12,8 +12,8 @@ process.env = {
 const configs = {
   env: process.env.NODE_ENV,
   app: {
-    name: process.env['API_APP_NAME'],
-    port: process.env['API_APP_PORT'],
+    name: process.env['APP_API_NAME'],
+    port: process.env['APP_API_PORT'],
   }
 };
 
