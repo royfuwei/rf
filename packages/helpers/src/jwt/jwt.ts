@@ -1,4 +1,3 @@
-import exp = require('constants');
 import {
   sign,
   verify,
@@ -7,7 +6,6 @@ import {
   SignOptions,
   VerifyOptions,
 } from 'jsonwebtoken';
-import { initial } from 'lodash';
 
 export type Secret = string | Buffer;
 
@@ -49,7 +47,7 @@ export type NotBeforeErrorMessages = 'jwt not active';
  */
 export type TokenExpiredErrorMessages = 'jwt expired';
 
-export interface VerifyJWTResult<T extends any> {
+export interface VerifyJWTResult<T = any> {
   success: boolean;
   payload: T;
   err?: VerifyErrors | null;
@@ -81,12 +79,12 @@ export class Jwt {
     });
   }
 
-  decodeToken<T extends any>(token: string): T {
+  decodeToken<T = any>(token: string): T {
     const payload = decode(token) as T;
     return payload;
   }
 
-  verifyToken<T extends any>(
+  verifyToken<T = any>(
     token: string,
     option?: VerifyOptions
   ): VerifyJWTResult<T> {
