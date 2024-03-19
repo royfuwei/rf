@@ -1,4 +1,5 @@
 import 'reflect-metadata';
+import configs from './configs';
 import { TsyringeAdapter } from './iocAdapter';
 import { RoutingControllersOptions, useContainer } from 'routing-controllers';
 import * as _indexControllers from './controllers';
@@ -27,7 +28,7 @@ export async function server() {
   );
 
   const host = process.env.HOST ?? 'localhost';
-  const port = process.env.PORT ? Number(process.env.PORT) : 8001;
+  const port = Number(configs.app.port);
 
   const httpServer = app.listen(port, host, () => {
     console.log(`[ ready ] http://${host}:${port}`);
