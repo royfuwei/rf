@@ -6,44 +6,50 @@ import {
   transports,
 } from 'winston';
 import 'winston-daily-rotate-file';
+import { clc, yellow } from '~rfjs/utils';
 
-const colorizer = format.colorize();
-const logPrintf = format.printf(({ level, message, timestamp, label }) => {
-  const padding = level.length <= 7 ? 7 : 17; // padding differently if it has colour.
-  return `${timestamp} ${label} ${level.padEnd(padding, '')} ${message}`;
-});
+function getColorByLogLevel(level: LoggerOptions['level']) {
+  switch (level) {
+    case 'debug':
+      return clc.magentaBright;
+    case 'warn':
+      return clc.yellow;
+    case 'error':
+      return clc.red;
+    case 'verbose':
+      return clc.cyanBright;
+    case 'fatal':
+      return clc.bold;
+    default:
+      return clc.green;
+  }
+}
 
-export const consoleFormat = (
-  label: string = '',
-  subject: string = '[LOGGER]'
-) =>
+function colorize(logLevel: string, message: string) {
+  const color = getColorByLogLevel(logLevel);
+  return color(message);
+}
+
+export const loggerFormat = (isColor = true) =>
   format.combine(
-    format.label({ label, message: label.length > 0 }),
     format.timestamp(),
-    format.printf(({ level, message, timestamp, label }) => {
-      const padding = level.length <= 7 ? 7 : 17; // padding differently if it has colour.
-      const subjectFormat = colorizer.colorize(level, `${subject}`);
-      const colorFormat = colorizer.colorize(
-        level,
-        `${level.padEnd(padding, '')} ${message}`
-      );
-      const timestampFormat = colorizer.colorize(level, `${timestamp}`);
-      return `${subjectFormat} ${timestampFormat} ${colorFormat}`;
-    })
-  );
-export const fileFormat = (label: string = '', subject: string = '[LOGGER]') =>
-  format.combine(
-    format.label({ label, message: label.length > 0 }),
-    format.timestamp(),
-    format.printf(({ level, message, timestamp, label }) => {
-      const padding = level.length <= 7 ? 7 : 17; // padding differently if it has colour.
-      return `${subject} ${timestamp} ${level.padEnd(padding, '')} ${message}`;
-    })
+    format.printf(({ level, message, timestamp, service, pid, context }) => {
+      context = context ? ` [${context}] ` : ' ';
+      service = service ? `[${service.toUpperCase()}]` : '';
+      const levelStr = level.padStart(7).toUpperCase();
+      const contextFormat = isColor ? yellow(`${context}`) : context;
+      const serviceFormat = isColor ? colorize(level, `${service}`) : service;
+      const pidFormat = isColor ? colorize(level, `${pid}`) : pid;
+      const levelFormat = isColor ? colorize(level, `${levelStr}`) : levelStr;
+      const messageFormat = isColor ? colorize(level, `${message}`) : message;
+      const formattedMessage = `${serviceFormat} ${pidFormat} - ${timestamp}${levelFormat}${contextFormat}${messageFormat} \n`;
+      return formattedMessage;
+    }),
   );
 
-interface LoggerFileOptions {
-  label?: string;
-  subject?: string;
+interface LoggerHelperOptions {
+  level?: string;
+  context?: string;
   dirname?: string;
   error?: string;
   info?: string;
@@ -52,16 +58,20 @@ interface LoggerFileOptions {
 }
 
 export class WinstonHelper {
-  private fileOptions?: LoggerFileOptions;
+  private helperOpts?: LoggerHelperOptions;
   logger: Logger;
 
-  constructor(fileOptions?: LoggerFileOptions, options?: LoggerOptions) {
-    const newOptions = this.genOptions(fileOptions, options);
+  constructor(
+    private service?: string,
+    helperOpts?: LoggerHelperOptions,
+    options?: LoggerOptions,
+  ) {
+    const newOptions = this.genOptions(helperOpts, options);
     this.logger = createLogger(newOptions);
   }
 
-  private defaultFileOpts: LoggerFileOptions = {
-    subject: '[LOGGER]',
+  private defaultHelperOpts: LoggerHelperOptions = {
+    level: 'info',
     dirname: 'logs',
     error: 'error.log',
     info: 'system.log',
@@ -70,109 +80,46 @@ export class WinstonHelper {
   };
 
   private genOptions(
-    fileOptions?: LoggerFileOptions,
-    options?: LoggerOptions
+    helperOpts?: LoggerHelperOptions,
+    options?: LoggerOptions,
   ): LoggerOptions {
-    this.fileOptions = {
-      ...this.defaultFileOpts,
-      ...fileOptions,
+    this.helperOpts = {
+      ...this.defaultHelperOpts,
+      ...helperOpts,
     };
     const defaultOptions: LoggerOptions = {
       transports: [
         new transports.DailyRotateFile({
-          dirname: this.fileOptions.dirname,
-          filename: this.fileOptions.dailyFilename,
+          dirname: this.helperOpts.dirname,
+          filename: this.helperOpts.dailyFilename,
           zippedArchive: true,
-          maxFiles: this.defaultFileOpts.logKeepDays, // 保留幾天
-          format: fileFormat(this.fileOptions.label, this.fileOptions.subject),
+          maxFiles: this.defaultHelperOpts.logKeepDays, // 保留幾天
+          format: loggerFormat(false),
         }),
       ],
     };
 
     return {
-      level: options?.level ?? 'info',
+      level: this.helperOpts.level ?? options?.level ?? 'info',
+      defaultMeta: {
+        service: this.service ?? 'logger',
+        context: this.helperOpts.context,
+        pid: process.pid,
+      },
       transports: [
         new transports.Console({
-          format: consoleFormat(
-            this.fileOptions.label,
-            this.fileOptions.subject
-          ),
+          format: loggerFormat(),
         }),
         new transports.File({
-          filename: this.fileOptions.error,
-          dirname: this.fileOptions.dirname,
+          filename: this.helperOpts.error,
+          dirname: this.helperOpts.dirname,
           level: 'error',
-          format: fileFormat(this.fileOptions.label, this.fileOptions.subject),
+          format: loggerFormat(false),
         }),
         ...((options?.transports as any[]) ??
           (defaultOptions.transports as any[])),
       ],
       format: options?.format ?? defaultOptions.format,
     };
-  }
-}
-
-export class WinstonSingleton {
-  private static instance: WinstonSingleton;
-  private static options?: LoggerOptions;
-  private static fileOptions?: LoggerFileOptions;
-  private static winstonLogger: Logger;
-
-  private constructor(
-    fileOptions?: LoggerFileOptions,
-    options?: LoggerOptions
-  ) {
-    const defaultFileOpts: LoggerFileOptions = {
-      dirname: '',
-      error: 'error.log',
-      info: 'system.log',
-    };
-    WinstonSingleton.fileOptions = {
-      ...defaultFileOpts,
-      ...fileOptions,
-    };
-    if (!options) {
-      options = {
-        transports: [
-          new transports.Console({
-            format: consoleFormat(),
-          }),
-          new transports.File({
-            filename: WinstonSingleton.fileOptions.error,
-            dirname: WinstonSingleton.fileOptions.dirname,
-            level: 'error',
-            format: fileFormat(),
-          }),
-          new transports.File({
-            filename: WinstonSingleton.fileOptions.info,
-            dirname: WinstonSingleton.fileOptions.dirname,
-            level: 'info',
-            format: fileFormat(),
-          }),
-        ],
-      };
-    } else {
-      WinstonSingleton.options = options;
-    }
-    WinstonSingleton.winstonLogger = createLogger(options);
-  }
-
-  static get logger(): Logger {
-    if (WinstonSingleton.instance) {
-      return WinstonSingleton.winstonLogger;
-    } else {
-      WinstonSingleton.instance = new WinstonSingleton(
-        WinstonSingleton.fileOptions,
-        WinstonSingleton.options
-      );
-      return WinstonSingleton.winstonLogger;
-    }
-  }
-
-  static initialize(fileOptions: LoggerFileOptions, options?: LoggerOptions) {
-    if (!WinstonSingleton.instance) {
-      WinstonSingleton.instance = new WinstonSingleton(fileOptions, options);
-    }
-    return WinstonSingleton.instance;
   }
 }
