@@ -5,6 +5,7 @@ import { RoutingControllersOptions, useContainer } from 'routing-controllers';
 import * as _indexControllers from './controllers';
 import * as _indexMiddlewares from './middlewares';
 import { initKoaApp } from './koaApp';
+import { HttpLogger } from './common/helpers/logger.helper';
 
 export async function server() {
   const iocAdapter = new TsyringeAdapter();
@@ -24,7 +25,7 @@ export async function server() {
   const port = Number(configs.app.port);
 
   const httpServer = app.listen(port, host, () => {
-    console.log(`[ ready ] http://${host}:${port}`);
+    HttpLogger.log.info(`http://${host}:${port}`);
   });
 
   return {

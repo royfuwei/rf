@@ -1,6 +1,7 @@
 import { Action, ClassConstructor, IocAdapter } from 'routing-controllers';
 import { DependencyContainer, container } from 'tsyringe';
 import { IAppService, AppService } from '@rfjs/modules';
+import { IocLogger } from './common/helpers/logger.helper';
 
 export class TsyringeAdapter implements IocAdapter {
   container: DependencyContainer;
@@ -34,5 +35,5 @@ function logRegister<T>(type: string, ...params: [string, string][]) {
     pre = `${pre}${str}`;
     return pre;
   }, '');
-  console.log(`[IOC][${type}] ${registerStr}`);
+  IocLogger.log.info(`[${type}] ${registerStr}`);
 }
