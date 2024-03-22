@@ -12,20 +12,13 @@ export async function server() {
   const middlewares = Object.values(_indexMiddlewares).values();
 
   const routingControllerOptions: RoutingControllersOptions = {
-    controllers: [
-      ...controllers,
-    ],
-    middlewares: [
-      ...middlewares,
-    ]
-  }
+    controllers: [...controllers],
+    middlewares: [...middlewares],
+  };
 
   useContainer(iocAdapter);
 
-  const app = initKoaApp(
-    routingControllerOptions,
-    true,
-  );
+  const app = initKoaApp(routingControllerOptions, true);
 
   const host = process.env.HOST ?? 'localhost';
   const port = Number(configs.app.port);
@@ -37,5 +30,5 @@ export async function server() {
   return {
     app,
     httpServer,
-  }
+  };
 }

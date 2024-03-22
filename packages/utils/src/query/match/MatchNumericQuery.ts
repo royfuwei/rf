@@ -7,7 +7,7 @@ import _ = require('lodash');
 import { typeTransfer } from '../../data';
 
 export class MatchNumericQuery {
-  isMatch: boolean = false;
+  isMatch = false;
   validPath = true;
   matchs: number[] = [];
   targets: number[];

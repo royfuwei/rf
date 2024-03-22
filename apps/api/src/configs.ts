@@ -14,7 +14,7 @@ const configs = {
   app: {
     name: process.env['APP_API_NAME'],
     port: process.env['APP_API_PORT'],
-  }
+  },
 };
 
 console.info(`[NODE_ENV] ${configs.app.name} ${configs.env}`);

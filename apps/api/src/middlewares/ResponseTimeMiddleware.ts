@@ -1,5 +1,5 @@
 import { Context } from 'koa';
-import { KoaMiddlewareInterface, Middleware } from "routing-controllers";
+import { KoaMiddlewareInterface, Middleware } from 'routing-controllers';
 
 @Middleware({ type: 'before' })
 export class ResponseTimeMiddleware implements KoaMiddlewareInterface {

@@ -1,12 +1,12 @@
-import koa from "koa";
-import { RoutingControllersOptions, useKoaServer } from "routing-controllers";
-import { getSwaggerSpec } from "./openapi";
-import { koaSwagger } from "koa2-swagger-ui";
-import { bodyParser } from "@koa/bodyparser";
+import koa from 'koa';
+import { RoutingControllersOptions, useKoaServer } from 'routing-controllers';
+import { getSwaggerSpec } from './openapi';
+import { koaSwagger } from 'koa2-swagger-ui';
+import { bodyParser } from '@koa/bodyparser';
 
 export function initKoaApp(
   routingControllerOptions: RoutingControllersOptions,
-  apiDoc: boolean = true,
+  apiDoc = true,
 ) {
   const app = new koa();
   useKoaServer(app, routingControllerOptions);
@@ -15,17 +15,19 @@ export function initKoaApp(
       formLimit: '100mb',
       jsonLimit: '100mb',
       textLimit: '100mb',
-      encoding: 'utf-8'
+      encoding: 'utf-8',
     }),
   );
   const spec = getSwaggerSpec(routingControllerOptions);
   if (apiDoc && spec) {
-    app.use(koaSwagger({
-      routePrefix: '/docs',
-      swaggerOptions: {
-        spec,
-      }
-    }));
+    app.use(
+      koaSwagger({
+        routePrefix: '/docs',
+        swaggerOptions: {
+          spec,
+        },
+      }),
+    );
   }
   return app;
 }

@@ -3,8 +3,8 @@ const { version, name } = require('../../../package.json');
 
 /* eslint-disable-next-line */
 export interface MinimalProps {
-  scopeStyle?: any,
-  id?: string,
+  scopeStyle?: any;
+  id?: string;
 }
 
 export function Minimal(props: MinimalProps) {
@@ -15,7 +15,7 @@ export function Minimal(props: MinimalProps) {
     <div id={id} className={scopeClass}>
       <h1>
         <span> Hello there, </span>
-        Welcome to Minimal! 👋 
+        Welcome to Minimal! 👋
       </h1>
       {name}:{version}
     </div>

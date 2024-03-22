@@ -1,5 +1,5 @@
-import { IsString } from "class-validator";
-import { JSONSchema } from "class-validator-jsonschema";
+import { IsString } from 'class-validator';
+import { JSONSchema } from 'class-validator-jsonschema';
 
 export interface AppInfo {
   uuid: string;

@@ -8,7 +8,7 @@ export class RetryHelper {
     return async <T>(
       job: RetryCallback<T>,
       periodMs = 100,
-      maxRetryTimes = 5
+      maxRetryTimes = 5,
     ) => {
       const isAsync = isAsyncFunction(job);
       const asyncRetry = async (count = 0): Promise<T> => {
@@ -21,7 +21,7 @@ export class RetryHelper {
           if (maxRetryTimes > count) {
             count++;
             console.log(
-              `retry maxRetryTimes: ${maxRetryTimes}, period: ${periodMs} ms, retry: ${count}`
+              `retry maxRetryTimes: ${maxRetryTimes}, period: ${periodMs} ms, retry: ${count}`,
             );
             await delay(periodMs);
             return asyncRetry(count);

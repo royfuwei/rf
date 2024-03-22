@@ -1,4 +1,4 @@
-import { AppInfo, IAppService } from "../types";
+import { AppInfo, IAppService } from '../types';
 import { injectable } from 'tsyringe';
 
 @injectable()

@@ -1,4 +1,4 @@
-import { AppInfo } from "./app.dto";
+import { AppInfo } from './app.dto';
 
 export interface IAppService {
   uuid: string;

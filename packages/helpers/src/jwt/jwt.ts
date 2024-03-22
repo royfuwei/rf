@@ -62,7 +62,7 @@ export class Jwt {
     private secret: Secret,
     private option: SignOptions = {
       expiresIn: 60 * 60,
-    }
+    },
   ) {}
 
   static initial(secret: Secret, option?: SignOptions) {
@@ -71,7 +71,7 @@ export class Jwt {
 
   createToken(
     payload: any,
-    options: SignOptions = { expiresIn: this.option.expiresIn }
+    options: SignOptions = { expiresIn: this.option.expiresIn },
   ): string {
     return sign(payload, this.secret, {
       ...this.option,
@@ -86,7 +86,7 @@ export class Jwt {
 
   verifyToken<T = any>(
     token: string,
-    option?: VerifyOptions
+    option?: VerifyOptions,
   ): VerifyJWTResult<T> {
     try {
       const payload = verify(token, this.secret, option) as T;

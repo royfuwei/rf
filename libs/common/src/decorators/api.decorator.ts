@@ -1,10 +1,14 @@
-import { TDataType } from "../types";
+import { TDataType } from '../types';
 import { OpenAPI } from 'routing-controllers-openapi';
 
 export const ApiResSchema = <TModel extends TDataType<any>>(
   model: TModel,
-  option?: 
-    { isArray?: boolean, status?: number, description?: string, contentType?: string, },
+  option?: {
+    isArray?: boolean;
+    status?: number;
+    description?: string;
+    contentType?: string;
+  },
 ) => {
   const properties = option?.isArray
     ? {

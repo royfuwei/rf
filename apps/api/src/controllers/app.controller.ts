@@ -1,10 +1,18 @@
-import { inject, injectable } from "tsyringe";
-import { IAppController } from "../types/app.type";
-import { AppInfoDTO, IAppService } from "@rfjs/modules";
-import { Body, Ctx, Get, JsonController, Post, QueryParam, UploadedFiles } from "routing-controllers";
+import { inject, injectable } from 'tsyringe';
+import { IAppController } from '../types/app.type';
+import { AppInfoDTO, IAppService } from '@rfjs/modules';
+import {
+  Body,
+  Ctx,
+  Get,
+  JsonController,
+  Post,
+  QueryParam,
+  UploadedFiles,
+} from 'routing-controllers';
 import { File } from '@koa/multer';
-import { fileUploadOptions } from "../common/helpers/upload.helper";
-import { Context } from "koa";
+import { fileUploadOptions } from '../common/helpers/upload.helper';
+import { Context } from 'koa';
 import { ApiResDTO, ApiResSchema } from '@rfjs/common';
 
 @injectable()
@@ -24,8 +32,8 @@ export class AppController implements IAppController {
       status: 200,
       result: {
         data,
-      }
-    }
+      },
+    };
     return result;
   }
 
@@ -37,10 +45,8 @@ export class AppController implements IAppController {
   } */
 
   @Get('/query')
-  async queryAppData(
-    @QueryParam('id') id: any,
-  ) {
-    return {id};
+  async queryAppData(@QueryParam('id') id: any) {
+    return { id };
   }
 
   @Post('/files')

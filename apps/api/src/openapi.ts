@@ -1,12 +1,15 @@
-import { RoutingControllersOptions, getMetadataArgsStorage } from "routing-controllers";
+import {
+  RoutingControllersOptions,
+  getMetadataArgsStorage,
+} from 'routing-controllers';
 import { routingControllersToSpec } from 'routing-controllers-openapi';
 import { defaultMetadataStorage } from 'class-transformer/cjs/storage';
-import { validationMetadatasToSchemas } from "class-validator-jsonschema";
-import { getMetadataStorage } from "class-validator";
+import { validationMetadatasToSchemas } from 'class-validator-jsonschema';
+import { getMetadataStorage } from 'class-validator';
 const { version, name } = require('../../../package.json');
 
 /**
- * 
+ *
  * @param routingControllerOptions RoutingControllersOptions
  * @param additionalProperties Partial<OpenAPIObject>
  */

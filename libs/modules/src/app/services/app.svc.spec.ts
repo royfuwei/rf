@@ -1,4 +1,4 @@
-import "reflect-metadata";
+import 'reflect-metadata';
 import { container } from 'tsyringe';
 import { AppService } from './app.svc';
 import { AppInfoDTO } from '../types';

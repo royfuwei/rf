@@ -12,7 +12,11 @@ export class TsyringeAdapter implements IocAdapter {
 
   init() {
     this.container.registerSingleton<IAppService>('IAppService', AppService);
-    logRegister('registerSingleton', ['from', 'IAppService'], ['to', 'AppService']);
+    logRegister(
+      'registerSingleton',
+      ['from', 'IAppService'],
+      ['to', 'AppService'],
+    );
   }
 
   get<T>(someClass: ClassConstructor<T>, action?: Action): T {
@@ -21,10 +25,7 @@ export class TsyringeAdapter implements IocAdapter {
   }
 }
 
-function logRegister<T>(
-  type: string,
-  ...params: [string, string][]
-) {
+function logRegister<T>(type: string, ...params: [string, string][]) {
   const registerStr = params.reduce((pre, cur) => {
     const str = `${cur[0]}: ${cur[1]}`;
     if (pre.length > 0) {

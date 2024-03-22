@@ -8,7 +8,7 @@ export function filterMappingMatchQueryData<T>(
   filterData: any[],
   filterMetadatas: FilterMappingMetadata[],
   exData: ObjectData = {},
-  dataKey: string = 'data',
+  dataKey = 'data',
 ) {
   if (filterMetadatas.length == 0) {
     return filterData as T[];

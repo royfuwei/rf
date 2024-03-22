@@ -7,7 +7,7 @@ import _ = require('lodash');
 import { typeTransfer } from '../../data';
 
 export class MatchTextQuery {
-  isMatch: boolean = false;
+  isMatch = false;
   validPath = true;
   matchs: string[] = [];
   targets: string[];

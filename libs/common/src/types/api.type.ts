@@ -33,9 +33,9 @@ export class ApiResDTO<TData> {
       },
       data: {
         description: '回傳資料',
-        type: ['array', 'object']
-      }
-    }
+        type: ['array', 'object'],
+      },
+    },
   })
   @IsOptional()
   result?: ApiResultDTO<TData>;

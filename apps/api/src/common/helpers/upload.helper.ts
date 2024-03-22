@@ -1,4 +1,4 @@
-import { Options, diskStorage } from "@koa/multer";
+import { Options, diskStorage } from '@koa/multer';
 
 export const fileUploadOptions = (): Options => ({
   /* storage: diskStorage({
@@ -10,7 +10,7 @@ export const fileUploadOptions = (): Options => ({
     // console.log('file: ', file);
   }, */
   limits: {
-      fieldNameSize: 255,
-      fileSize: 1024 * 1024 * 2
-  }
+    fieldNameSize: 255,
+    fileSize: 1024 * 1024 * 2,
+  },
 });
