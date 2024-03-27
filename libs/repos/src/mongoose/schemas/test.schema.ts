@@ -2,10 +2,11 @@ import _ = require('lodash');
 import { Schema } from 'mongoose';
 import { CreatedAtDocument, UpdatedAtDocument } from '../common';
 
-export type Test =  {
+export type Test = {
   uuid: string;
   value: string;
-} & UpdatedAtDocument & CreatedAtDocument;
+} & UpdatedAtDocument &
+  CreatedAtDocument;
 
 export type TestData = {
   id: string;
@@ -19,9 +20,11 @@ export const TestSchema = new Schema<Test>({
 });
 
 TestSchema.set('toJSON', {
-  transform: (doc: any, ret: any) => _.assign({ id: ret._id.toString() }, _.omit(ret, ['_id']))
+  transform: (doc: any, ret: any) =>
+    _.assign({ id: ret._id.toString() }, _.omit(ret, ['_id'])),
 });
 
 TestSchema.set('toObject', {
-  transform: (doc: any, ret: any) => _.assign({ id: doc._id.toString() }, _.omit(doc, ['_id']))
+  transform: (doc: any, ret: any) =>
+    _.assign({ id: doc._id.toString() }, _.omit(doc, ['_id'])),
 });
