@@ -6,7 +6,7 @@ import {
   transports,
 } from 'winston';
 import 'winston-daily-rotate-file';
-import { clc, yellow } from '~rfjs/utils';
+import { clc, yellow } from '@rfjs/utils';
 
 function getColorByLogLevel(level: LoggerOptions['level']) {
   switch (level) {

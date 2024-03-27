@@ -15,12 +15,14 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "~rfjs/api/*": ["apps/api/src/*"],
       "@rfjs/common": ["libs/common/src/index.ts"],
-      "~rfjs/helpers": ["packages/helpers/src/index.ts"],
       "@rfjs/minimal": ["packages/minimal/src/index.ts"],
       "@rfjs/minimal/server": ["packages/minimal/src/server.ts"],
       "@rfjs/modules": ["libs/modules/src/index.ts"],
-      "~rfjs/utils": ["packages/utils/src/index.ts"]
+      "@rfjs/repos": ["libs/repos/src/index.ts"],
+      "@rfjs/helpers": ["packages/helpers/src/index.ts"],
+      "@rfjs/utils": ["packages/utils/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
