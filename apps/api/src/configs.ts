@@ -17,6 +17,9 @@ const configs = {
     name: process.env['APP_API_NAME'],
     port: process.env['APP_API_PORT'],
   },
+  mongodb: {
+    uri: process.env['DB_MONGO_URI'],
+  },
 };
 
 LoggerHelper.log.info(`[NODE_ENV] ${configs.app.name} ${configs.env}`);

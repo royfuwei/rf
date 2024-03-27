@@ -1,7 +1,17 @@
 import { Action, ClassConstructor, IocAdapter } from 'routing-controllers';
 import { DependencyContainer, container } from 'tsyringe';
-import { IAppService, AppService } from '@rfjs/modules';
+import {
+  IAppService,
+  AppService,
+  DemoRepository,
+  IDemoRepository,
+  INJECT_MONGO_CLIENT,
+  INJECT_DEMO_REPO,
+  INJECT_SVC_APP_SERVICE,
+} from '@rfjs/modules';
 import { IocLogger } from './common/helpers/logger.helper';
+import { BaseMonogoClient } from '@rfjs/repos';
+import { DemoDbMongoClient } from './database/mongodb/demoDB';
 
 export class TsyringeAdapter implements IocAdapter {
   container: DependencyContainer;
@@ -11,12 +21,33 @@ export class TsyringeAdapter implements IocAdapter {
     this.init();
   }
 
-  init() {
-    this.container.registerSingleton<IAppService>('IAppService', AppService);
+  private init() {
+    this.container.registerSingleton<IAppService>(
+      INJECT_SVC_APP_SERVICE,
+      AppService,
+    );
     logRegister(
       'registerSingleton',
-      ['from', 'IAppService'],
+      ['from', INJECT_SVC_APP_SERVICE],
       ['to', 'AppService'],
+    );
+    this.container.registerSingleton<BaseMonogoClient>(
+      INJECT_MONGO_CLIENT,
+      DemoDbMongoClient,
+    );
+    logRegister(
+      'registerSingleton',
+      ['from', INJECT_MONGO_CLIENT],
+      ['to', 'DemoDbMongoClient'],
+    );
+    this.container.registerSingleton<IDemoRepository>(
+      INJECT_DEMO_REPO,
+      DemoRepository,
+    );
+    logRegister(
+      'registerSingleton',
+      ['from', 'IDemoRepository'],
+      ['to', 'DemoRepository'],
     );
   }
 
@@ -37,3 +68,5 @@ function logRegister<T>(type: string, ...params: [string, string][]) {
   }, '');
   IocLogger.log.info(`[${type}] ${registerStr}`);
 }
+
+export const iocAdapter = new TsyringeAdapter();

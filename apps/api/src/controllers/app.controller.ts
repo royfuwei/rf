@@ -1,6 +1,12 @@
 import { inject, injectable } from 'tsyringe';
 import { IAppController } from '../types/app.type';
-import { AppInfoDTO, IAppService } from '@rfjs/modules';
+import {
+  AppInfoDTO,
+  IDemoRepository,
+  IAppService,
+  AppUsecase,
+  INJECT_SVC_APP_SERVICE,
+} from '@rfjs/modules';
 import {
   Body,
   Ctx,
@@ -19,8 +25,10 @@ import { ApiResDTO, ApiResSchema } from '@rfjs/common';
 @JsonController('/app')
 export class AppController implements IAppController {
   constructor(
-    @inject('IAppService')
+    @inject(INJECT_SVC_APP_SERVICE)
     private readonly appSvc: IAppService,
+    @inject(AppUsecase)
+    private readonly appUCase: AppUsecase,
   ) {}
 
   @Get()
@@ -35,6 +43,11 @@ export class AppController implements IAppController {
       },
     };
     return result;
+  }
+
+  @Get('/db')
+  async getTest() {
+    return this.appUCase.getTestData();
   }
 
   /* @Post()

@@ -1,14 +1,18 @@
 import 'reflect-metadata';
 import configs from './configs';
-import { TsyringeAdapter } from './iocAdapter';
+import { iocAdapter } from './iocAdapter';
 import { RoutingControllersOptions, useContainer } from 'routing-controllers';
 import * as _indexControllers from './controllers';
 import * as _indexMiddlewares from './middlewares';
 import { initKoaApp } from './koaApp';
 import { HttpLogger } from './common/helpers/logger.helper';
+import { DemoDbMongoClient } from './database/mongodb/demoDB';
+import { INJECT_MONGO_CLIENT } from '@rfjs/modules';
 
 export async function server() {
-  const iocAdapter = new TsyringeAdapter();
+  const client =
+    iocAdapter.container.resolve<DemoDbMongoClient>(INJECT_MONGO_CLIENT);
+  await client.connection.asPromise();
   const controllers = Object.values(_indexControllers).values();
   const middlewares = Object.values(_indexMiddlewares).values();
 

@@ -1,5 +1,5 @@
 import { Logger } from 'winston';
-import { WinstonHelper } from '~rfjs/helpers';
+import { WinstonHelper } from '@rfjs/helpers';
 
 export abstract class LoggerHelper {
   protected static wlog: Logger;
