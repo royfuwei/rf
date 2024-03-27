@@ -2,7 +2,7 @@ import { ConnectOptions, Connection, Mongoose } from 'mongoose';
 import { v4 as uuidV4 } from 'uuid';
 import { WinstonHelper } from '@rfjs/helpers';
 
-const mongoLogger = new WinstonHelper('mongo', { context: 'CONNECTION' });
+const mongoLogger = new WinstonHelper('mongo', { context: 'DB' });
 
 export class BaseMonogoClient {
   connection: Connection;
