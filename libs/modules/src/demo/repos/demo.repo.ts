@@ -1,8 +1,9 @@
-import { BaseMonogoClient, TestData, testSchema } from "@rfjs/repos";
+import { BaseMonogoClient, testSchema } from "@rfjs/repos";
 import { inject, injectable } from "tsyringe";
 import { INJECT_MONGO_CLIENT } from "../../const";
 import { IDemoRepository } from "../type";
 import { Model } from "mongoose";
+import { TestData } from "@rfjs/common";
 
 @injectable()
 export class DemoRepository implements IDemoRepository {
