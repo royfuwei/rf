@@ -19,7 +19,15 @@ import {
 import { File } from '@koa/multer';
 import { fileUploadOptions } from '../common/helpers/upload.helper';
 import { Context } from 'koa';
-import { ApiResDataDTO, ApiResDataListSchema, ApiResDataSchema, ApiResErrDTO, ApiResPaginatedSchema, HttpException, TestDataDTO } from '@rfjs/common';
+import {
+  ApiResDataDTO,
+  ApiResDataListSchema,
+  ApiResDataSchema,
+  ApiResErrDTO,
+  ApiResPaginatedSchema,
+  HttpException,
+  TestDataDTO,
+} from '@rfjs/common';
 import httpStatus from 'http-status';
 import { ResponseSchema } from 'routing-controllers-openapi';
 import { ApiUtil } from '@rfjs/utils';
@@ -57,10 +65,7 @@ export class AppController implements IAppController {
   @ApiResPaginatedSchema(TestDataDTO)
   async getAppPaginated() {
     const data = await this.appUCase.getTestData();
-    const result = ApiUtil.jsonPaginated<TestDataDTO>(
-      data,
-      data.length,
-    );
+    const result = ApiUtil.jsonPaginated<TestDataDTO>(data, data.length);
     return result;
   }
 

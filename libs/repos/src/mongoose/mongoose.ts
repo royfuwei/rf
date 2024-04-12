@@ -1,8 +1,7 @@
+import { WinstonHelper } from '@rfjs/helpers';
 import { ConnectOptions, Connection, Mongoose } from 'mongoose';
 import { v4 as uuidV4 } from 'uuid';
-import { WinstonHelper } from '@rfjs/helpers';
-
-const mongoLogger = new WinstonHelper('mongo', { context: 'DB' });
+import { Logger } from 'winston';
 
 export class BaseMonogoClient {
   connection: Connection;
@@ -16,8 +15,13 @@ export class BaseMonogoClient {
     public uri = 'mongodb://127.0.0.1:27017',
     options?: ConnectOptions,
     public dbName?: string,
+    private logger?: Logger,
     public clientId: string = uuidV4(),
   ) {
+    if (!logger) {
+      const logger = new WinstonHelper('mongo', { context: 'DB' });
+      this.logger = logger.logger;
+    }
     this.options = {
       ...this.options,
       ...options,
@@ -33,22 +37,30 @@ export class BaseMonogoClient {
 
   private setConnectionOn() {
     this.mongoose.connection.on('connected', () => {
-      mongoLogger.logger.info(
-        `[${this.connection.name}] connected: ${this.clientId}`,
-      );
+      if (this.logger) {
+        this.logger.info(
+          `[${this.connection.name}] connected: ${this.clientId}`,
+        );
+      }
     });
     this.mongoose.connection.on('disconnected', () => {
-      mongoLogger.logger.info(
-        `[${this.connection.name}] disconnected: ${this.clientId}`,
-      );
+      if (this.logger) {
+        this.logger.info(
+          `[${this.connection.name}] disconnected: ${this.clientId}`,
+        );
+      }
     });
     this.mongoose.connection.on('error', (error) => {
-      mongoLogger.logger.error(error);
+      if (this.logger) {
+        this.logger.error(error);
+      }
     });
     this.mongoose.connection.on('open', () => {
-      mongoLogger.logger.info(
-        `[${this.connection.name}] connection opened: ${this.clientId}`,
-      );
+      if (this.logger) {
+        this.logger.info(
+          `[${this.connection.name}] connection opened: ${this.clientId}`,
+        );
+      }
     });
   }
 
@@ -56,7 +68,9 @@ export class BaseMonogoClient {
     try {
       await this.mongoose.connection.asPromise();
     } catch (error) {
-      mongoLogger.logger.error(error);
+      if (this.logger) {
+        this.logger.error(error);
+      }
       throw error;
     }
   }
