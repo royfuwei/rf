@@ -5,6 +5,11 @@ export enum EnumErrorCode {
   UNKNOWN_ERROR = 'unknown_error',
 
   /**
+   * BASE_ERROR
+   */
+  BASE_ERROR = 'base_error',
+
+  /**
    * base http error
    */
   HTTP_BASE_ERROR = 'http_base_error',
