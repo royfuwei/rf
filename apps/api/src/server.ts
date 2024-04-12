@@ -17,6 +17,7 @@ export async function server() {
   const middlewares = Object.values(_indexMiddlewares).values();
 
   const routingControllerOptions: RoutingControllersOptions = {
+    defaultErrorHandler: false,
     controllers: [...controllers],
     middlewares: [...middlewares],
   };

@@ -3,12 +3,16 @@ import { RoutingControllersOptions, useKoaServer } from 'routing-controllers';
 import { getSwaggerSpec } from './openapi';
 import { koaSwagger } from 'koa2-swagger-ui';
 import { bodyParser } from '@koa/bodyparser';
+import { KoaLoggerHttpErrorMiddleware, KoaHttpErrorInterceptor } from '@rfjs/utils';
+import { HttpLogger } from './common/helpers/logger.helper';
 
 export function initKoaApp(
   routingControllerOptions: RoutingControllersOptions,
   apiDoc = true,
 ) {
   const app = new koa();
+  app.use(KoaLoggerHttpErrorMiddleware(HttpLogger.log));
+
   useKoaServer(app, routingControllerOptions);
   app.use(
     bodyParser({
