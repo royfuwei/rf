@@ -19,9 +19,15 @@ import {
 import { File } from '@koa/multer';
 import { fileUploadOptions } from '../common/helpers/upload.helper';
 import { Context } from 'koa';
-import { ApiResDTO, ApiResSchema } from '@rfjs/common';
+import { ApiResDataDTO, ApiResDataListSchema, ApiResDataSchema, ApiResErrDTO, ApiResPaginatedSchema, HttpException, TestDataDTO } from '@rfjs/common';
+import httpStatus from 'http-status';
+import { ResponseSchema } from 'routing-controllers-openapi';
+import { ApiUtil } from '@rfjs/utils';
 
 @injectable()
+@ResponseSchema(ApiResErrDTO, {
+  statusCode: httpStatus.BAD_REQUEST,
+})
 @JsonController('/app')
 export class AppController implements IAppController {
   constructor(
@@ -31,23 +37,36 @@ export class AppController implements IAppController {
     private readonly appUCase: AppUsecase,
   ) {}
 
-  @Get()
-  @ApiResSchema(AppInfoDTO)
-  async getAppInfo() {
+  @Get('/data')
+  @ApiResDataSchema(AppInfoDTO)
+  async getAppData(): Promise<ApiResDataDTO<AppInfoDTO>> {
     const data = this.appSvc.getAppInfo();
-    const result: ApiResDTO<AppInfoDTO> = {
-      success: true,
-      status: 200,
-      result: {
-        data,
-      },
-    };
+    const result = ApiUtil.jsonData<AppInfoDTO>(data);
     return result;
   }
 
-  @Get('/db')
-  async getTest() {
-    return this.appUCase.getTestData();
+  @Get('/data/list')
+  @ApiResDataListSchema(AppInfoDTO, { status: httpStatus.CREATED })
+  async getAppDataList(): Promise<ApiResDataDTO<AppInfoDTO>> {
+    const data = this.appSvc.getAppInfo();
+    const result = ApiUtil.jsonDataList<AppInfoDTO>([data], httpStatus.CREATED);
+    return result;
+  }
+
+  @Get('/data/paginated')
+  @ApiResPaginatedSchema(TestDataDTO)
+  async getAppPaginated() {
+    const data = await this.appUCase.getTestData();
+    const result = ApiUtil.jsonPaginated<TestDataDTO>(
+      data,
+      data.length,
+    );
+    return result;
+  }
+
+  @Get('/error')
+  async getError() {
+    throw new HttpException('test http exception');
   }
 
   /* @Post()
@@ -56,11 +75,6 @@ export class AppController implements IAppController {
   ) {
     return body;
   } */
-
-  @Get('/query')
-  async queryAppData(@QueryParam('id') id: any) {
-    return { id };
-  }
 
   @Post('/files')
   async uploadFiles(
