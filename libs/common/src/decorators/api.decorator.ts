@@ -1,7 +1,47 @@
 import { TDataType } from '../types';
 import { OpenAPI } from 'routing-controllers-openapi';
 
-export const ApiResSchema = <TModel extends TDataType<any>>(
+export const ApiResPaginatedSchema = <TModel extends TDataType<any>>(
+  model: TModel,
+  option?: {
+    status?: number;
+    description?: string;
+    contentType?: string;
+  },
+) => {
+  const properties = {
+    type: 'array',
+    items: { $ref: `#/components/schemas/${model.name}` },
+  };
+  const statuscode = option?.status ?? 200;
+  const contentType = option?.contentType ?? 'application/json';
+
+  return OpenAPI({
+    description: option?.description,
+    responses: {
+      [`${statuscode}`]: {
+        content: {
+          [`${contentType}`]: {
+            schema: {
+              allOf: [
+                {
+                  $ref: `#/components/schemas/ApiResPaginatedDTO`,
+                },
+                {
+                  properties: {
+                    data: properties,
+                  },
+                },
+              ],
+            },
+          },
+        },
+      },
+    },
+  });
+};
+
+export const ApiResDataSchema = <TModel extends TDataType<any>>(
   model: TModel,
   option?: {
     isArray?: boolean;
@@ -12,18 +52,11 @@ export const ApiResSchema = <TModel extends TDataType<any>>(
 ) => {
   const properties = option?.isArray
     ? {
-        total: {
-          type: 'number',
-        },
-        data: {
-          type: 'array',
-          items: { $ref: `#/components/schemas/${model.name}` },
-        },
+        type: 'array',
+        items: { $ref: `#/components/schemas/${model.name}` },
       }
     : {
-        data: {
-          $ref: `#/components/schemas/${model.name}`,
-        },
+        $ref: `#/components/schemas/${model.name}`,
       };
   const statuscode = option?.status ?? 200;
   const contentType = option?.contentType ?? 'application/json';
@@ -37,14 +70,51 @@ export const ApiResSchema = <TModel extends TDataType<any>>(
             schema: {
               allOf: [
                 {
-                  $ref: `#/components/schemas/ApiResDTO`,
+                  $ref: `#/components/schemas/ApiResDataDTO`,
                 },
                 {
                   properties: {
-                    result: {
-                      type: 'object',
-                      properties,
-                    },
+                    data: properties,
+                  },
+                },
+              ],
+            },
+          },
+        },
+      },
+    },
+  });
+};
+
+export const ApiResDataListSchema = <TModel extends TDataType<any>>(
+  model: TModel,
+  option?: {
+    status?: number;
+    description?: string;
+    contentType?: string;
+  },
+) => {
+  const properties = {
+    type: 'array',
+    items: { $ref: `#/components/schemas/${model.name}` },
+  };
+  const statuscode = option?.status ?? 200;
+  const contentType = option?.contentType ?? 'application/json';
+
+  return OpenAPI({
+    description: option?.description,
+    responses: {
+      [`${statuscode}`]: {
+        content: {
+          [`${contentType}`]: {
+            schema: {
+              allOf: [
+                {
+                  $ref: `#/components/schemas/ApiResDataDTO`,
+                },
+                {
+                  properties: {
+                    data: properties,
                   },
                 },
               ],
