@@ -1,16 +1,6 @@
 import _ = require('lodash');
 import { Schema } from 'mongoose';
-import { CreatedAtDocument, UpdatedAtDocument } from '../common';
-
-export type Test = {
-  uuid: string;
-  value: string;
-} & UpdatedAtDocument &
-  CreatedAtDocument;
-
-export type TestData = {
-  id: string;
-} & Test;
+import { Test } from '@rfjs/common';
 
 export const testSchema = new Schema<Test>({
   uuid: { type: String, required: true },
