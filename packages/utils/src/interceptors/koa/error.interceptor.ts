@@ -4,7 +4,7 @@ import { Logger } from 'winston';
 
 export const KoaLoggerHttpErrorMiddleware = (logger: Logger) => {
   return async (ctx: Koa.Context, next: () => Promise<any>) => {
-    KoaHttpErrorInterceptor(ctx, next, logger);
+    await KoaHttpErrorInterceptor(ctx, next, logger);
   };
 };
 
