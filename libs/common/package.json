@@ -4,7 +4,6 @@
   "dependencies": {
     "class-validator": "^0.14.1",
     "class-validator-jsonschema": "^5.0.0",
-    "routing-controllers-openapi": "^4.0.0",
     "tslib": "^2.3.0",
     "http-status": "^1.7.4"
   }

@@ -21,10 +21,7 @@ import { fileUploadOptions } from '../common/helpers/upload.helper';
 import { Context } from 'koa';
 import {
   ApiResDataDTO,
-  ApiResDataListSchema,
-  ApiResDataSchema,
   ApiResErrDTO,
-  ApiResPaginatedSchema,
   HttpException,
   TestDataDTO,
 } from '@rfjs/common';
@@ -46,7 +43,7 @@ export class AppController implements IAppController {
   ) {}
 
   @Get('/data')
-  @ApiResDataSchema(AppInfoDTO)
+  @ApiUtil.ApiResDataSchema(AppInfoDTO)
   async getAppData(): Promise<ApiResDataDTO<AppInfoDTO>> {
     const data = this.appSvc.getAppInfo();
     const result = ApiUtil.jsonData<AppInfoDTO>(data);
@@ -54,7 +51,7 @@ export class AppController implements IAppController {
   }
 
   @Get('/data/list')
-  @ApiResDataListSchema(AppInfoDTO, { status: httpStatus.CREATED })
+  @ApiUtil.ApiResDataListSchema(AppInfoDTO, { status: httpStatus.CREATED })
   async getAppDataList(): Promise<ApiResDataDTO<AppInfoDTO>> {
     const data = this.appSvc.getAppInfo();
     const result = ApiUtil.jsonDataList<AppInfoDTO>([data], httpStatus.CREATED);
@@ -62,7 +59,7 @@ export class AppController implements IAppController {
   }
 
   @Get('/data/paginated')
-  @ApiResPaginatedSchema(TestDataDTO)
+  @ApiUtil.ApiResPaginatedSchema(TestDataDTO)
   async getAppPaginated() {
     const data = await this.appUCase.getTestData();
     const result = ApiUtil.jsonPaginated<TestDataDTO>(data, data.length);
