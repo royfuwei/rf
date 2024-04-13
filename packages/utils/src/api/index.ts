@@ -1,2 +1,2 @@
-export * from './json.type';
+export * from './apiResData';
 export * from './api.decorator';

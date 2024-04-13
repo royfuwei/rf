@@ -46,7 +46,7 @@ export class AppController implements IAppController {
   @ApiUtil.ApiResDataSchema(AppInfoDTO)
   async getAppData(): Promise<ApiResDataDTO<AppInfoDTO>> {
     const data = this.appSvc.getAppInfo();
-    const result = ApiUtil.jsonData<AppInfoDTO>(data);
+    const result = ApiUtil.apiResData<AppInfoDTO>(data);
     return result;
   }
 
@@ -54,7 +54,7 @@ export class AppController implements IAppController {
   @ApiUtil.ApiResDataListSchema(AppInfoDTO, { status: httpStatus.CREATED })
   async getAppDataList(): Promise<ApiResDataDTO<AppInfoDTO>> {
     const data = this.appSvc.getAppInfo();
-    const result = ApiUtil.jsonDataList<AppInfoDTO>([data], httpStatus.CREATED);
+    const result = ApiUtil.apiResDataList<AppInfoDTO>([data], httpStatus.CREATED);
     return result;
   }
 
@@ -62,7 +62,7 @@ export class AppController implements IAppController {
   @ApiUtil.ApiResPaginatedSchema(TestDataDTO)
   async getAppPaginated() {
     const data = await this.appUCase.getTestData();
-    const result = ApiUtil.jsonPaginated<TestDataDTO>(data, data.length);
+    const result = ApiUtil.apiResPaginated<TestDataDTO>(data, data.length);
     return result;
   }
 

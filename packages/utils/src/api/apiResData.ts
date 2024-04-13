@@ -1,6 +1,6 @@
 import { ApiResData, ApiResPaginated } from '@rfjs/common';
 
-export const jsonData = <T>(
+export const apiResData = <T>(
   data: T | null,
   status = 200,
   success = true,
@@ -12,7 +12,7 @@ export const jsonData = <T>(
   };
 };
 
-export const jsonDataList = <T>(
+export const apiResDataList = <T>(
   data: T[],
   status = 200,
   success = true,
@@ -24,7 +24,7 @@ export const jsonDataList = <T>(
   };
 };
 
-export const jsonPaginated = <T>(
+export const apiResPaginated = <T>(
   data: T[],
   total: number,
   status = 200,
