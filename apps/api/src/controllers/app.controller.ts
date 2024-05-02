@@ -11,6 +11,7 @@ import {
   Body,
   Ctx,
   Get,
+  HttpCode,
   JsonController,
   Post,
   QueryParam,
@@ -51,10 +52,14 @@ export class AppController implements IAppController {
   }
 
   @Get('/data/list')
+  @HttpCode(httpStatus.CREATED)
   @ApiUtil.ApiResDataListSchema(AppInfoDTO, { status: httpStatus.CREATED })
   async getAppDataList(): Promise<ApiResDataDTO<AppInfoDTO>> {
     const data = this.appSvc.getAppInfo();
-    const result = ApiUtil.apiResDataList<AppInfoDTO>([data], httpStatus.CREATED);
+    const result = ApiUtil.apiResDataList<AppInfoDTO>(
+      [data],
+      httpStatus.CREATED,
+    );
     return result;
   }
 

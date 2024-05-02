@@ -20,6 +20,10 @@ const configs = {
   mongodb: {
     uri: process.env['DB_MONGO_URI'],
   },
+  supabase: {
+    url: process.env['PUBLIC_SUPABASE_URL'],
+    key: process.env['PUBLIC_SUPABASE_ANON_KEY'],
+  },
 };
 
 LoggerHelper.log.info(`[NODE_ENV] ${configs.app.name} ${configs.env}`);
