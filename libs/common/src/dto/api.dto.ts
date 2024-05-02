@@ -10,7 +10,7 @@ import {
 import { JSONSchema } from 'class-validator-jsonschema';
 import { ApiResData, ApiResErr, ApiResPaginated } from '../types/api/api.type';
 import { EnumErrorCode } from '../enums';
-import httpStatus = require('http-status');
+import * as httpStatus from 'http-status';
 
 export class ApiResPaginatedDTO<TData> implements ApiResPaginated<TData> {
   @JSONSchema({ description: '請求結果' })
@@ -84,6 +84,10 @@ export class ApiResErrDTO implements ApiResErr {
   @JSONSchema({ description: '錯誤路徑' })
   @IsString()
   path: string;
+
+  @JSONSchema({ description: 'http method' })
+  @IsString()
+  method: string;
 
   @JSONSchema({
     description: '錯誤時間',
