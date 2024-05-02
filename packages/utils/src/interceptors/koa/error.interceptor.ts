@@ -1,6 +1,7 @@
 import * as Koa from 'koa';
 import { ApiResErr, HttpException } from '@rfjs/common';
 import { Logger } from 'winston';
+import * as _ from 'lodash';
 
 export const KoaLoggerHttpErrorMiddleware = (logger: Logger) => {
   return async (ctx: Koa.Context, next: () => Promise<any>) => {
@@ -16,7 +17,9 @@ export const KoaHttpErrorInterceptor = async (
   try {
     await next();
     const body: any = ctx.body;
-    ctx.status = body['status'] ?? ctx.status;
+    if (body && _.has(body, 'status')) {
+      body.status = ctx.status;
+    }
   } catch (error: any) {
     await koaErrorHandler(error, ctx, logger);
   }
@@ -28,14 +31,18 @@ export const koaErrorHandler = async (
   logger?: Logger,
 ) => {
   const isInnerError = error instanceof HttpException;
+  if (!isInnerError) {
+    error = new HttpException(error.message, 500);
+  }
   const httpError = error as HttpException;
   const body: ApiResErr = {
     success: false,
     status: httpError.status,
     errorCode: httpError.errorCode,
     message: error.message,
-    timestamp: new Date().toISOString(),
+    method: ctx.method,
     path: ctx.path,
+    timestamp: new Date().toISOString(),
   };
   if (error.description) {
     body.description = error.description;
