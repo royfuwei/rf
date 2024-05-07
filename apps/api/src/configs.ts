@@ -24,6 +24,17 @@ const configs = {
     url: process.env['PUBLIC_SUPABASE_URL'],
     key: process.env['PUBLIC_SUPABASE_ANON_KEY'],
   },
+  line: {
+    bot: {
+      channelId: process.env['LINE_CHANNEL_ID'],
+      channelSecret: process.env['LINE_CHANNEL_SECRET'],
+      channelAccessToken: process.env['LINE_CHANNEL_ACCESS_TOKEN'],
+    },
+    notify: {
+      clientId: process.env['LINE_NOTIFY_CLIENT_ID'],
+      clientSecret: process.env['LINE_NOTIFY_CLIENT_SECRET'],
+    },
+  },
 };
 
 LoggerHelper.log.info(`[NODE_ENV] ${configs.app.name} ${configs.env}`);
