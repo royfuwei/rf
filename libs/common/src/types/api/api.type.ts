@@ -20,4 +20,5 @@ export type ApiResErr = ApiResStatus & {
   description?: string;
   path: string;
   timestamp: string;
+  method: string;
 };

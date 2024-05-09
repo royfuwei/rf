@@ -8,6 +8,7 @@ import {
   KoaHttpErrorInterceptor,
 } from '@rfjs/utils';
 import { HttpLogger } from './common/helpers/logger.helper';
+import views from 'koa-views';
 
 export function initKoaApp(
   routingControllerOptions: RoutingControllersOptions,
@@ -15,6 +16,8 @@ export function initKoaApp(
 ) {
   const app = new koa();
   app.use(KoaLoggerHttpErrorMiddleware(HttpLogger.log));
+  const render = views(__dirname + '/assets');
+  app.use(render);
 
   useKoaServer(app, routingControllerOptions);
   app.use(
