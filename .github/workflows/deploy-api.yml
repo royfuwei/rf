@@ -1,0 +1,30 @@
+name: Deploy to Render
+
+on:
+  push:
+    branches:
+      # - production 
+      - main 
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Deploy to Render
+        env:
+          RENDER_DEPLOY_HOOK_KEY: ${{ secrets.RENDER_DEPLOY_HOOK_KEY }}
+          RENDER_DEPLOY_SERVICE_KEY: ${{ secrets.RENDER_DEPLOY_SERVICE_KEY }}
+        run: |
+          curl -X POST \
+          -H "Content-Type: application/json" \
+          https://api.render.com/deploy/$RENDER_DEPLOY_SERVICE_KEY?key=$RENDER_DEPLOY_HOOK_KEY
+

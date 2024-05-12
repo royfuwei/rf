@@ -1,0 +1,65 @@
+name: Trigger Deploy
+
+on:
+  push:
+    branches:
+      - production
+
+jobs:
+  trigger-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Trigger target repository dispatch
+      env:
+        RFJS_TARGET_OWNER: ${{ secrets.RFJS_TARGET_OWNER }}
+        RFJS_DEVOPS_TARGET_REPO: ${{ secrets.RFJS_DEVOPS_TARGET_REPO }}
+        RFJS_GITHUB_TOKEN: ${{ secrets.RFJS_GITHUB_TOKEN }}
+      run: |
+        curl -X POST \
+          -H "Accept: application/vnd.github.v3+json" \
+          -H "Authorization: Bearer $RFJS_GITHUB_TOKEN" \
+          https://api.github.com/repos/$RFJS_TARGET_OWNER/$RFJS_DEVOPS_TARGET_REPO/dispatches \
+          -d '{"event_type":"deploy-trigger","client_payload":{"ref":"main"}}'
+
+    # - name: Install jq
+    #   run: sudo apt-get install jq
+
+    # - name: Wait and check workflow status
+    #   id: check_status
+    #   env:
+    #     RFJS_TARGET_OWNER: ${{ secrets.RFJS_TARGET_OWNER }}
+    #     RFJS_DEVOPS_TARGET_REPO: ${{ secrets.RFJS_DEVOPS_TARGET_REPO }}
+    #     RFJS_GITHUB_TOKEN: ${{ secrets.RFJS_GITHUB_TOKEN }}
+    #   run: |
+    #     target_workflow_run_id=$(curl -s -H "Accept: application/vnd.github.v3+json" \
+    #       -H "Authorization: Bearer $RFJS_GITHUB_TOKEN" \
+    #       https://api.github.com/repos/$RFJS_TARGET_OWNER/$RFJS_DEVOPS_TARGET_REPO/actions/runs \
+    #       | jq -r '.workflow_runs[] | select(.head_branch=="main" and .status=="in_progress") | .id' | head -n 1)
+
+    #     if [ -z "$target_workflow_run_id" ]; then
+    #       echo "No in-progress workflow found."
+    #       exit 1
+    #     fi
+
+    #     echo "Monitoring workflow run ID: $target_workflow_run_id"
+
+    #     while [ "$(curl -s -H "Accept: application/vnd.github.v3+json" \
+    #       -H "Authorization: Bearer $RFJS_GITHUB_TOKEN" \
+    #       https://api.github.com/repos/$RFJS_TARGET_OWNER/$RFJS_DEVOPS_TARGET_REPO/actions/runs/$target_workflow_run_id | jq -r '.status')" == "in_progress" ]; do
+    #       echo "Workflow is still in progress. Waiting for 30 seconds..."
+    #       sleep 30
+    #     done
+
+    #     conclusion=$(curl -s -H "Accept: application/vnd.github.v3+json" \
+    #       -H "Authorization: Bearer $RFJS_GITHUB_TOKEN" \
+    #       https://api.github.com/repos/$RFJS_TARGET_OWNER/$RFJS_DEVOPS_TARGET_REPO/actions/runs/$target_workflow_run_id | jq -r '.conclusion')
+
+    #     echo "Workflow concluded with status: $conclusion"
+
+    #     if [ "$conclusion" != "success" ]; then
+    #       echo "Triggered workflow failed. Failing this workflow."
+    #       exit 1
+    #     fi
+
+    #     echo "Triggered workflow succeeded."
