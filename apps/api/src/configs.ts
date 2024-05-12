@@ -14,8 +14,8 @@ process.env = {
 const configs = {
   env: process.env.NODE_ENV,
   app: {
-    name: process.env['APP_API_NAME'],
-    port: process.env['APP_API_PORT'],
+    name: process.env['APP_API_NAME'] ?? '127.0.0.1',
+    port: process.env['APP_API_PORT'] ?? 8001,
   },
   mongodb: {
     uri: process.env['DB_MONGO_URI'],
