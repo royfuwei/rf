@@ -4,15 +4,6 @@
       "analyzeSourceFiles": true
     }
   },
-  "tasksRunnerOptions": {
-    "default": {
-      "runner": "nx-cloud",
-      "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"],
-        "accessToken": "NjQxOGY4NGYtYWEzOS00NmJjLTk4OTQtMjIzNmFkYzVkYTcwfHJlYWQtd3JpdGU="
-      }
-    }
-  },
   "extends": "nx/presets/npm.json",
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "targetDefaults": {
