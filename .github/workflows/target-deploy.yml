@@ -3,7 +3,8 @@ name: Trigger Deploy
 on:
   push:
     branches:
-      - production
+      # - production
+      - none
 
 jobs:
   trigger-deploy:
