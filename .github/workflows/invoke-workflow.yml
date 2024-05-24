@@ -7,6 +7,6 @@ on:
 
 jobs:
   call-reusable:
-    uses: royfuwei/rfjs-devops/.github/workflows/reusable-workflow.yml@main
+    uses: royfuwei/rf-devops/.github/workflows/reusable-workflow.yml@main
     with:
       example_input: "World"
