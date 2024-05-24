@@ -28,13 +28,14 @@ jobs:
   #       run: |
   #         docker build -f apps/api/Dockerfile . -t ${HARBOR_HOST}/royfuwei/rfjs-api:latest
   #         docker push ${HARBOR_HOST}/royfuwei/rfjs-api:latest
-  # helm-release:
-  #   name: Helm release - private actions
-  #   uses: royfuwei/rfjs-devops/.github/workflows/deploy-rfjs-api.yml@main
-  #   with:
-  #     config-path: .github/labeler.yml
-  #   secrets:
-  #     HARBOR_HOST: ${{ secrets.HARBOR_HOST }}
-  #     HARBOR_USERNAME: ${{ secrets.HARBOR_USERNAME }}
-  #     HARBOR_TOKEN: ${{ secrets.HARBOR_TOKEN }}
-  #     envPAT: ${{ secrets.GIT_TOKEN }}
+  helm-release:
+    name: Helm release - rfjs-api
+    uses: royfuwei/rfjs-devops/.github/workflows/release-helm.yml@main
+    with:
+      config-path: .github/labeler.yml
+      projectName: rfjs-api
+    secrets:
+      HARBOR_HOST: ${{ secrets.HARBOR_HOST }}
+      HARBOR_USERNAME: ${{ secrets.HARBOR_USERNAME }}
+      HARBOR_TOKEN: ${{ secrets.HARBOR_TOKEN }}
+      envPAT: ${{ secrets.GIT_TOKEN }}
