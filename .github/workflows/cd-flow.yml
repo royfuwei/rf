@@ -39,3 +39,16 @@ jobs:
       HARBOR_USERNAME: ${{ secrets.HARBOR_USERNAME }}
       HARBOR_TOKEN: ${{ secrets.HARBOR_TOKEN }}
       envPAT: ${{ secrets.GIT_TOKEN }}
+
+  deploy-rfjs-api:
+    needs: helm-release
+    name: Helm release - rfjs-api
+    uses: royfuwei/rfjs-devops/.github/workflows/deploy-rfjs-api.yml@main
+    with:
+      projectName: rfjs-api
+    secrets:
+      HARBOR_HOST: ${{ secrets.HARBOR_HOST }}
+      HARBOR_USERNAME: ${{ secrets.HARBOR_USERNAME }}
+      HARBOR_TOKEN: ${{ secrets.HARBOR_TOKEN }}
+      KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+      envPAT: ${{ secrets.GIT_TOKEN }}
