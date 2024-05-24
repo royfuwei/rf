@@ -6,29 +6,30 @@ on:
       - main
 
 jobs:
-  # docker-build:
-  #   name: Docker build & publish - latest
-  #   runs-on: ubuntu-latest
-  #   environment: actions
-  #   strategy:
-  #     matrix:
-  #       node-version: [20.x]
+  docker-build:
+    name: Docker build & publish - rfjs-api latest
+    runs-on: ubuntu-latest
+    environment: actions
+    strategy:
+      matrix:
+        node-version: [20.x]
 
-  #   steps:
-  #     - name: Login to Harbor
-  #       uses: docker/login-action@v1
-  #       with:
-  #         registry: ${{ secrets.HARBOR_HOST }}
-  #         username: ${{ secrets.HARBOR_USERNAME }}
-  #         password: ${{ secrets.HARBOR_TOKEN }}
-  #     - uses: actions/checkout@v3
-  #     - name: Build and push image
-  #       env:
-  #         HARBOR_HOST: ${{ secrets.HARBOR_HOST }}
-  #       run: |
-  #         docker build -f apps/api/Dockerfile . -t ${HARBOR_HOST}/royfuwei/rfjs-api:latest
-  #         docker push ${HARBOR_HOST}/royfuwei/rfjs-api:latest
+    steps:
+      - name: Login to Harbor
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ secrets.HARBOR_HOST }}
+          username: ${{ secrets.HARBOR_USERNAME }}
+          password: ${{ secrets.HARBOR_TOKEN }}
+      - uses: actions/checkout@v3
+      - name: Build and push image
+        env:
+          HARBOR_HOST: ${{ secrets.HARBOR_HOST }}
+        run: |
+          docker build -f apps/api/Dockerfile . -t ${HARBOR_HOST}/royfuwei/rfjs-api:latest
+          docker push ${HARBOR_HOST}/royfuwei/rfjs-api:latest
   helm-release:
+    needs: docker-build
     name: Helm release - rfjs-api
     uses: royfuwei/rf-devops/.github/workflows/release-helm.yml@main
     with:
