@@ -45,7 +45,7 @@ jobs:
             --parallel=3
 
   ci-with-sonarqube-scan:
-    uses: ./.github/workflows/tp-sonarqube.yml
+    uses: royfuwei/rf-devops/.github/workflows/_sonarqube.yml@main
     name: Scan Project
     needs: ci-with-nx
     secrets:

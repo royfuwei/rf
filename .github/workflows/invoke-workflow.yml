@@ -3,10 +3,10 @@ name: Invoke Reusable Workflow
 on:
   push:
     branches:
-      - main
+      - none
 
 jobs:
   call-reusable:
-    uses: royfuwei/rf-devops/.github/workflows/reusable-workflow.yml@main
+    uses: royfuwei/rf-devops/.github/workflows/_reusable-workflow.yml@main
     with:
       example_input: "World"

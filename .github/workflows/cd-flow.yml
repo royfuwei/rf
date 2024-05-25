@@ -31,7 +31,7 @@ jobs:
   helm-release:
     needs: docker-build
     name: Helm release - rfjs-api
-    uses: royfuwei/rf-devops/.github/workflows/release-helm.yml@main
+    uses: royfuwei/rf-devops/.github/workflows/_release-helm.yml@main
     with:
       config-path: .github/labeler.yml
       projectName: rfjs-api
