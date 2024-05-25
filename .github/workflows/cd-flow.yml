@@ -27,6 +27,7 @@ jobs:
     with:
       config-path: .github/labeler.yml
       projectName: rfjs-api
+      projectSource: royfuwei
     secrets:
       HARBOR_HOST: ${{ secrets.HARBOR_HOST }}
       HARBOR_USERNAME: ${{ secrets.HARBOR_USERNAME }}
@@ -39,6 +40,7 @@ jobs:
     uses: royfuwei/rf-devops/.github/workflows/rfjs-api-deploy-k8s.yml@main
     with:
       projectName: rfjs-api
+      projectSource: royfuwei
     secrets:
       HARBOR_HOST: ${{ secrets.HARBOR_HOST }}
       HARBOR_USERNAME: ${{ secrets.HARBOR_USERNAME }}
