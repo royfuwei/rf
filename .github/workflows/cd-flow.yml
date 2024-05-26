@@ -14,6 +14,7 @@ jobs:
       projectSource: royfuwei
       version: latest
       buildPath: apps/api/Dockerfile
+      environment: k8s-rfjs-api
     secrets:
       HARBOR_HOST: ${{ secrets.HARBOR_HOST }}
       HARBOR_USERNAME: ${{ secrets.HARBOR_USERNAME }}
@@ -30,6 +31,7 @@ jobs:
       projectSource: royfuwei
       appVersion: latest
       helmVersion: 0.0.${{ github.run_number }}
+      environment: k8s-rfjs-api
     secrets:
       HARBOR_HOST: ${{ secrets.HARBOR_HOST }}
       HARBOR_USERNAME: ${{ secrets.HARBOR_USERNAME }}
@@ -43,6 +45,7 @@ jobs:
     with:
       projectName: rfjs-api
       projectSource: royfuwei
+      environment: k8s-rfjs-api
     secrets:
       HARBOR_HOST: ${{ secrets.HARBOR_HOST }}
       HARBOR_USERNAME: ${{ secrets.HARBOR_USERNAME }}
