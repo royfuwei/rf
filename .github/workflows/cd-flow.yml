@@ -14,7 +14,7 @@ jobs:
       projectSource: royfuwei
       version: latest
       buildPath: apps/api/Dockerfile
-      environment: k8s-rfjs-api
+      environment: k8s-rfjs
     secrets:
       HARBOR_HOST: ${{ secrets.HARBOR_HOST }}
       HARBOR_USERNAME: ${{ secrets.HARBOR_USERNAME }}
@@ -29,7 +29,7 @@ jobs:
       projectSource: royfuwei
       version: latest
       buildPath: apps/web/Dockerfile
-      environment: k8s-rfjs-api
+      environment: k8s-rfjs
     secrets:
       HARBOR_HOST: ${{ secrets.HARBOR_HOST }}
       HARBOR_USERNAME: ${{ secrets.HARBOR_USERNAME }}
@@ -46,35 +46,12 @@ jobs:
       projectSource: royfuwei
       appVersion: latest
       helmVersion: 0.0.${{ github.run_number }}
-      environment: k8s-rfjs-api
+      environment: k8s-rfjs
     secrets:
       HARBOR_HOST: ${{ secrets.HARBOR_HOST }}
       HARBOR_USERNAME: ${{ secrets.HARBOR_USERNAME }}
       HARBOR_TOKEN: ${{ secrets.HARBOR_TOKEN }}
       envPAT: ${{ secrets.GIT_TOKEN }}
-
-  # deploy-rfjs-api:
-  #   needs: helm-release
-  #   name: Deploy local k8s - rfjs-api
-  #   uses: royfuwei/rf-devops/.github/workflows/rfjs-api-deploy-k8s.yml@main
-  #   with:
-  #     projectName: rfjs-api
-  #     projectSource: royfuwei
-  #     environment: k8s-rfjs-api
-  #   secrets:
-  #     HARBOR_HOST: ${{ secrets.HARBOR_HOST }}
-  #     HARBOR_USERNAME: ${{ secrets.HARBOR_USERNAME }}
-  #     HARBOR_TOKEN: ${{ secrets.HARBOR_TOKEN }}
-  #     KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
-  #     envPAT: ${{ secrets.GIT_TOKEN }}
-  #     ENV_DB_MONGO_URI: ${{ secrets.ENV_DB_MONGO_URI }}
-  #     ENV_PUBLIC_SUPABASE_URL: ${{ secrets.ENV_PUBLIC_SUPABASE_URL }}
-  #     ENV_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.ENV_PUBLIC_SUPABASE_ANON_KEY }}
-  #     ENV_LINE_CHANNEL_ID: ${{ secrets.ENV_LINE_CHANNEL_ID }}
-  #     ENV_LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.ENV_LINE_CHANNEL_ACCESS_TOKEN }}
-  #     ENV_LINE_CHANNEL_SECRET: ${{ secrets.ENV_LINE_CHANNEL_SECRET }}
-  #     ENV_LINE_NOTIFY_CLIENT_ID: ${{ secrets.ENV_LINE_NOTIFY_CLIENT_ID }}
-  #     ENV_LINE_NOTIFY_CLIENT_SECRET: ${{ secrets.ENV_LINE_NOTIFY_CLIENT_SECRET }}
 
   deploy-rfjs:
     needs: helm-release
@@ -83,12 +60,12 @@ jobs:
     with:
       projectName: rfjs
       projectSource: royfuwei
-      environment: k8s-rfjs-api
+      environment: k8s-rfjs
     secrets:
       HARBOR_HOST: ${{ secrets.HARBOR_HOST }}
       HARBOR_USERNAME: ${{ secrets.HARBOR_USERNAME }}
       HARBOR_TOKEN: ${{ secrets.HARBOR_TOKEN }}
-      KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+      KUBE_CONFIG: ${{ secrets.KUBE_CONFIG_BASE64 }}
       envPAT: ${{ secrets.GIT_TOKEN }}
       ENV_DB_MONGO_URI: ${{ secrets.ENV_DB_MONGO_URI }}
       ENV_PUBLIC_SUPABASE_URL: ${{ secrets.ENV_PUBLIC_SUPABASE_URL }}
