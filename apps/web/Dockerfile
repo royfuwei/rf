@@ -11,7 +11,7 @@ RUN npm ci \
 FROM node:20.10.0-alpine3.19
 RUN apk update \
     && apk upgrade \
-    && apk add tzdata
+    && apk --no-cache add tzdata
 
 RUN cp /usr/share/zoneinfo/Asia/Taipei /etc/localtime
 RUN echo "Asia/Taipei" >  /etc/timezone
