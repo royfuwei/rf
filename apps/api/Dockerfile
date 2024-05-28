@@ -1,7 +1,14 @@
 FROM node:20.10.0-alpine3.19 AS builder
 
 WORKDIR /build
-COPY . .
+COPY apps/api apps/api
+COPY libs libs
+COPY packages packages
+COPY package.json package.json
+COPY package-lock.json package-lock.json
+COPY nx.json nx.json
+COPY project.json project.json
+COPY tsconfig.base.json tsconfig.base.json
 
 RUN npm ci --ignore-scripts \
     && npx nx run api:build:production \
