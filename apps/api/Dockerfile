@@ -5,8 +5,8 @@ COPY . .
 
 RUN npm ci \
     && npx nx run api:build:production \
-    && rm -rf node_modules \
-    && npm ci
+    && npm prune --production \
+    && npm cache clean --force
 
 
 FROM node:20.10.0-alpine3.19
