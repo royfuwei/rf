@@ -3,7 +3,7 @@ FROM node:20.10.0-alpine3.19 AS builder
 WORKDIR /build
 COPY . .
 
-RUN npm ci \
+RUN npm ci --ignore-scripts \
     && npx nx run api:build:production \
     && npm prune --production \
     && npm cache clean --force
