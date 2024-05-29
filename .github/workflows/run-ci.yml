@@ -1,12 +1,17 @@
-name: CI flow - Nx and SonarQube Scan
+name: Run CI flow
 
 on:
-  push:
-    branches:
-      - main
+  workflow_call:
+    secrets:
+      GIT_TOKEN:
+        required: true
+      SONAR_HOST_URL:
+        required: true
+      SONAR_TOKEN:
+        required: true
 
 jobs:
-  ci-with-nx:
+  ci-nx:
     name: CI with NX
     runs-on: ubuntu-latest
     environment: actions
@@ -19,7 +24,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          token: ${{ secrets.RFJS_GITHUB_TOKEN }}
+          token: ${{ secrets.GIT_TOKEN }}
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
@@ -44,10 +49,10 @@ jobs:
             --uncommitted \
             --parallel=3
 
-  ci-with-sonarqube-scan:
+  sonarqube-scan:
     uses: royfuwei/rf-devops/.github/workflows/_sonarqube.yml@main
     name: Scan Project
-    needs: ci-with-nx
+    needs: ci-nx
     secrets:
       SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
