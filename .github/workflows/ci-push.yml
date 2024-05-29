@@ -2,8 +2,11 @@ name: CI flow on push
 
 on: 
   push:
+    branches:
+      - '*'
     tags-ignore:
-      - '!v*'
+      - 'v*'
+
 jobs:
   run-ci:
     name: Run CI flow
