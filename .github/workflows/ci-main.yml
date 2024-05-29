@@ -1,14 +1,12 @@
-name: CI flow on push
+name: CI main
 
-on: 
-  push:
+on:
+  pull_request:
     branches:
-      - '*'
-    tags:
-      - '!v*'
+      - main
 
 jobs:
-  run-ci:
+  ci-main:
     name: Run CI flow
     uses: ./.github/workflows/run-ci.yml
     secrets:
