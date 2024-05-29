@@ -77,7 +77,6 @@ jobs:
     name: Helm release - rfjs:${{ inputs.helmVersion }}
     uses: royfuwei/rf-devops/.github/workflows/_release-helm.yml@main
     with:
-      config-path: .github/labeler.yml
       projectName: rfjs
       projectSource: royfuwei
       appVersion: ${{ inputs.appVersion }}
