@@ -1,20 +1,56 @@
-name: CD flow - Build & Publish
+name: Deploy local k8s
 
 on:
-  push:
-    branches:
-      - main
+  workflow_call:
+    inputs:
+      appVersion:
+        type: string
+        default: latest
+      helmVersion:
+        type: string
+        default: 0.0.1
+      environment:
+        type: string
+        default: k8s-rfjs
+    secrets:
+      GIT_TOKEN:
+        required: true
+      KUBE_CONFIG:
+        required: true
+      HARBOR_HOST:
+        required: true
+      HARBOR_USERNAME:
+        required: true
+      HARBOR_TOKEN:
+        required: true
+      # env secrets
+      ENV_DB_MONGO_URI:
+        required: true
+      ENV_PUBLIC_SUPABASE_URL:
+        required: true
+      ENV_PUBLIC_SUPABASE_ANON_KEY:
+        required: true
+      ENV_LINE_CHANNEL_ID:
+        required: true
+      ENV_LINE_CHANNEL_ACCESS_TOKEN:
+        required: true
+      ENV_LINE_CHANNEL_SECRET:
+        required: true
+      ENV_LINE_NOTIFY_CLIENT_ID:
+        required: true
+      ENV_LINE_NOTIFY_CLIENT_SECRET:
+        required: true
 
 jobs:
   docker-build-api:
-    name: Docker release - rfjs-api
+    name: Docker release - rfjs-api:${{ inputs.appVersion }}
     uses: royfuwei/rf-devops/.github/workflows/_release-docker.yml@main
     with:
       projectName: rfjs-api
       projectSource: royfuwei
-      version: latest
+      version: ${{ inputs.appVersion }}
       buildPath: apps/api/Dockerfile
-      environment: k8s-rfjs
+      environment: ${{ inputs.environment }}
     secrets:
       HARBOR_HOST: ${{ secrets.HARBOR_HOST }}
       HARBOR_USERNAME: ${{ secrets.HARBOR_USERNAME }}
@@ -22,14 +58,14 @@ jobs:
       envPAT: ${{ secrets.GIT_TOKEN }}
       
   docker-build-web:
-    name: Docker release - rfjs-web
+    name: Docker release - rfjs-web:${{ inputs.appVersion }}
     uses: royfuwei/rf-devops/.github/workflows/_release-docker.yml@main
     with:
       projectName: rfjs-web
       projectSource: royfuwei
-      version: latest
+      version: ${{ inputs.appVersion }}
       buildPath: apps/web/Dockerfile
-      environment: k8s-rfjs
+      environment: ${{ inputs.environment }}
     secrets:
       HARBOR_HOST: ${{ secrets.HARBOR_HOST }}
       HARBOR_USERNAME: ${{ secrets.HARBOR_USERNAME }}
@@ -38,15 +74,15 @@ jobs:
 
   helm-release:
     needs: [docker-build-api, docker-build-web]
-    name: Helm release - rfjs
+    name: Helm release - rfjs:${{ inputs.helmVersion }}
     uses: royfuwei/rf-devops/.github/workflows/_release-helm.yml@main
     with:
       config-path: .github/labeler.yml
       projectName: rfjs
       projectSource: royfuwei
-      appVersion: latest
-      helmVersion: 0.0.${{ github.run_number }}
-      environment: k8s-rfjs
+      appVersion: ${{ inputs.appVersion }}
+      helmVersion: ${{ inputs.helmVersion }}
+      environment: ${{ inputs.environment }}
     secrets:
       HARBOR_HOST: ${{ secrets.HARBOR_HOST }}
       HARBOR_USERNAME: ${{ secrets.HARBOR_USERNAME }}
@@ -60,7 +96,7 @@ jobs:
     with:
       projectName: rfjs
       projectSource: royfuwei
-      environment: k8s-rfjs
+      environment: ${{ inputs.environment }}
     secrets:
       HARBOR_HOST: ${{ secrets.HARBOR_HOST }}
       HARBOR_USERNAME: ${{ secrets.HARBOR_USERNAME }}
