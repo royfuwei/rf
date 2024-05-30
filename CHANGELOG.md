@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5](https://github.com/royfuwei/rfjs/compare/v0.0.4...v0.0.5) (2024-05-30)
+
+
+### Features
+
+* **apps/web:** update dcockerfile for nextjs standalone output ([#18](https://github.com/royfuwei/rfjs/issues/18)) ([#19](https://github.com/royfuwei/rfjs/issues/19)) ([50eb5b4](https://github.com/royfuwei/rfjs/commit/50eb5b474c1a3c14862d5ddb6f70d645513a7b18))
+
 ### [0.0.4](https://github.com/royfuwei/rfjs/compare/v0.0.3...v0.0.4) (2024-05-29)
 
 ### [0.0.3](https://github.com/royfuwei/rfjs/compare/v0.0.2...v0.0.3) (2024-05-29)
