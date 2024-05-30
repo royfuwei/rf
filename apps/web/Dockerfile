@@ -31,9 +31,13 @@ ENV HOST=0.0.0.0
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-COPY --from=builder /build/dist/apps/web/.next/standalone ./
-COPY --from=builder /build/dist/apps/web/.next/static ./dist/apps/web/.next/static
-COPY --from=builder /build/dist/apps/web/public ./apps/web/public
+# standalone
+# COPY --from=builder /build/dist/apps/web/.next/standalone ./
+# COPY --from=builder /build/dist/apps/web/.next/static ./dist/apps/web/.next/static
+# COPY --from=builder /build/dist/apps/web/public ./apps/web/public
+
+COPY --from=builder /build/dist/apps/web ./
+COPY --from=builder /build/node_modules ./node_modules
 
 USER nextjs
 
@@ -44,7 +48,10 @@ ENV HOSTNAME "0.0.0.0"
 
 # server.js is created by next build from the standalone output
 # https://nextjs.org/docs/pages/api-reference/next-config-js/output
-CMD [ "node", "apps/web/server.js" ]
+
+# standalone
+# CMD [ "node", "apps/web/server.js" ]
+CMD [ "npm", "start" ]
 
 ####################
 
