@@ -18,7 +18,7 @@ jobs:
 
   run-release:
     name: Release Production
-    uses: ./.github/workflows/node-release.yml
+    uses: royfuwei/rf-devops/.github/workflows/_node-release.yml@main
     needs: run-ci
     secrets:
       GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
