@@ -34,9 +34,9 @@ jobs:
         uses: martinbeentjes/npm-get-version-action@v1.3.1
 
   release-deploy-k8s:
-    name: Deploy local k8s
+    name: Deploy Release
     needs: release
-    uses: ./.github/workflows/deploy-local-k8s.yml
+    uses: royfuwei/rf-devops/.github/workflows/rfjs-deploy-k8s.yml@main
     with:
       appVersion: ${{ needs.release.outputs.current-version  }}
       helmVersion: ${{ needs.release.outputs.current-version  }}
