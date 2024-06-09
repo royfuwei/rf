@@ -9,6 +9,7 @@ on:
 
 jobs:
   run-ci:
+    if: github.event.pull_request.merged == true
     name: Run CI flow
     uses: ./.github/workflows/run-ci.yml
     secrets:
@@ -17,6 +18,7 @@ jobs:
       GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
 
   run-release:
+    if: github.event.pull_request.merged == true
     name: Release Production
     uses: royfuwei/rf-devops/.github/workflows/_node-release.yml@main
     needs: run-ci
