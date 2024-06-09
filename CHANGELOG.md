@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.12](https://github.com/royfuwei/rfjs/compare/v0.0.11...v0.0.12) (2024-06-09)
+
+
+### Features
+
+* **apps/api:** build dockerfile use default output ([#20](https://github.com/royfuwei/rfjs/issues/20)) ([e13e538](https://github.com/royfuwei/rfjs/commit/e13e538e1cf2d3482821ddc60abc28b6a767f7c3))
+* **apps/web:** update dcockerfile for nextjs standalone output ([#18](https://github.com/royfuwei/rfjs/issues/18)) ([5fd2cfd](https://github.com/royfuwei/rfjs/commit/5fd2cfd3e7be073be08acfc755be203009cf3ad9))
+
+
+### Bug Fixes
+
+* **apps/web:** remove home-view-default.css and add nx default global css ([#29](https://github.com/royfuwei/rfjs/issues/29)) ([d7f0012](https://github.com/royfuwei/rfjs/commit/d7f0012bb0acf3931ce9f3a47fd42b9f85131af6))
+* **apps/web:** section remove home-view-default.css and root layout use home-view-default.css ([#33](https://github.com/royfuwei/rfjs/issues/33)) ([82a36f3](https://github.com/royfuwei/rfjs/commit/82a36f3129bd0fd8ec9e71894eb802d4a1b9a747))
+* squash and merge to production branch conflicts ([154cb29](https://github.com/royfuwei/rfjs/commit/154cb29d3bc07ca5078305d1ff90a7e5e3b489aa))
+
 ### [0.0.11](https://github.com/royfuwei/rfjs/compare/v0.0.10...v0.0.11) (2024-06-09)
 
 ### [0.0.10](https://github.com/royfuwei/rfjs/compare/v0.0.9...v0.0.10) (2024-06-09)
