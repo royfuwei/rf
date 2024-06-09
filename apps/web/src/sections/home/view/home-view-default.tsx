@@ -1,5 +1,6 @@
 'use client';
 
+import styles from './home-view-default.css';
 import { Minimal } from '@rfjs/minimal';
 import { Container } from '@mui/material';
 
@@ -10,7 +11,7 @@ export default function HomeDefaultView() {
    * Note: The corresponding styles are in the ./index.scss file.
    */
   const defaultView = (
-    <div className="page">
+    <div className={styles.page}>
       <div className="wrapper">
         <div className="container">
           <Minimal id={'welcome'} />

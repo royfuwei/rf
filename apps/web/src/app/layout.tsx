@@ -1,7 +1,6 @@
 import ThemeProvider from '../theme';
 import { primaryFont } from '../theme/typography';
 import './global.css';
-import './global-default.css';
 
 export const viewport = {
   themeColor: '#000000',
