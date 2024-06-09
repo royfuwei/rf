@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "~rfjs/api/*": ["apps/api/src/*"],
+      "~rfjs/web/*": ["apps/web/src/*"],
       "@rfjs/common": ["libs/common/src/index.ts"],
       "@rfjs/minimal": ["packages/minimal/src/index.ts"],
       "@rfjs/minimal/server": ["packages/minimal/src/server.ts"],
