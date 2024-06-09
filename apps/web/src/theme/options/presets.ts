@@ -8,12 +8,14 @@ import { ThemeColorPresetType } from '~rfjs/web/components/settings/types';
 export function createPresets(preset: ThemeColorPresetType) {
   const primaryColor = getPrimary(preset);
 
+  const primaryCustomShadows = alpha(`${primaryColor?.main}`, 0.24);
+
   const theme = {
     palette: {
       primary: primaryColor,
     },
     customShadows: {
-      primary: `0 8px 16px 0 ${alpha(`${primaryColor?.main}`, 0.24)}`,
+      primary: `0 8px 16px 0 ${primaryCustomShadows}`,
     },
   };
   return {

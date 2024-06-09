@@ -4,7 +4,6 @@ import {
   ControllerRenderProps,
   FieldValues,
   UseFormStateReturn,
-  useFormContext,
 } from 'react-hook-form';
 import { TextField, TextFieldProps } from '@mui/material';
 import { ReactElement, JSXElementConstructor } from 'react';
@@ -19,7 +18,6 @@ export default function RHFTextField({
   type,
   ...other
 }: Props) {
-  const { control } = useFormContext();
 
   return (
     <Controller
