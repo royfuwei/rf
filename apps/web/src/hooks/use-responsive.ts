@@ -7,17 +7,16 @@ export type Value = Breakpoint | number;
 
 export function useResponsive(
   query: Query,
-  start?: Value,
-  end?: Value,
+  values: Value[] = [], 
 ): boolean {
   const theme = useTheme();
 
-  const mediaUp = useMediaQuery(theme.breakpoints.up(start as Value));
-  const mediaDown = useMediaQuery(theme.breakpoints.down(start as Value));
+  const mediaUp = useMediaQuery(theme.breakpoints.up(values[0]));
+  const mediaDown = useMediaQuery(theme.breakpoints.down(values[0]));
   const mediaBetween = useMediaQuery(
-    theme.breakpoints.between(start as Value, end as Value),
+    theme.breakpoints.between(values[0], values[1]),
   );
-  const mediaOnly = useMediaQuery(theme.breakpoints.only(start as Breakpoint));
+  const mediaOnly = useMediaQuery(theme.breakpoints.only(values[0] as Breakpoint));
 
   switch (query) {
     case 'up':
