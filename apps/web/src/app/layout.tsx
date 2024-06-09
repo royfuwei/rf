@@ -1,4 +1,13 @@
+import ThemeProvider from '../theme';
+import { primaryFont } from '../theme/typography';
 import './global.css';
+
+export const viewport = {
+  themeColor: '#000000',
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+};
 
 export const metadata = {
   title: 'Welcome to web',
@@ -7,12 +16,14 @@ export const metadata = {
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" className={primaryFont.className}>
+      <body>
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }

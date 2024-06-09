@@ -85,9 +85,16 @@
     "verdaccio": "^5.0.4"
   },
   "dependencies": {
+    "@auth0/auth0-react": "^2.2.4",
+    "@emotion/cache": "^11.11.0",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@hookform/resolvers": "^3.6.0",
+    "@iconify/react": "^5.0.1",
     "@koa/bodyparser": "^5.0.0",
     "@koa/multer": "^3.0.2",
     "@line/bot-sdk": "^9.2.1",
+    "@mui/material": "^5.15.19",
     "@supabase/supabase-js": "^2.42.7",
     "axios": "1.6.8",
     "chalk": "^5.3.0",
@@ -97,6 +104,7 @@
     "crypto-js": "^4.1.1",
     "dotenv": "^16.4.5",
     "dotenv-flow": "^4.1.0",
+    "framer-motion": "^11.2.10",
     "http-status": "^1.7.4",
     "jsonwebtoken": "^9.0.2",
     "koa": "~2.14.1",
@@ -109,13 +117,16 @@
     "next": "14.0.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.51.5",
     "reflect-metadata": "^0.2.1",
     "routing-controllers": "^0.10.4",
     "routing-controllers-openapi": "^4.0.0",
+    "simplebar-react": "^3.2.5",
     "tslib": "^2.3.0",
     "tsyringe": "^4.8.0",
     "uuid": "^9.0.1",
     "winston": "^3.12.0",
-    "winston-daily-rotate-file": "^5.0.0"
+    "winston-daily-rotate-file": "^5.0.0",
+    "yup": "^1.4.0"
   }
 }
