@@ -1,4 +1,3 @@
-import { useReducer } from 'react';
 import { ActionMapType, AuthStateType, AuthUserType } from './types';
 
 enum Types {
@@ -23,12 +22,12 @@ type Payload = {
 
 type ActionsType = ActionMapType<Payload>[keyof ActionMapType<Payload>];
 
-const initialState: AuthStateType = {
+export const initialState: AuthStateType = {
   user: null,
   loading: true,
 };
 
-const reducer = (state: AuthStateType, action: ActionsType) => {
+export const reducer = (state: AuthStateType, action: ActionsType) => {
   if (action.type === Types.INITIAL) {
     return {
       loading: false,
@@ -55,11 +54,3 @@ const reducer = (state: AuthStateType, action: ActionsType) => {
   }
   return state;
 };
-
-type Props = {
-  children: React.ReactNode;
-};
-
-export function AuthProvider({ children }: Props) {
-  const [state, dispatch] = useReducer(reducer, initialState);
-}

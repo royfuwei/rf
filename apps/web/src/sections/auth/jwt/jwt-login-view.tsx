@@ -8,15 +8,11 @@ import {
 } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import { useForm } from 'react-hook-form';
-import { useAuthContext } from '~rfjs/web/auth/hooks';
 import { FormProvider } from '~rfjs/web/components/hook-form';
 import { Iconify } from '~rfjs/web/components/iconify';
 import { useBoolean } from '~rfjs/web/hooks/use-boolean';
-import { useRouter } from '~rfjs/web/routes/hooks';
 
 export default function JwtLoginView() {
-  const { login } = useAuthContext();
-  const router = useRouter();
 
   const password = useBoolean();
 

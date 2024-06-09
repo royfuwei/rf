@@ -11,10 +11,6 @@ export default function AuthClassicLayout({
   image,
   title,
 }: Readonly<Props>) {
-  const renderLogo = (
-    // <Logo
-    <></>
-  );
 
   const renderContent = (
     <Stack
@@ -29,13 +25,6 @@ export default function AuthClassicLayout({
     >
       {children}
     </Stack>
-  );
-
-  const renderSection = (
-    <Stack
-    // flexGrow={1}
-    // spacing={10}
-    ></Stack>
   );
 
   return (
