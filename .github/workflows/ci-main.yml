@@ -8,6 +8,7 @@ on:
 jobs:
   ci-main:
     name: Run Main CI
+    if: github.head_ref != 'production'
     uses: ./.github/workflows/run-ci.yml
     secrets:
       SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
