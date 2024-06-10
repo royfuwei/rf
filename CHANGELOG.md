@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.14](https://github.com/royfuwei/rfjs/compare/v0.0.13...v0.0.14) (2024-06-10)
+
+
+### Features
+
+* **apps/web:** add apps/web packages ([f562c13](https://github.com/royfuwei/rfjs/commit/f562c13bd9973af83768e2a045b45acd67575f05))
+* **apps/web:** add apps/web use public assets ([e07b1e9](https://github.com/royfuwei/rfjs/commit/e07b1e95a6a48da96e58fb2a9584aab88f59f2d0))
+* **apps/web:** adjust auth classic layout ([a9b1728](https://github.com/royfuwei/rfjs/commit/a9b172813315105c0e6eacc0a1a028c5c339def4))
+* **apps/web:** adjust auth jwt login app layout ([5f339bc](https://github.com/royfuwei/rfjs/commit/5f339bc4233e3ff0c305fd4bdeac3e2a8fa2c7c1))
+* **apps/web:** adjust jwt login view ([898991d](https://github.com/royfuwei/rfjs/commit/898991d153d58590a94c10c3db13053b8a170134))
+* **apps/web:** adjust main header layout ([85ac28c](https://github.com/royfuwei/rfjs/commit/85ac28cf6cf76c4b611b96c52b30bde9516097d7))
+* **web/components:** adjust logo ref and outer box setting ([28090cd](https://github.com/royfuwei/rfjs/commit/28090cd6528bf6d3497c3190abb2605a07dee2a7))
+* **web/hooks:** add use router and use search params ([4506696](https://github.com/royfuwei/rfjs/commit/4506696fa41d32b2c243631e1ce80aa5b6d0b3af))
+* **web/theme:** add background gradient css theme ([f876481](https://github.com/royfuwei/rfjs/commit/f87648175f0268973158bf64ad0cf6da03a18e48))
+
+
+### Bug Fixes
+
+* sonarqube lint ([431cda3](https://github.com/royfuwei/rfjs/commit/431cda3cc23c228c048c41edf3515c6a3270f410))
+
 ### [0.0.13](https://github.com/royfuwei/rfjs/compare/v0.0.12...v0.0.13) (2024-06-10)
 
 
