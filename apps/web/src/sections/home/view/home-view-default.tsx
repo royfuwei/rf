@@ -1,6 +1,5 @@
 'use client';
 
-import { Minimal } from '@rfjs/minimal';
 import { Container } from '@mui/material';
 
 export default function HomeDefaultView() {
