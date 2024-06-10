@@ -55,7 +55,7 @@ export default function Header() {
         </Container>
       </Box>
       <Stack alignItems={'center'} direction={'row'} spacing={2}>
-        {mdUp ? <LoginButton /> : null}
+        {mdUp && <LoginButton />}
       </Stack>
     </Container>
   );
@@ -79,7 +79,7 @@ export default function Header() {
         {toolBarContainer}
       </Toolbar>
 
-      { offsetTop ? <HeaderShadow /> : null}
+      { offsetTop && <HeaderShadow />}
     </AppBar>
   );
 }
