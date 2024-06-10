@@ -1,5 +1,7 @@
 import { alpha } from "@mui/material";
 
+// ----------------------------------------------------------------------
+
 type BgBlurProps = {
   blur?: number;
   opacity?: number;
@@ -39,3 +41,36 @@ export function bgBlur(props?: BgBlurProps) {
 
   return common;
 }
+
+// ----------------------------------------------------------------------
+
+type BgGradientProps = {
+  direction?: string;
+  color?: string;
+  startColor?: string;
+  endColor?: string;
+  imgUrl?: string;
+};
+
+export function bgGradient(props?: BgGradientProps) {
+  const direction = props?.direction ?? 'to bottom';
+  const startColor = props?.startColor;
+  const endColor = props?.endColor;
+  const imgUrl = props?.imgUrl;
+  const color = props?.color;
+  if (imgUrl) {
+    return {
+      background: `linear-gradient(${direction}, ${startColor || color}, ${
+        endColor || color
+      }), url(${imgUrl})`,
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center center',
+    }
+  }
+
+  return {
+    background: `linear-gradient(${direction}, ${startColor}, ${endColor})`,
+  }
+}
+
