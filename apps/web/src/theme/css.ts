@@ -60,8 +60,8 @@ export function bgGradient(props?: BgGradientProps) {
   const color = props?.color;
   if (imgUrl) {
     return {
-      background: `linear-gradient(${direction}, ${startColor || color}, ${
-        endColor || color
+      background: `linear-gradient(${direction}, ${startColor ?? color}, ${
+        endColor ?? color
       }), url(${imgUrl})`,
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
