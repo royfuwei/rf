@@ -1,6 +1,5 @@
 'use client';
 
-import { Minimal } from '@rfjs/minimal';
 import { Container } from '@mui/material';
 
 export default function HomeDefaultView() {
@@ -13,7 +12,6 @@ export default function HomeDefaultView() {
     <div className="page">
       <div className="wrapper">
         <div className="container">
-          <Minimal id={'welcome'} />
           <div id="hero" className="rounded">
             <div className="text-container">
               <h2>
