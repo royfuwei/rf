@@ -10,8 +10,28 @@ import {
 import { HEADER } from '../config-layout';
 import { Logo } from '~rfjs/web/components/logo';
 import LoginButton from '../common/login-button';
+import { useResponsive } from '~rfjs/web/hooks/use-responsive';
+import { useOffSetTop } from '~rfjs/web/hooks/use-off-set-top';
+import { bgBlur } from '~rfjs/web/theme/css';
+import { useTheme } from '@mui/material/styles';
+import HeaderShadow from '../common/header-shadow';
 
 export default function Header() {
+  const theme = useTheme();
+
+  const mdUp = useResponsive('up', ['md']);
+
+  const offsetTop = useOffSetTop(HEADER.H_DESKTOP);
+
+  const toolbarOffsetConfig = offsetTop ? {
+    ...bgBlur({
+      color: theme.palette.background.default,
+    }),
+    height: {
+      md: HEADER.H_DESKTOP_OFFSET
+    }
+  } : {};
+
   const badgeLogo = (
     <Badge
       sx={{
@@ -35,7 +55,7 @@ export default function Header() {
         </Container>
       </Box>
       <Stack alignItems={'center'} direction={'row'} spacing={2}>
-        <LoginButton />
+        {mdUp ? <LoginButton /> : null}
       </Stack>
     </Container>
   );
@@ -49,10 +69,17 @@ export default function Header() {
             xs: HEADER.H_MOBILE,
             md: HEADER.H_DESKTOP,
           },
+          transition: theme.transitions.create(['height'], {
+            easing: theme.transitions.easing.easeInOut,
+            duration: theme.transitions.duration.shorter,
+          }),
+          ...toolbarOffsetConfig,
         }}
       >
         {toolBarContainer}
       </Toolbar>
+
+      { offsetTop ? <HeaderShadow /> : null}
     </AppBar>
   );
 }
