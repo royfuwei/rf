@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.13](https://github.com/royfuwei/rfjs/compare/v0.0.12...v0.0.13) (2024-06-10)
+
+
+### Features
+
+* **apps/web:** add common header shadow layout ([536ee4c](https://github.com/royfuwei/rfjs/commit/536ee4cdcf7f0aad22a19c2d8cd22524bbc22620))
+* **apps/web:** add css background blur theme ([373074f](https://github.com/royfuwei/rfjs/commit/373074fdf74b33aa5c85b579ac5f49e57b1641cb))
+* **apps/web:** add main layout toolbar offset top config ([d6a4460](https://github.com/royfuwei/rfjs/commit/d6a446095259a85471524e90f1cccb12e8867618))
+* **apps/web:** add use offset top hook ([3ce85ec](https://github.com/royfuwei/rfjs/commit/3ce85ec2218613c37e42bd0290d8bdc399f5d34a))
+* **apps/web:** adjust home view section ([29b1d5d](https://github.com/royfuwei/rfjs/commit/29b1d5d8bc14e5056221715abc4bffa977d5d411))
+
 ### [0.0.12](https://github.com/royfuwei/rfjs/compare/v0.0.11...v0.0.12) (2024-06-09)
 
 
