@@ -10,13 +10,16 @@ const Logo = forwardRef<HTMLDivElement, Props>(
   ({ disabledLink = false, sx, ...other }, ref) => {
     const logo = (
       <Box
+        ref={ref}
         component="img"
         src="/assets/logo/logo-192x192.png"
         sx={{
           width: 40,
           height: 40,
           cursor: 'pointer',
+          ...sx,
         }}
+        {...other}
       />
     );
     if (disabledLink) {
