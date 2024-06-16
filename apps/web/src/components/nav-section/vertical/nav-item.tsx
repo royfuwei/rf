@@ -23,8 +23,6 @@ const renderNavItem: ForwardRefRenderFunction<HTMLDivElement, NavItemProps> = (
   },
   ref,
 ) => {
-  // const subItem = depth !== 1;
-
   const renderContent = (
     <StyledNavItem
       ref={ref}

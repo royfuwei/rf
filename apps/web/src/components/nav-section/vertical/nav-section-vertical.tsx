@@ -36,7 +36,7 @@ function Group({ subheader, items, slotProps }: Readonly<NavGroupProps>) {
           typography: 'overline',
           display: 'inline-flex',
           color: 'text.disabled',
-          mb: `${slotProps?.gap || 4}px`,
+          mb: `${slotProps?.gap ?? 4}px`,
           p: (theme) => theme.spacing(2, 1, 1, 1.5),
           transition: (theme) =>
             theme.transitions.create(['color'], {
