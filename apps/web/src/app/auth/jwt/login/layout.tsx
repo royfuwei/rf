@@ -1,6 +1,6 @@
-'use client'
+'use client';
 
-import AuthClassicLayout from "~rfjs/web/layouts/auth/classic";
+import AuthClassicLayout from '~rfjs/web/layouts/auth/classic';
 
 type Props = {
   children: React.ReactNode;
