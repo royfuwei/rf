@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.15](https://github.com/royfuwei/rfjs/compare/v0.0.14...v0.0.15) (2024-06-16)
+
+
+### Features
+
+* **apps/web:** adjust dashboard layout and page ([866d767](https://github.com/royfuwei/rfjs/commit/866d767a9aa7fdfe713020d67101dee77f250a9a))
+* **web/components:** add nav-section and svg-color components ([cb6f1e9](https://github.com/royfuwei/rfjs/commit/cb6f1e9ac17e9d95a2f9edc6e75a26ebb545c2f7))
+* **web/components:** logo link component add href ([6e8182f](https://github.com/royfuwei/rfjs/commit/6e8182fa58ca28d38f6ab9b3fb450500d8438222))
+* **web/layouts:** add common account, setting and searchbar button ([f559aba](https://github.com/royfuwei/rfjs/commit/f559aba18bc6bf8764e09596ccba092271d517e9))
+
+
+### Bug Fixes
+
+* **apps/web:** sonar lint failed ([e62288a](https://github.com/royfuwei/rfjs/commit/e62288ac3373a78352e4fba9e035c340d81c62ca))
+
 ### [0.0.14](https://github.com/royfuwei/rfjs/compare/v0.0.13...v0.0.14) (2024-06-10)
 
 
