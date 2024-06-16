@@ -14,7 +14,6 @@ export default function AuthClassicLayout({
   image,
   title,
 }: Readonly<Props>) {
-
   const theme = useTheme();
   const mdUp = useResponsive('up', ['md']);
 
@@ -53,19 +52,19 @@ export default function AuthClassicLayout({
         ...bgGradient({
           color: alpha(
             theme.palette.background.default,
-            theme.palette.mode === 'light' ? 0.88 : 0.94
+            theme.palette.mode === 'light' ? 0.88 : 0.94,
           ),
           imgUrl: '/assets/background/overlay_2.jpg',
-        })
+        }),
       }}
     >
-      <Typography variant='h3' sx={{ maxWidth: 480, textAlign: 'center' }}>
+      <Typography variant="h3" sx={{ maxWidth: 480, textAlign: 'center' }}>
         {title ?? 'Hi, Welcome'}
       </Typography>
 
-      <Box 
-        component='img'
-        alt='auth'
+      <Box
+        component="img"
+        alt="auth"
         src={image ?? '/assets/illustrations/redlychee_1.png'}
         sx={{
           maxWidth: {
@@ -77,7 +76,7 @@ export default function AuthClassicLayout({
       />
       <Box />
     </Stack>
-  )
+  );
 
   return (
     <Stack

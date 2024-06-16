@@ -23,7 +23,6 @@ import { PATH_DASHBOARD } from '~rfjs/web/config-global';
 import { useState } from 'react';
 
 export default function JwtLoginView() {
-
   const router = useRouter();
 
   const [errorMessage, setErrorMessage] = useState('');
@@ -33,7 +32,9 @@ export default function JwtLoginView() {
   const returnTo = useSearchParams().get('returnTo');
 
   const LoginSchema = Yup.object().shape({
-    email: Yup.string().required('Email is required').email('Email must be a valid email address'),
+    email: Yup.string()
+      .required('Email is required')
+      .email('Email must be a valid email address'),
     password: Yup.string().required('Password is required'),
   });
 
@@ -41,7 +42,7 @@ export default function JwtLoginView() {
     resolver: yupResolver(LoginSchema),
   });
 
-  const { 
+  const {
     reset,
     handleSubmit,
     formState: { isSubmitting },
@@ -111,10 +112,10 @@ export default function JwtLoginView() {
 
       <LoadingButton
         fullWidth
-        color='inherit'
-        size='large'
-        type='submit'
-        variant='contained'
+        color="inherit"
+        size="large"
+        type="submit"
+        variant="contained"
         loading={isSubmitting}
       >
         Login
@@ -124,7 +125,7 @@ export default function JwtLoginView() {
 
   const renderError = (
     <Box>
-      <Alert severity='error' sx={{ mb: 3 }}>
+      <Alert severity="error" sx={{ mb: 3 }}>
         {errorMessage}
       </Alert>
     </Box>

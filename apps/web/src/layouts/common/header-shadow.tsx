@@ -1,10 +1,10 @@
-import { Box, BoxProps } from "@mui/material";
+import { Box, BoxProps } from '@mui/material';
 
 export default function HeaderShadow({ sx, ...other }: BoxProps) {
   return (
-    <Box 
+    <Box
       sx={{
-        left: 0, 
+        left: 0,
         right: 0,
         bottom: 0,
         m: 'auto',

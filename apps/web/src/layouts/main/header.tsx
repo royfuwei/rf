@@ -3,6 +3,7 @@ import {
   Badge,
   Box,
   Container,
+  IconButton,
   Stack,
   Toolbar,
   badgeClasses,
@@ -15,6 +16,9 @@ import { useOffSetTop } from '~rfjs/web/hooks/use-off-set-top';
 import { bgBlur } from '~rfjs/web/theme/css';
 import { useTheme } from '@mui/material/styles';
 import HeaderShadow from '../common/header-shadow';
+import SvgColor from '~rfjs/web/components/svg-color';
+import { RouterLink } from '~rfjs/web/routes/components';
+import { PATH_DASHBOARD } from '~rfjs/web/config-global';
 
 export default function Header() {
   const theme = useTheme();
@@ -23,14 +27,16 @@ export default function Header() {
 
   const offsetTop = useOffSetTop(HEADER.H_DESKTOP);
 
-  const toolbarOffsetConfig = offsetTop ? {
-    ...bgBlur({
-      color: theme.palette.background.default,
-    }),
-    height: {
-      md: HEADER.H_DESKTOP_OFFSET
-    }
-  } : {};
+  const toolbarOffsetConfig = offsetTop
+    ? {
+        ...bgBlur({
+          color: theme.palette.background.default,
+        }),
+        height: {
+          md: HEADER.H_DESKTOP_OFFSET,
+        },
+      }
+    : {};
 
   const badgeLogo = (
     <Badge
@@ -46,6 +52,12 @@ export default function Header() {
     </Badge>
   );
 
+  const dashboardButton = (
+    <IconButton component={RouterLink} href={PATH_DASHBOARD}>
+      <SvgColor src="/assets/icons/navbar/ic_dashboard.svg" />
+    </IconButton>
+  );
+
   const toolBarContainer = (
     <Container sx={{ height: 1, display: 'flex', alignItems: 'center' }}>
       {badgeLogo}
@@ -55,7 +67,8 @@ export default function Header() {
         </Container>
       </Box>
       <Stack alignItems={'center'} direction={'row'} spacing={2}>
-        {mdUp && <LoginButton />}
+        {mdUp && dashboardButton}
+        <LoginButton />
       </Stack>
     </Container>
   );
@@ -79,7 +92,7 @@ export default function Header() {
         {toolBarContainer}
       </Toolbar>
 
-      { offsetTop && <HeaderShadow />}
+      {offsetTop && <HeaderShadow />}
     </AppBar>
   );
 }
