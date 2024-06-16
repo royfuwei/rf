@@ -1,4 +1,4 @@
-import { alpha } from "@mui/material";
+import { alpha } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
@@ -7,10 +7,9 @@ type BgBlurProps = {
   opacity?: number;
   color?: string;
   imgUrl?: string;
-}
+};
 
 export function bgBlur(props?: BgBlurProps) {
-
   const color = props?.color ?? '#000000';
   const blur = props?.blur ?? 6;
   const opacity = props?.opacity ?? 0.8;
@@ -35,8 +34,8 @@ export function bgBlur(props?: BgBlurProps) {
         width: '100%',
         height: '100%',
         ...common,
-      }
-    }
+      },
+    };
   }
 
   return common;
@@ -66,11 +65,10 @@ export function bgGradient(props?: BgGradientProps) {
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center center',
-    }
+    };
   }
 
   return {
     background: `linear-gradient(${direction}, ${startColor}, ${endColor})`,
-  }
+  };
 }
-

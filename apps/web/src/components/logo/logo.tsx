@@ -1,13 +1,15 @@
 import { BoxProps, Box, Link } from '@mui/material';
 import { forwardRef } from 'react';
+import { PATH_ROOT } from '~rfjs/web/config-global';
 import { RouterLink } from '~rfjs/web/routes/components';
 
 export type Props = BoxProps & {
   disabledLink?: boolean;
+  href?: string;
 };
 
 const Logo = forwardRef<HTMLDivElement, Props>(
-  ({ disabledLink = false, sx, ...other }, ref) => {
+  ({ disabledLink = false, href = PATH_ROOT, sx, ...other }, ref) => {
     const logo = (
       <Box
         ref={ref}
@@ -26,7 +28,7 @@ const Logo = forwardRef<HTMLDivElement, Props>(
       return logo;
     }
     return (
-      <Link component={RouterLink} href="/" sx={{ display: 'contents' }}>
+      <Link component={RouterLink} href={href} sx={{ display: 'contents' }}>
         {logo}
       </Link>
     );

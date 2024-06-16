@@ -1,11 +1,11 @@
 'use client';
 
-import AuthClassicLayout from '~rfjs/web/layouts/auth/classic';
+import DashboardLayout from '~rfjs/web/layouts/dashboard';
 
 type Props = {
   children: React.ReactNode;
 };
 
 export default function Layout({ children }: Readonly<Props>) {
-  return <AuthClassicLayout>{children}</AuthClassicLayout>;
+  return <DashboardLayout>{children}</DashboardLayout>;
 }

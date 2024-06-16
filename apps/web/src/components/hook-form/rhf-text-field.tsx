@@ -18,7 +18,6 @@ export default function RHFTextField({
   type,
   ...other
 }: Props) {
-
   return (
     <Controller
       name={name}
