@@ -56,7 +56,7 @@ export class AppController implements IAppController {
   @ApiUtil.ApiResDataListSchema(AppInfoDTO, { status: httpStatus.CREATED })
   async getAppDataList(): Promise<ApiResDataDTO<AppInfoDTO>> {
     const data = this.appSvc.getAppInfo();
-    const result = ApiUtil.apiResDataList<AppInfoDTO>(
+    const result = ApiUtil.apiResData<AppInfoDTO>(
       [data],
       httpStatus.CREATED,
     );

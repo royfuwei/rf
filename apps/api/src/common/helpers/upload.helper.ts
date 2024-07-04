@@ -1,4 +1,4 @@
-import { Options, diskStorage } from '@koa/multer';
+import { Options } from '@koa/multer';
 
 export const fileUploadOptions = (): Options => ({
   /* storage: diskStorage({
