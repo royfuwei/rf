@@ -2,19 +2,16 @@ import { inject, injectable } from 'tsyringe';
 import { IAppController } from '../types/app.type';
 import {
   AppInfoDTO,
-  IDemoRepository,
   IAppService,
   AppUsecase,
   INJECT_SVC_APP_SERVICE,
 } from '@rfjs/modules';
 import {
-  Body,
   Ctx,
   Get,
   HttpCode,
   JsonController,
   Post,
-  QueryParam,
   UploadedFiles,
 } from 'routing-controllers';
 import { File } from '@koa/multer';
