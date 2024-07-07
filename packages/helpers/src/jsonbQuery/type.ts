@@ -26,7 +26,6 @@ export type JsonbValueType =
   | string
   | string[]
   | number
-  | number
   | number[]
   | Date
   | Date[]

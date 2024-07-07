@@ -40,6 +40,8 @@ export function filterMappingMatchQueryData<T>(
   return Array.from(matchUserOrderItemMap.values());
 }
 
+type MappingDataValue = string | number | MappingObject[];
+
 function genItemMappingData(
   dataKey: string,
   data: ObjectData,
@@ -50,13 +52,13 @@ function genItemMappingData(
       _dataKey: string,
       _key: string,
       _data: ObjectData,
-      _value: string | number | MappingObject[],
+      _value: MappingDataValue,
     ) => genMappingDataByValue(_dataKey, _key, _data, _value),
     value: (
       _dataKey: string,
       _key: string,
       _data: ObjectData,
-      _value: string | number | MappingObject[],
+      _value: MappingDataValue,
     ) => genMappingDataByValue(_dataKey, _key, _data, _value),
   };
   for (const mapping of mappings) {
