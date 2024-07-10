@@ -1,0 +1,1 @@
+export const toDateString = (value: string | number) => new Date(value).toISOString();

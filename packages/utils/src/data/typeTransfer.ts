@@ -1,7 +1,7 @@
-import { DataType } from '@rfjs/common';
+import { DataType, ValueType } from '@rfjs/common';
 import _ = require('lodash');
 
-export const typeTransfer = (value: any, type: DataType) => {
+export const typeTransfer = (value: ValueType, type: DataType): ValueType => {
   const transfer = {
     any: () => value,
     date: () => new Date(value as string | number),
