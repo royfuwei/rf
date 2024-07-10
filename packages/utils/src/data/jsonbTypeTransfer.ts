@@ -1,14 +1,11 @@
-import { DataType, JsonbValueTransfer, JsonbValueType } from './type';
+import { JsonbDataType, JsonbValueTransfer, ValueType } from "@rfjs/common";
+import { toDateString } from "./date";
+import { toBoolean } from "./boolean";
 
-const toDateString = (value: string | number) => new Date(value).toISOString();
-const toBoolean = (value: boolean | string) =>
-  ['true', 'false'].includes(value as string)
-    ? JSON.parse(value as string)
-    : Boolean(value);
-export const typeTransfer = (
-  type: DataType,
-  value: JsonbValueType,
-): JsonbValueType => {
+export const jsonbTypeTransfer = (
+  value: ValueType,
+  type: JsonbDataType,
+): ValueType => {
   const transfer: JsonbValueTransfer = {
     string: () => value,
     numeric: () => Number(value),

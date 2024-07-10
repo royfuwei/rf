@@ -1,15 +1,16 @@
+import { DataUtil } from '@rfjs/utils';
 import { JsonbOperatorQuery, filterOperator } from './jsonbOperatorQuery';
-import { typeTransfer } from './transfer';
-import { FilterOperator, DataType, JsonbValueType } from './type';
+import { JsonbDataType, ValueType } from '@rfjs/common';
+import { FilterOperator } from './type';
 
 export const toJsonbQuery = (
   jsonb: string,
   field: string,
   filter: FilterOperator,
-  dataType: DataType,
-  value: JsonbValueType,
+  dataType: JsonbDataType,
+  value: ValueType,
 ) => {
-  const values = [].concat(value).map((el) => typeTransfer(dataType, el));
+  const values = [].concat(value).map((el) => DataUtil.jsonbTypeTransfer(el, dataType));
   if (!Object.keys(filterOperator).includes(filter)) {
     return null;
   }
