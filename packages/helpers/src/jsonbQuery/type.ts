@@ -1,3 +1,5 @@
+import { JsonbDataType, ValueType } from "@rfjs/common";
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface ISqlQuery {
   fromAlias?: string | null;
@@ -12,34 +14,19 @@ export type FilterQueryMetadata = {
 
 export type QueryMetadata = {
   field: string;
-  dataType: DataType;
+  dataType: JsonbDataType;
   operator:
     | DefaultFilterOperator
     | TextFilterOperator
     | NumericFilterOperator
     | DateFilterOperator
     | BooleanFilterOperator;
-  value: JsonbValueType;
-};
-
-export type JsonbValueType =
-  | string
-  | string[]
-  | number
-  | number[]
-  | Date
-  | Date[]
-  | boolean
-  | boolean[]
-  | any;
-
-export type JsonbValueTransfer = {
-  [key in DataType]: () => JsonbValueType;
+  value: ValueType;
 };
 
 export type JsonbOperatorToSqlObj = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key in DataType]: (
+  [key in JsonbDataType]: (
     _jsonb: string,
     _field: string,
     _value: any,
@@ -48,37 +35,18 @@ export type JsonbOperatorToSqlObj = {
 
 export type JsonbWhereAliasFieldObj = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key in DataType]: (_field: string, _alias: string) => string;
+  [key in JsonbDataType]: (_field: string, _alias: string) => string;
 };
 
 export type JsonbFromSqlObj = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key in DataType]: (_jsonb: string, _field: string) => string | null;
+  [key in JsonbDataType]: (_jsonb: string, _field: string) => string | null;
 };
 export type JsonbFromAliasObj = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key in DataType]: (_field: string, _alias: string) => string | null;
+  [key in JsonbDataType]: (_field: string, _alias: string) => string | null;
 };
 
-export type DataType =
-  | 'string'
-  | 'numeric'
-  | 'date'
-  | 'boolean'
-  | 'objectString'
-  | 'objectBoolean'
-  | 'objectNumeric'
-  | 'objectDate'
-  | 'arrayString'
-  | 'arrayNumeric'
-  | 'arrayDate'
-  | 'arrayBoolean'
-  | 'arrayObjectString'
-  | 'arrayObjectBoolean'
-  | 'arrayObjectNumeric'
-  | 'arrayObjectDate';
-
-// export type LogicalOperator = 'and' | 'or' | 'nor';
 export type LogicalOperator = 'and' | 'or';
 
 export type DefaultFilterOperator = 'eq' | 'neq' | 'isnull' | 'isnotnull';
@@ -121,8 +89,8 @@ export type FilterOperatorQuery = {
   [key in FilterOperator]: (
     _jsonb: string,
     _field: string,
-    _dataType: DataType,
-    _value: JsonbValueType,
+    _dataType: JsonbDataType,
+    _value: ValueType,
   ) => ISqlQuery;
 };
 
@@ -130,7 +98,7 @@ export type FilterOperatorQueryObj = {
   [key in FilterOperator]: (
     _jsonb: string,
     _field: string,
-    _dataType: DataType,
-    _value: JsonbValueType,
+    _dataType: JsonbDataType,
+    _value: ValueType,
   ) => string | null;
 };
