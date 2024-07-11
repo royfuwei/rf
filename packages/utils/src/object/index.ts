@@ -27,7 +27,9 @@ export function flatten(nestedObj: object, prefix?: string) {
   return Object.entries(nestedObj).reduce((target, cur) => {
     const [key, value] = cur;
     const thisKey = prefix ? [prefix, key].join('.') : key;
-    if (typeof value === 'object') {
+    if (value === null || value === undefined || Array.isArray(value)) {
+      Object.assign(target, { [`${thisKey}`]: value });
+    } else if (typeof value === 'object') {
       Object.assign(target, flatten(value, thisKey));
     } else {
       Object.assign(target, { [`${thisKey}`]: value });

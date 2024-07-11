@@ -1,6 +1,56 @@
 import { flatten } from '.';
 
 describe('Test lib object flatten', () => {
+
+  it('Test flatten undefined value', () => {
+    const testObj = {
+      a: undefined,
+      b: {
+        b2: undefined,
+      },
+    };
+    const result = flatten(testObj);
+    const expectResult = {
+      a: undefined,
+      'b.b2': undefined,
+    };
+    expect(result).toEqual(expectResult);
+  });
+
+  it('Test flatten null value', () => {
+    const testObj = {
+      a: null,
+      b: {
+        b2: null,
+      },
+    };
+    const result = flatten(testObj);
+    const expectResult = {
+      a: null,
+      'b.b2': null,
+    };
+    expect(result).toEqual(expectResult);
+  });
+
+  it('Test flatten array value', () => {
+    const testObj = {
+      a: {
+        b1: [1, 2, 3],
+        b2: [],
+      },
+      b: [1, 2, 3],
+      c: [],
+    };
+    const result = flatten(testObj);
+    const expectResult = {
+      'a.b1': [1, 2, 3],
+      'a.b2': [],
+      b: [1, 2, 3],
+      c: [],
+    };
+    expect(result).toEqual(expectResult);
+  });
+
   it('Test flatten 1', () => {
     const testObj = {
       a: 1,
