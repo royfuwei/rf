@@ -9,10 +9,26 @@ describe('Test aliasValue', () => {
       array: [1, 2, 3],
       emptyArray: [],
       null: null,
+      obj: {
+        a: 1,
+        b: {
+          c: 2.
+        },
+      },
       undefined: undefined,
       one: 1,
       zero: 0,
     };
+    it ('Test aliasValue obj key ${obj}', () => {
+      const alias = '${obj}';
+      const result = aliasValue(alias, data);
+      expect(result).toEqual({ a: 1, b: { c: 2 } });
+    });
+    it ('Test aliasValue obj key ${obj.b}', () => {
+      const alias = '${obj.b}';
+      const result = aliasValue(alias, data);
+      expect(result).toEqual({ c: 2 });
+    });
     it('Test aliasValue undefined key ${z}', () => {
       const alias = '${z}';
       const result = aliasValue(alias, data);
