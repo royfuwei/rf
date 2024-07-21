@@ -1,8 +1,8 @@
+import _ = require('lodash');
 import { ObjectData } from '@rfjs/common';
-import { convertAliasData } from '../regex';
 import { filterMatchQueryData } from './filterMatchQueryData';
 import { FilterMatchQuery } from './type';
-import _ = require('lodash');
+import { aliasData } from '../alias';
 
 export function filterMappingMatchQueryData<T>(
   filterData: any[],
@@ -21,11 +21,11 @@ export function filterMappingMatchQueryData<T>(
         ...exData,
         [dataKey]: item,
       };
-      const convertFilter = convertAliasData<FilterMatchQuery>(
+      const convertFilter = aliasData<FilterMatchQuery>(
         _.cloneDeep(filter),
         data,
       );
-      const convertMapping = convertAliasData<MappingValue[]>(
+      const convertMapping = aliasData<MappingValue[]>(
         _.cloneDeep(mappings ?? []),
         data,
       );
