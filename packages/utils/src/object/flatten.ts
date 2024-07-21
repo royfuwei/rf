@@ -1,3 +1,5 @@
+import { ValueType } from "@rfjs/common";
+
 /**
  * convert nested object to flat object
  * @example
@@ -35,5 +37,5 @@ export function flatten(nestedObj: object, prefix?: string) {
       Object.assign(target, { [`${thisKey}`]: value });
     }
     return target;
-  }, {});
+  }, <{[key:string]: ValueType}>{});
 }
