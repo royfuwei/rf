@@ -18,11 +18,6 @@ RUN npm ci --ignore-scripts \
 
 FROM node:20.10.0-alpine3.19 AS runtime
 
-RUN addgroup -S nonroot \
-    && adduser -S nonroot -G nonroot
-
-USER nonroot
-
 RUN apk update \
     && apk upgrade \
     && apk --no-cache add tzdata
@@ -34,6 +29,11 @@ WORKDIR /app
 
 ENV HOST=0.0.0.0
 ENV APP_GQL_PORT=8002
+
+RUN addgroup -S nonroot \
+    && adduser -S nonroot -G nonroot
+
+USER nonroot
 
 COPY --from=builder /build/dist/apps/gql ./dist
 COPY --from=builder /build/node_modules ./node_modules
