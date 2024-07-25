@@ -60,7 +60,7 @@ export abstract class BaseMongooseRepository<T> {
     const andFilter = Array.from(filterMap.entries()).reduce(
       (acc, [key, value]) => {
         const _key = key == 'id' ? '_id' : (key as keyof T);
-        acc[_key] = value as any;
+        acc[_key] = value;
         return acc;
       },
       <FilterQuery<T>>{},
