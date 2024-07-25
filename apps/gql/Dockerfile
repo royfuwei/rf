@@ -16,7 +16,13 @@ RUN npm ci --ignore-scripts \
     && npm cache clean --force
 
 
-FROM node:20.10.0-alpine3.19
+FROM node:20.10.0-alpine3.19 AS runtime
+
+RUN addgroup -S nonroot \
+    && adduser -S nonroot -G nonroot
+
+USER nonroot
+
 RUN apk update \
     && apk upgrade \
     && apk --no-cache add tzdata
