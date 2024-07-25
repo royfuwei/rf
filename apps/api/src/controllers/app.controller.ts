@@ -2,19 +2,16 @@ import { inject, injectable } from 'tsyringe';
 import { IAppController } from '../types/app.type';
 import {
   AppInfoDTO,
-  IDemoRepository,
   IAppService,
   AppUsecase,
   INJECT_SVC_APP_SERVICE,
 } from '@rfjs/modules';
 import {
-  Body,
   Ctx,
   Get,
   HttpCode,
   JsonController,
   Post,
-  QueryParam,
   UploadedFiles,
 } from 'routing-controllers';
 import { File } from '@koa/multer';
@@ -56,7 +53,7 @@ export class AppController implements IAppController {
   @ApiUtil.ApiResDataListSchema(AppInfoDTO, { status: httpStatus.CREATED })
   async getAppDataList(): Promise<ApiResDataDTO<AppInfoDTO>> {
     const data = this.appSvc.getAppInfo();
-    const result = ApiUtil.apiResDataList<AppInfoDTO>(
+    const result = ApiUtil.apiResData<AppInfoDTO>(
       [data],
       httpStatus.CREATED,
     );

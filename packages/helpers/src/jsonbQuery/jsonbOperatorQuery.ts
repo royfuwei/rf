@@ -1,3 +1,4 @@
+import { JsonbDataType, ValueType } from '@rfjs/common';
 import {
   jsonbWhereAliasField,
   jsonbFromSql,
@@ -20,8 +21,6 @@ import {
 } from './jsonbOperator';
 import {
   ISqlQuery,
-  DataType,
-  JsonbValueType,
   FilterOperator,
   FilterOperatorQueryObj,
 } from './type';
@@ -31,80 +30,80 @@ export const filterOperator: FilterOperatorQueryObj = {
   contains: (
     _jsonb: string,
     _field: string,
-    _dataType: DataType,
-    _value: JsonbValueType,
+    _dataType: JsonbDataType,
+    _value: ValueType,
   ) => jsonbContainsOperator[_dataType](_jsonb, _field, _value),
   eq: (
     _jsonb: string,
     _field: string,
-    _dataType: DataType,
-    _value: JsonbValueType,
+    _dataType: JsonbDataType,
+    _value: ValueType,
   ) => jsonbEqOperator[_dataType](_jsonb, _field, _value),
   neq: (
     _jsonb: string,
     _field: string,
-    _dataType: DataType,
-    _value: JsonbValueType,
+    _dataType: JsonbDataType,
+    _value: ValueType,
   ) => jsonbNeqOperator[_dataType](_jsonb, _field, _value),
   isnull: (
     _jsonb: string,
     _field: string,
-    _dataType: DataType,
-    _value: JsonbValueType,
+    _dataType: JsonbDataType,
+    _value: ValueType,
   ) => jsonbIsNullOperator[_dataType](_jsonb, _field, _value),
   isnotnull: (
     _jsonb: string,
     _field: string,
-    _dataType: DataType,
-    _value: JsonbValueType,
+    _dataType: JsonbDataType,
+    _value: ValueType,
   ) => jsonbIsNotNullOperator[_dataType](_jsonb, _field, _value),
   startswith: (
     _jsonb: string,
     _field: string,
-    _dataType: DataType,
-    _value: JsonbValueType,
+    _dataType: JsonbDataType,
+    _value: ValueType,
   ) => jsonbStartsWithOperator[_dataType](_jsonb, _field, _value),
   endswith: (
     _jsonb: string,
     _field: string,
-    _dataType: DataType,
-    _value: JsonbValueType,
+    _dataType: JsonbDataType,
+    _value: ValueType,
   ) => jsonbEndsWithOperator[_dataType](_jsonb, _field, _value),
   terms: (
     _jsonb: string,
     _field: string,
-    _dataType: DataType,
-    _value: JsonbValueType,
+    _dataType: JsonbDataType,
+    _value: ValueType,
   ) => jsonbTermsOperator[_dataType](_jsonb, _field, _value),
   gte: (
     _jsonb: string,
     _field: string,
-    _dataType: DataType,
-    _value: JsonbValueType,
+    _dataType: JsonbDataType,
+    _value: ValueType,
   ) => jsonbGteOperator[_dataType](_jsonb, _field, _value),
   gt: (
     _jsonb: string,
     _field: string,
-    _dataType: DataType,
-    _value: JsonbValueType,
+    _dataType: JsonbDataType,
+    _value: ValueType,
   ) => jsonbGtOperator[_dataType](_jsonb, _field, _value),
   lte: (
     _jsonb: string,
     _field: string,
-    _dataType: DataType,
-    _value: JsonbValueType,
+    _dataType: JsonbDataType,
+    _value: ValueType,
   ) => jsonbLteOperator[_dataType](_jsonb, _field, _value),
   lt: (
     _jsonb: string,
     _field: string,
-    _dataType: DataType,
-    _value: JsonbValueType,
+    _dataType: JsonbDataType,
+    _value: ValueType,
   ) => jsonbLtOperator[_dataType](_jsonb, _field, _value),
   range: (
     _jsonb: string,
     _field: string,
-    _dataType: DataType,
-    _value: JsonbValueType,
+    _dataType: JsonbDataType,
+    _value: ValueType,
   ) => jsonbRangeOperator[_dataType](_jsonb, _field, _value),
 };
 
@@ -118,8 +117,8 @@ export class JsonbOperatorQuery implements ISqlQuery {
     jsonb: string,
     field: string,
     filter: FilterOperator,
-    dataType: DataType,
-    value: JsonbValueType,
+    dataType: JsonbDataType,
+    value: ValueType,
   ) {
     const aliasField = jsonbWhereAliasField[dataType](field, this.alias);
     this.fromAlias = jsonbFromAlias[dataType](field, this.alias);

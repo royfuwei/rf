@@ -1,4 +1,4 @@
-import { inject, injectable } from 'tsyringe';
+import { injectable } from 'tsyringe';
 import { Get, JsonController, Param } from 'routing-controllers';
 import { ApiResErrDTO } from '@rfjs/common';
 import httpStatus from 'http-status';

@@ -1,4 +1,4 @@
-import { inject, injectable } from 'tsyringe';
+import { injectable } from 'tsyringe';
 import {
   Body,
   BodyParam,
@@ -112,8 +112,8 @@ export class AuthSupabaseController {
     const url = ctx.url;
     const querystring = ctx.querystring;
     const query = ctx.query;
-    // const access_token = ctx.cookies.get('access_token');
-    // const refresh_token = ctx.cookies.get('refresh_token');
+    console.log('querystring: ', querystring);
+    console.log('query: ', query);
     return {
       path,
       url,

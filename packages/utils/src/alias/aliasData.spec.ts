@@ -1,6 +1,6 @@
 import _ = require('lodash');
-import { convertAliasData } from './index';
-describe('convertAliasData', () => {
+import { aliasData } from './index';
+describe('aliasData', () => {
   const number = 10;
   const object = {
     A1: '1234',
@@ -24,7 +24,7 @@ describe('convertAliasData', () => {
       c: 'alias.number',
       f: 'alias.array',
     };
-    const result = convertAliasData(testData, { alias });
+    const result = aliasData(testData, { alias });
     const expectData = _.cloneDeep(testData);
     expect(result).toEqual(expectData);
   });
@@ -39,7 +39,7 @@ describe('convertAliasData', () => {
       c: '$alias.number',
       f: '$alias.array',
     };
-    const result = convertAliasData(testData, { alias });
+    const result = aliasData(testData, { alias });
     const expectData = _.cloneDeep(testData);
     _.set(expectData, 'test1.alias', object);
     _.set(expectData, 'test1.d', string);
