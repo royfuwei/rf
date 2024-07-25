@@ -6,9 +6,7 @@ import { Test } from '../test/test.gql.type';
 @injectable()
 @Resolver(() => Test)
 export class TestResolver {
-  constructor(
-    @inject(AppUsecase) private appUCase: AppUsecase,
-  ) {}
+  constructor(@inject(AppUsecase) private appUCase: AppUsecase) {}
 
   @Query((of) => [Test])
   async tests() {
