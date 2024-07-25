@@ -1,11 +1,11 @@
-import { TestData } from "@rfjs/common";
-import { Field, ObjectType } from "type-graphql";
+import { TestData } from '@rfjs/common';
+import { Field, ObjectType } from 'type-graphql';
 
 @ObjectType()
 export class Test implements TestData {
   @Field(() => String)
   id: string;
-  
+
   @Field(() => String)
   uuid: string;
 

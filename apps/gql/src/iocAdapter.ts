@@ -1,4 +1,9 @@
-import { INJECT_MONGO_CLIENT, IDemoRepository, INJECT_DEMO_REPO, DemoRepository } from '@rfjs/modules';
+import {
+  INJECT_MONGO_CLIENT,
+  IDemoRepository,
+  INJECT_DEMO_REPO,
+  DemoRepository,
+} from '@rfjs/modules';
 import { BaseMonogoClient } from '@rfjs/repos';
 import { container, DependencyContainer, InjectionToken } from 'tsyringe';
 import { DemoDbMongoClient } from './common/mongodb/demoDB';

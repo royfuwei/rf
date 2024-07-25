@@ -13,7 +13,7 @@ export class AppResolver {
     @inject(INJECT_DEMO_REPO)
     private demoRepo: DemoRepository,
   ) {}
-  
+
   @Query((of) => App)
   async app() {
     return {
@@ -24,7 +24,10 @@ export class AppResolver {
 
   @FieldResolver((of) => [Test], { nullable: true })
   async tests() {
-    const data = this.demoRepo.dataLoaderFindByKeyId('6603b34caf27362c86b747fd', 'id');
+    const data = this.demoRepo.dataLoaderFindByKeyId(
+      '6603b34caf27362c86b747fd',
+      'id',
+    );
     return data;
   }
 }

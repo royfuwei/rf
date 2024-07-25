@@ -1,7 +1,7 @@
 import dotenvFlow from 'dotenv-flow';
 import { LoggerHelper } from './common/helpers/logger.helper';
 import { toBoolean } from 'packages/utils/src/data';
-import { toNumber } from 'lodash';
+import { isUndefined, toNumber } from 'lodash';
 
 const flowEnv = dotenvFlow.config({
   node_env: process.env.NODE_ENV,
@@ -20,8 +20,12 @@ const configs = {
     port: toNumber(process.env['APP_GQL_PORT']) ?? 8002,
   },
   gql: {
-    debug: toBoolean(process.env['GQL_DEBUG']) ?? true,
-    playground: toBoolean(process.env['GQL_PLAYGROUND']) ?? true,
+    debug: !isUndefined(process.env['GQL_DEBUG'])
+      ? toBoolean(process.env['GQL_DEBUG'])
+      : true,
+    playground: !isUndefined(process.env['GQL_PLAYGROUND'])
+      ? toBoolean(process.env['GQL_PLAYGROUND'])
+      : true,
   },
   mongodb: {
     uri: process.env['DB_MONGO_URI'],
