@@ -57,3 +57,5 @@ Thumbs.db
 .env.*.local
 
 logs/*
+
+schema.gql

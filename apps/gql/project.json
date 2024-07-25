@@ -1,0 +1,52 @@
+{
+  "name": "gql",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/gql/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/gql",
+        "main": "apps/gql/src/main.ts",
+        "tsConfig": "apps/gql/tsconfig.app.json",
+        "assets": ["apps/gql/src/assets"],
+        "webpackConfig": "apps/gql/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "gql:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "gql:build:development"
+        },
+        "production": {
+          "buildTarget": "gql:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/gql/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}

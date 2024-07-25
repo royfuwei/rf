@@ -1,4 +1,4 @@
-import { ValueType } from "../data";
+import { ValueType } from '../data';
 
 export type JsonbDataType =
   | 'string'

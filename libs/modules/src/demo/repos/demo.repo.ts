@@ -3,15 +3,17 @@ import { inject, injectable } from "tsyringe";
 import { INJECT_MONGO_CLIENT } from "../../const";
 import { IDemoRepository } from "../type";
 import { Model } from "mongoose";
-import { TestData } from "@rfjs/common";
+import { BaseMongooseRepository, TestData } from "@rfjs/common";
 
 @injectable()
-export class DemoRepository implements IDemoRepository {
-    private model: Model<TestData> = this.client.connection.model<TestData>('tests', testSchema);
+export class DemoRepository extends BaseMongooseRepository<TestData> implements IDemoRepository {
+    model: Model<TestData> = this.client.connection.model<TestData>('tests', testSchema);
     constructor(
       @inject(INJECT_MONGO_CLIENT)
       private client: BaseMonogoClient,
-    ) {}
+    ) {
+      super();
+    }
 
     async getTests() {
       const tests = await this.model.find();
