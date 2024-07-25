@@ -1,8 +1,8 @@
-import { Server } from "http";
-import { iocAdapter } from "./iocAdapter";
-import { HttpLogger, LoggerHelper } from "./common/helpers/logger.helper";
-import { INJECT_MONGO_CLIENT } from "@rfjs/modules";
-import { DemoDbMongoClient } from "./common/mongodb/demoDB";
+import { Server } from 'http';
+import { iocAdapter } from './iocAdapter';
+import { HttpLogger, LoggerHelper } from './common/helpers/logger.helper';
+import { INJECT_MONGO_CLIENT } from '@rfjs/modules';
+import { DemoDbMongoClient } from './common/mongodb/demoDB';
 
 export function setProcess(httpServer: Server) {
   const mongoClient = iocAdapter.get<DemoDbMongoClient>(INJECT_MONGO_CLIENT);
