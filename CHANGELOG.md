@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.16](https://github.com/royfuwei/rfjs/compare/v0.0.15...v0.0.16) (2024-07-25)
+
+
+### Features
+
+* **apps/gql:** adjust graphql application settings ([965d927](https://github.com/royfuwei/rfjs/commit/965d927003e0f4be06581bd65348c0a24f69883c))
+* **apps/gql:** initial graphql application ([aad6fc4](https://github.com/royfuwei/rfjs/commit/aad6fc418c5c9408356b5451ab8e6b9df2c80222))
+* **common/repository:** add dataloader base mongoose repository ([b2f6c41](https://github.com/royfuwei/rfjs/commit/b2f6c418aaa89f7e340e6848e3382f535a28e488))
+* **common/types:** add jsonb types for helpers ([d21a7de](https://github.com/royfuwei/rfjs/commit/d21a7de98a03aa6cc8ccee8c3892feb191d9617f))
+* demoRepository extends BaseMongooseRepository, and graphql test dataloader ([02bc80d](https://github.com/royfuwei/rfjs/commit/02bc80d71080273eccc63bc676aadbf8b3e13d77))
+* **helpers/jsonbQuery:** adjust and export jsonbQuery helpers ([6d38cf8](https://github.com/royfuwei/rfjs/commit/6d38cf8e6b75ec2d11edb3a20e4842f566afed1c))
+* **utils/alias:** add alias ${key} or $key to obj keyValue ([efec65d](https://github.com/royfuwei/rfjs/commit/efec65dbc19a3764de5dc5a3d516e15ddfdbcc57))
+* **utils/data:** add date, boolean and jsonbTypeTransfer data utils ([9bb8741](https://github.com/royfuwei/rfjs/commit/9bb87410a6879cc55088d16de00d0a794d756bb1))
+* **utils/object:** adjust flatten return generics type ([9bd6237](https://github.com/royfuwei/rfjs/commit/9bd6237843ef1114d4ced37888c32a9439842d52))
+* **utils/object:** move regex/convertAliasData to alias/aliasData ([e221a84](https://github.com/royfuwei/rfjs/commit/e221a84e80fb788d1c86cc653750b4bc8f1e3da2))
+
+
+### Bug Fixes
+
+* sonar scan code smell ([cd4215e](https://github.com/royfuwei/rfjs/commit/cd4215ec21ae8708925ace2bd73258293b2ed410))
+* **sonar:** apps/gql Dockerfile ([f4e6784](https://github.com/royfuwei/rfjs/commit/f4e678498e656bfb238276405c85746152c39895))
+* **sonar:** remove as any type ([6d74722](https://github.com/royfuwei/rfjs/commit/6d747227209dba6cd3938889d922615e772bdb72))
+* **sonar:** remove unused import ([61e534e](https://github.com/royfuwei/rfjs/commit/61e534e8e2c4b085e2f7b92ef579cf1d118e3f87))
+* **sonar:** replace this union type with a type alias ([6ce5d3e](https://github.com/royfuwei/rfjs/commit/6ce5d3ed0e96e26dc772d22d9e63d9c77bbcdb92))
+* **utils/object:** cannot alias multi nested object error ([8f4ebda](https://github.com/royfuwei/rfjs/commit/8f4ebda05572100b6b0d729125aff8ea8f787052))
+* **utils/object:** fix flatten object in undefined, null and array data type error ([ac1b82a](https://github.com/royfuwei/rfjs/commit/ac1b82a266c4c79dfd586288bead1c7b39c4dd5a))
+
 ### [0.0.15](https://github.com/royfuwei/rfjs/compare/v0.0.14...v0.0.15) (2024-06-16)
 
 
