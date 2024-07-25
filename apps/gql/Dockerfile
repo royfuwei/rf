@@ -33,11 +33,15 @@ ENV APP_GQL_PORT=8002
 RUN addgroup -S nonroot \
     && adduser -S nonroot -G nonroot
 
-USER nonroot
+RUN mkdir -p logs && chown -R nonroot:nonroot logs
 
 COPY --from=builder /build/dist/apps/gql ./dist
 COPY --from=builder /build/node_modules ./node_modules
 # copy env files, last arg is destination
 COPY [ "package.json", "./" ]
+
+RUN chown -R nonroot:nonroot /app
+
+USER nonroot
 
 CMD [ "node", "dist/main.js" ]
