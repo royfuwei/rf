@@ -17,7 +17,8 @@ export const genFilterQueryMetadata = (
         cur as FilterQueryMetadata,
         from,
       );
-      pre = `${pre.length > 0 ? `${pre} ${logic} ` : ''}(${
+      const logicStr = `${pre} ${logic} `;
+      pre = `${pre.length > 0 ? logicStr : ''}(${
         getNestedQuery.where
       })`;
       return pre;
