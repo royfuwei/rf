@@ -1,6 +1,6 @@
-import _ = require("lodash");
-import DataLoader = require("dataloader");
-import { FilterQuery, Model } from "mongoose";
+import _ = require('lodash');
+import DataLoader = require('dataloader');
+import { FilterQuery, Model } from 'mongoose';
 
 export abstract class BaseMongooseRepository<T> {
   abstract model: Model<T>;
@@ -23,15 +23,17 @@ export abstract class BaseMongooseRepository<T> {
 
   /* data loader */
   private findByOrQueryDataLoader = new DataLoader(
-    (filters: readonly FilterQuery<T>[]) =>
-      this.batchLoadFnByFilter(filters),
+    (filters: readonly FilterQuery<T>[]) => this.batchLoadFnByFilter(filters),
     {
       cache: false,
       batchScheduleFn: (callback) => setTimeout(callback, 100),
     },
   );
 
-  private async batchLoadFnByFilter(filters: readonly FilterQuery<T>[], isOrFilter = true,) {
+  private async batchLoadFnByFilter(
+    filters: readonly FilterQuery<T>[],
+    isOrFilter = true,
+  ) {
     const mappingKeys = filters.map((filter) => JSON.stringify(filter));
     const keys = Object.keys(filters[0]);
     const filterMap = filters.reduce((acc, filter, index) => {
@@ -43,21 +45,29 @@ export abstract class BaseMongooseRepository<T> {
       }
       return acc;
     }, new Map<string, FilterQuery<T>>());
-    const orFilters = Array.from(filterMap.entries()).reduce((acc, [key, value]) => {
-      const _key = key == 'id' ? '_id' : key;
-      const inFilter = <FilterQuery<T>>{
-        [_key]: value,
-      };
-      acc.push(inFilter);
-      return acc;
-    }, <FilterQuery<T>[]>[]);
-    
-    const andFilter = Array.from(filterMap.entries()).reduce((acc, [key, value]) => {
-      const _key = key == 'id' ? '_id' : key as keyof T;
-      acc[_key] = value as any;
-      return acc;
-    }, <FilterQuery<T>>{});
-    const query = isOrFilter ? { $or: orFilters } as FilterQuery<T> : andFilter;
+    const orFilters = Array.from(filterMap.entries()).reduce(
+      (acc, [key, value]) => {
+        const _key = key == 'id' ? '_id' : key;
+        const inFilter = <FilterQuery<T>>{
+          [_key]: value,
+        };
+        acc.push(inFilter);
+        return acc;
+      },
+      <FilterQuery<T>[]>[],
+    );
+
+    const andFilter = Array.from(filterMap.entries()).reduce(
+      (acc, [key, value]) => {
+        const _key = key == 'id' ? '_id' : (key as keyof T);
+        acc[_key] = value as any;
+        return acc;
+      },
+      <FilterQuery<T>>{},
+    );
+    const query = isOrFilter
+      ? ({ $or: orFilters } as FilterQuery<T>)
+      : andFilter;
     const data = await this.model.find(query);
     const dataMap = data.reduce((pre, cur) => {
       const pick = _.pick(cur, keys);

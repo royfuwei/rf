@@ -5,6 +5,9 @@
     "class-validator": "^0.14.1",
     "class-validator-jsonschema": "^5.0.0",
     "tslib": "^2.3.0",
-    "http-status": "^1.7.4"
+    "http-status": "^1.7.4",
+    "lodash": "^4.17.21",
+    "dataloader": "^2.2.2",
+    "mongoose": "^8.2.3"
   }
 }
