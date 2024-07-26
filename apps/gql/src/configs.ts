@@ -18,7 +18,7 @@ const configs = {
   app: {
     name: process.env['APP_GQL_NAME'] ?? '127.0.0.1',
     port: toNumber(process.env['APP_GQL_PORT']) ?? 8002,
-    origins: ['https://rfjs-gql.royfuwei.dev'],
+    origin: process.env['APP_GQL_ORIGIN'] ?? 'http://localhost:8002',
   },
   gql: {
     debug: !isUndefined(process.env['GQL_DEBUG'])
