@@ -9,6 +9,7 @@ import { koaSwagger } from 'koa2-swagger-ui';
 import { defaultMetadataStorage } from 'class-transformer/cjs/storage';
 import { HttpLogger } from './common/helpers/logger.helper';
 import { bodyParser } from '@koa/bodyparser';
+import cors from '@koa/cors';
 
 export async function initKoaServer() {
   const app = new Koa();
@@ -18,6 +19,17 @@ export async function initKoaServer() {
       jsonLimit: '100mb',
       textLimit: '100mb',
       encoding: 'utf-8',
+    }),
+  );
+
+  app.use(
+    cors({
+      origin: (ctx) => {
+        const origin = ctx.get('Origin');
+        if (configs.app.origins.includes(origin)) {
+          return origin;
+        }
+      },
     }),
   );
 
