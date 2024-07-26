@@ -25,8 +25,9 @@ export async function initKoaServer() {
   app.use(
     cors({
       origin: (ctx) => {
+        const allowedOrigins = ['https://studio.apollographql.com', configs.app.origin];
         const origin = ctx.get('Origin');
-        if (configs.app.origins.includes(origin)) {
+        if (allowedOrigins.includes(origin)) {
           return origin;
         }
       },
