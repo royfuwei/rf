@@ -19,11 +19,7 @@ import {
   jsonbLteOperator,
   jsonbLtOperator,
 } from './jsonbOperator';
-import {
-  ISqlQuery,
-  FilterOperator,
-  FilterOperatorQueryObj,
-} from './type';
+import { ISqlQuery, FilterOperator, FilterOperatorQueryObj } from './type';
 import { v4 as uuidv4 } from 'uuid';
 
 export const filterOperator: FilterOperatorQueryObj = {
