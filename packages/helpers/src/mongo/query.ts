@@ -1,4 +1,37 @@
-import { ValueType } from '@rfjs/common';
+import { EnumMgoLogicalOperator, ValueType } from '@rfjs/common';
+
+export class LogicalQuery {
+  [EnumMgoLogicalOperator.AND]?: Array<any>;
+  [EnumMgoLogicalOperator.NOR]?: Array<any>;
+  [EnumMgoLogicalOperator.OR]?: Array<any>;
+}
+
+export class EqQuery {
+  [field: string]: ValueType;
+  constructor(field: string, value: ValueType) {
+    this[field] = {
+      $eq: value,
+    };
+  }
+}
+
+export class NinQuery {
+  [field: string]: {
+    $nin: Array<ValueType>;
+  };
+  constructor(field: string, values: Array<ValueType>) {
+    this[field] = { $nin: values };
+  }
+}
+
+export class NeQuery {
+  [field: string]: {
+    $ne: ValueType;
+  };
+  constructor(field: string, value: ValueType) {
+    this[field] = { $ne: value };
+  }
+}
 
 export class TermsQuery {
   [field: string]: {

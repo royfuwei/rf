@@ -8,7 +8,10 @@ import {
   LTQuery,
   GTEQuery,
   LTEQuery,
-} from './mongoQuery';
+  EqQuery,
+  NeQuery,
+  NinQuery,
+} from './query';
 
 export function toQuery(
   field: string,
@@ -45,6 +48,17 @@ export function toQuery(
     const [_value] = _values;
     return new RegexQuery(_field, _value);
   };
+  const eq = (_field: string, _values: Array<any>) => {
+    const [value] = _values;
+    return new EqQuery(_field, value);
+  }
+  const neq = (_field: string, _values: Array<any>) => {
+    const [value] = _values;
+    return new NeQuery(_field, value);
+  }
+  const nin = (_field: string, _values: Array<any>) => {
+    return new NinQuery(_field, _values);
+  }
   return {
     terms,
     term,
@@ -54,5 +68,8 @@ export function toQuery(
     lte,
     regex,
     range,
+    eq,
+    neq,
+    nin,
   }[condition](field, values);
 }
