@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.22](https://github.com/royfuwei/rfjs/compare/v0.0.21...v0.0.22) (2024-07-27)
+
+
+### Features
+
+* **apps/gql:** adjust cors origin ([fa1ee11](https://github.com/royfuwei/rfjs/commit/fa1ee11e227ec9e20179a77b5e7784d8cefaa3b0))
+
 ### [0.0.21](https://github.com/royfuwei/rfjs/compare/v0.0.20...v0.0.21) (2024-07-26)
 
 
