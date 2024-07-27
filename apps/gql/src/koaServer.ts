@@ -24,7 +24,14 @@ export async function initKoaServer() {
 
   app.use(
     cors({
-      origin: '*'
+      origin: (ctx) => {
+        const allowedOrigins = ['https://studio.apollographql.com', 'https://sandbox.embed.apollographql.com', configs.app.origin];
+        const origin = ctx.get('Origin');
+        if (allowedOrigins.includes(origin)) {
+          return origin;
+        }
+      },
+      credentials: true,
     }),
   );
 
