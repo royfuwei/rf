@@ -6,3 +6,4 @@ export * from './api';
 export * as ErrType from './errors';
 export * as ApiType from './api';
 export * from './jsonb';
+export * from './schedule';

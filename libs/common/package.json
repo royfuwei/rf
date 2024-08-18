@@ -8,6 +8,7 @@
     "http-status": "^1.7.4",
     "lodash": "^4.17.21",
     "dataloader": "^2.2.2",
-    "mongoose": "^8.2.3"
+    "mongoose": "^8.2.3",
+    "node-schedule": "^2.1.1"
   }
 }
