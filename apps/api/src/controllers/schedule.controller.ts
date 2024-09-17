@@ -21,7 +21,7 @@ export class ScheduleController {
     @Body() body: ReqRescheduleBodyDTO,
   ) {
     const reschedule = ScheduleRegistry.reschedule(body.name, body);
-    const data = ScheduleRegistry.getSchedulesInfoDTO(body.name);
+    const data = ScheduleRegistry.getSchedulesInfoDTO(reschedule.name);
     return ApiUtil.apiResData(data);
   }
 }

@@ -11,7 +11,7 @@ export class AppSchedule {
   ) {}
 
   init() {
-    ScheduleRegistry.registerSchedule('AppSchedule', '*/10 * * * * *', () => {
+    ScheduleRegistry.registerSchedule('AppSchedule', '*/3600 * * * * *', () => {
       this.run();
     });
   }
