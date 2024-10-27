@@ -65,3 +65,25 @@ export function useNavData() {
 
   return data;
 }
+
+export function useNavMapData() {
+  const data = useMemo(
+    () => [
+      // OVERVIEW
+      // ----------------------------------------------------------------------
+      {
+        subheader: 'overview',
+        items: [
+          {
+            title: 'app',
+            path: paths.map4d.root,
+            icon: ICONS.dashboard,
+          },
+        ],
+      },
+    ],
+    [],
+  );
+
+  return data;
+}
