@@ -7,4 +7,4 @@ export const PATH_ROOT = paths.home.root;
 
 export const HOST_API = process.env.NEXT_PUBLIC_HOST_API;
 export const CESIUM_DEFAULT_ACCESS_TOKEN =
-  process.env.CESIUM_DEFAULT_ACCESS_TOKEN ?? '';
+  process.env.NEXT_PUBLIC_CESIUM_DEFAULT_ACCESS_TOKEN ?? '';
