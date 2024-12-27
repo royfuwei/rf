@@ -1,5 +1,5 @@
 import { MgoConditionType, MgoDataType, ValueType } from '@rfjs/common';
-import { typeTransfer } from 'packages/utils/src/data';
+import { DataUtil } from '@rfjs/utils';
 import {
   TermsQuery,
   RegexQuery,
@@ -19,7 +19,7 @@ export function toQuery(
   condition: MgoConditionType,
   value: ValueType,
 ) {
-  const values = [].concat(value).map((i) => typeTransfer(i, type));
+  const values = [].concat(value).map((i) => DataUtil.typeTransfer(i, type));
   const terms = (_field: string, _values: Array<any>) => {
     return new TermsQuery(_field, _values);
   };
