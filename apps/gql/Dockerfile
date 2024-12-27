@@ -1,4 +1,4 @@
-FROM node:20.10.0-alpine3.19 AS builder
+FROM node:22.12.0-alpine3.21 AS builder
 
 WORKDIR /build
 COPY apps/gql apps/gql
@@ -16,7 +16,7 @@ RUN npm ci --ignore-scripts \
     && npm cache clean --force
 
 
-FROM node:20.10.0-alpine3.19 AS runtime
+FROM node:22.12.0-alpine3.21 AS runtime
 
 RUN apk update \
     && apk upgrade \
