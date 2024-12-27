@@ -35,7 +35,7 @@ export const loggerFormat = (isColor = true) =>
     format.timestamp(),
     format.printf(({ level, message, timestamp, service, pid, context }) => {
       context = context ? ` [${context}] ` : ' ';
-      service = service ? `[${service.toUpperCase()}]` : '';
+      service = service ? `[${(service as string).toUpperCase()}]` : '';
       const levelStr = level.padStart(7).toUpperCase();
       const contextFormat = isColor ? yellow(`${context}`) : context;
       const serviceFormat = isColor ? colorize(level, `${service}`) : service;

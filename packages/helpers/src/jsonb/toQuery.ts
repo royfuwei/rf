@@ -10,7 +10,9 @@ export const toJsonbQuery = (
   dataType: JsonbDataType,
   value: ValueType,
 ) => {
-  const values = [].concat(value).map((el) => DataUtil.jsonbTypeTransfer(el, dataType));
+  const values = []
+    .concat(value)
+    .map((el) => DataUtil.jsonbTypeTransfer(el, dataType));
   if (!Object.keys(filterOperator).includes(filter)) {
     return null;
   }
