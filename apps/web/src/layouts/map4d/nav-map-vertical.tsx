@@ -3,7 +3,7 @@ import { Logo } from '~rfjs/web/components/logo';
 import NavSectionVertical from '~rfjs/web/components/nav-section/vertical/nav-section-vertical';
 import { PATH_DASHBOARD } from '~rfjs/web/config-global';
 import { NAV } from '../config-layout';
-import { useNavMapData } from '../dashboard/config-navigation';
+import { useNavMapData } from './config-navigation';
 
 type Props = {
   openNav: boolean;

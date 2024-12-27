@@ -44,18 +44,21 @@ const ICONS = {
 
 // ----------------------------------------------------------------------
 
-export function useNavData() {
+export function useNavMapData() {
   const data = useMemo(
     () => [
       // OVERVIEW
       // ----------------------------------------------------------------------
       {
-        subheader: 'overview',
+        subheader: 'kml data',
         items: [
           {
-            title: 'app',
-            path: paths.dashboard.root,
+            title: 'kml 01',
+            path: paths.map4d.root,
             icon: ICONS.dashboard,
+            onItemClick: () => {
+              console.log('kml data onItemClick');
+            },
           },
         ],
       },

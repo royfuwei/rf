@@ -1,13 +1,26 @@
-import { Viewer } from 'resium';
+'use client';
+import { KmlDataSource, Viewer } from 'resium';
 import * as Cesium from 'cesium';
 import { Box, BoxProps } from '@mui/material';
 import { CESIUM_DEFAULT_ACCESS_TOKEN } from '~rfjs/web/config-global';
+import CsKmlDataViewer from './cs-kml-viewer';
 // ----
 
 Cesium.Ion.defaultAccessToken = CESIUM_DEFAULT_ACCESS_TOKEN;
 
 type Props = {
   children: React.ReactNode;
+};
+
+const extendSplitScreen = (viewer: Cesium.Viewer) => {
+  const layers = viewer.imageryLayers;
+  /* const earthAtNight = Cesium.ImageryLayer.fromProviderAsync(
+    Cesium.IonImageryProvider.fromAssetId(3812),
+  ); */
+  // const baseLayer = layers.get(0);
+  // baseLayer.splitDirection = Cesium.SplitDirection.LEFT; // Only show to the left of the slider.
+  // layers.add(baseLayer);
+  /*  */
 };
 
 export default function CesiumViewer({
@@ -42,7 +55,12 @@ export default function CesiumViewer({
         animation={false}
         fullscreenButton={false}
         homeButton={false}
-      />
+        extend={(viewer) => {
+          extendSplitScreen(viewer);
+        }}
+      >
+        <CsKmlDataViewer />
+      </Viewer>
     </Box>
   );
 }

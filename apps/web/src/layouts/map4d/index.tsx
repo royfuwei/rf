@@ -8,7 +8,7 @@ type Props = {
 };
 
 export default function Map4DLayout({ children }: Readonly<Props>) {
-  const renderNavVertical = <NaMapVertical openNav={true} />;
+  const renderMapNavVertical = <NaMapVertical openNav={true} />;
   return (
     <>
       <Header />
@@ -20,7 +20,7 @@ export default function Map4DLayout({ children }: Readonly<Props>) {
           flexDirection: { xs: 'column', lg: 'row' },
         }}
       >
-        {renderNavVertical}
+        {renderMapNavVertical}
         <Main>{children}</Main>
       </Box>
     </>
