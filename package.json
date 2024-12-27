@@ -1,6 +1,6 @@
 {
   "name": "rfjs",
-  "version": "0.0.24",
+  "version": "0.0.25",
   "license": "MIT",
   "scripts": {
     "dev": "npx nx run-many --target=serve --parallel=4",
