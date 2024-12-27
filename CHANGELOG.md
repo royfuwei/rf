@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.24](https://github.com/royfuwei/rfjs/compare/v0.0.23...v0.0.24) (2024-12-27)
+
+
+### Features
+
+* **apps/api:** add simple schedule controller ([3cfbbbc](https://github.com/royfuwei/rfjs/commit/3cfbbbc51795b45cd3ba8b4d8c2fcab018a89ae4))
+* **common/types:** add mongo query types ([589ff3e](https://github.com/royfuwei/rfjs/commit/589ff3ee1fb8315fd7962b23b25f62a0e973dd3d))
+* **helpers/mongo:** add genFilterQuery mongo helper ([115fb03](https://github.com/royfuwei/rfjs/commit/115fb0360f93ddce71fc8688e212b63b9de3170f))
+* **helpers/mongo:** add mongo toQuery helper ([ab567bc](https://github.com/royfuwei/rfjs/commit/ab567bcd6da433553593c5ce8bcbc1fd8dbbbaa3))
+* **helpers/mongo:** refactor mongoQuery to query, and add LogicalQuery, eq, nin, ne query instances ([840a8f3](https://github.com/royfuwei/rfjs/commit/840a8f3bdecfbf833583d9f417fa62ff8598c241))
+* **helpers/schedule:** add schedule registry helper tool ([8dc2e6d](https://github.com/royfuwei/rfjs/commit/8dc2e6de9260b00f0bd3b1075564c11dc91e73e1))
+* **libs/common:** add schedule type and dto ([e9f50d7](https://github.com/royfuwei/rfjs/commit/e9f50d7c242393d33bcee9c3f922c98209835d74))
+
+
+### Bug Fixes
+
+* **apps/api:** sonar scan code smell ([968528a](https://github.com/royfuwei/rfjs/commit/968528ade36c40f1f1f76b7268c19b6a9d574073))
+* **helpers/loggers:** service string type use toUpperCase ([39733ab](https://github.com/royfuwei/rfjs/commit/39733ab950a70d4cb0f90f341dc364c51d308954))
+* **packages/helpers:** import @rfjs/utils DataUtil.typeTransfer ([c133b62](https://github.com/royfuwei/rfjs/commit/c133b62a782e26aee039cf6ce4fcf566529edc82))
+
 ### [0.0.23](https://github.com/royfuwei/rfjs/compare/v0.0.22...v0.0.23) (2024-07-27)
 
 
