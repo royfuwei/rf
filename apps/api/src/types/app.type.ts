@@ -8,11 +8,11 @@ export interface IAppController {
   getAppData(): Promise<ApiResDataDTO<AppInfoDTO>>;
 }
 
-/* export class ReqAppBodyDTO {
+export class ReqAppBodyDTO {
   @IsString()
   @JSONSchema({
     description: 'app name',
     default: 'api'
   })
   app: string;
-} */
+}

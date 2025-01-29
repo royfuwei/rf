@@ -125,10 +125,4 @@ export class AuthSupabaseController {
       token_type,
     };
   }
-
-  @Get('/redirect')
-  @Render('supabase.html')
-  supabaseRedirect() {
-    return;
-  }
 }
