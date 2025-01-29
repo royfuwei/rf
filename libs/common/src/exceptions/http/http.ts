@@ -26,7 +26,7 @@ export class HttpException extends BaseException {
     description?: string,
   ) {
     _status = _status ?? httpStatus.BAD_REQUEST;
-    message = message && message.length ? message : httpStatus[_status];
+    message = message?.length ? message : httpStatus[_status];
     super(message, description);
     this._status = _status;
   }

@@ -1,4 +1,4 @@
-import { IsDate, IsEnum, IsNumber, IsString, IsUrl } from 'class-validator';
+import { IsEnum, IsString } from 'class-validator';
 import { JSONSchema } from 'class-validator-jsonschema';
 
 export class AuthSupabaseSignOutBodyDTO {

@@ -20,6 +20,7 @@ export default function Main({ children, sx, ...other }: Readonly<BoxProps>) {
       }}
       {...other}
     >
+      {renderNavVertical}
       <CesiumViewer>{children}</CesiumViewer>
     </Box>
   );

@@ -1,5 +1,5 @@
 'use client';
-import { KmlDataSource, Viewer } from 'resium';
+import { Viewer } from 'resium';
 import * as Cesium from 'cesium';
 import { Box, BoxProps } from '@mui/material';
 import { CESIUM_DEFAULT_ACCESS_TOKEN } from '~rfjs/web/config-global';

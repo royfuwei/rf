@@ -11,13 +11,11 @@ export default function CsKmlDataViewer({
   sx,
   ...other
 }: Readonly<BoxProps>) {
-  // const kmlList: Document[] = [kmlData];
   const [kmlList, setKmlDocumentSet] = useState<Document[]>([kmlData]);
-  // const kmlList: Document[] = [];
   return (
     <>
       {kmlList.map((kml, index) => {
-        return <KmlDataSource key={index} data={kml} />;
+        return <KmlDataSource key={`${kml}-${index}`} data={kml} />;
       })}
     </>
   );
